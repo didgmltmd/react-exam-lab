@@ -6,6 +6,6 @@
 - **실기**: Vite + React 프로젝트 6문제. 터미널에서 `npm run dev`, Simple Browser로 확인, 시험 도구 뷰에서 자동 채점
 - **실전 모의고사**: 120분, 필기 20문항 + 실기 2문제, 배점(이해 30 · 코드리뷰 30 · 코드 작성 40)으로 환산
 
-사이트: https://didgmltmd.github.io/react-exam-lab/
+사이트: https://learningmate-lab.github.io/react-exam-lab/
 
 `src/`는 원본 코드, `data/`는 문제 데이터예요. 진행 기록은 브라우저에만 저장돼요.
