@@ -590,6 +590,7 @@
 
   /* ---------- 채점 ---------- */
   async function runGrade() {
+    window.LMTrack && window.LMTrack.event('grade'); 
     if (gradeState.running) return;
     if (P.dirty.size) notify('저장하지 않은 파일이 있어요. 채점은 <b>저장된 코드</b>로 해요. (Ctrl+S 로 저장)');
     view = 'test'; sideOn = true;

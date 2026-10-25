@@ -209,7 +209,7 @@
       if (a === 'home') { S = null; L.home(); }
       else if (a === 'prev') { saveBlanks(); S.i--; renderCBT(); }
       else if (a === 'next') { saveBlanks(); S.i++; renderCBT(); }
-      else if (a === 'check') { saveBlanks(); S.checked[q.id] = true; const wr = st.get('wres', {}); wr[q.id] = isRight(q, S.ans[q.id]); st.set('wres', wr); renderCBT(); }
+      else if (a === 'check') { window.LMTrack && window.LMTrack.event('quiz'); saveBlanks(); S.checked[q.id] = true; const wr = st.get('wres', {}); wr[q.id] = isRight(q, S.ans[q.id]); st.set('wres', wr); renderCBT(); }
       else if (a === 'shuffle') { S.list = shuffle(S.list); S.i = 0; renderCBT(); }
       else if (a === 'submit') { saveBlanks(); const un = S.list.filter(x => !answered(x)).length; L.ask('필기 답안을 제출할까요?', un ? `아직 안 푼 문제가 ${un}개 있어요. 제출하면 실기 2문제로 넘어가요.` : '제출하면 실기 2문제로 넘어가요. 시간은 이어서 흘러요.', '제출하고 실기로').then(y => { if (y && S && S.onDone) S.onDone(); }); }
     };
@@ -228,6 +228,7 @@
 
   /* ---------- 모의고사 ---------- */
   async function startMock() {
+    window.LMTrack && window.LMTrack.event('mock'); 
     if (!(await L.ask('실전 모의고사를 시작할까요?', '· 120분 타이머\n· 필기 20문항 → 실기 2문제\n· 필기는 끝날 때까지 정답을 보여 주지 않아요\n· 실기 문제 코드는 처음 상태로 돌아가요', '시작'))) return;
     const pick = (type, n) => shuffle(W.filter(q => q.type === type)).slice(0, n);
     const list = shuffle(pick('single', 7).concat(pick('multi', 3))).concat(shuffle(pick('review', 5).concat(pick('blank', 5))));
