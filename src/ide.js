@@ -37,7 +37,7 @@
   function loadProject(pid) {
     const pr = problemById(pid); const name = projName(pr);
     const base = Object.assign({}, L.scaffold(name), pr.files);
-    const saved = L.store.get('files.' + pid, null);
+    const saved = L.store.get('files2.' + pid, null);
     const files = Object.assign({}, base, saved || {});
     if (saved) Object.keys(saved).forEach(k => { if (saved[k] === null) delete files[k]; });
     files['문제.md'] = pr.desc;
@@ -47,10 +47,10 @@
     if (!P) return; const out = {};
     Object.keys(P.files).forEach(k => { if (k.startsWith('src/')) out[k] = P.files[k]; });
     const base = P.pr.files; Object.keys(base).forEach(k => { if (k.startsWith('src/') && !(k in P.files)) out[k] = null; });
-    L.store.set('files.' + P.pid, out);
+    L.store.set('files2.' + P.pid, out);
   }
   IDE.resetProject = function () {
-    if (!P) return; L.store.del('files.' + P.pid); const pid = P.pid; P = null; disposeModels(); openProject(pid);
+    if (!P) return; L.store.del('files2.' + P.pid); const pid = P.pid; P = null; disposeModels(); openProject(pid);
     notify('처음 코드로 되돌렸어요.');
   };
 
@@ -175,8 +175,8 @@
     const pr = P.pr; const res = gradeState.results; const tests = pr.tests;
     const score = res ? tests.reduce((s, t, i) => s + (res[i] && res[i].pass ? t.points : 0), 0) : null;
     const list = (ctx.problems || []).map(id => {
-      const x = problemById(id); const best = L.store.get('best.' + id, null);
-      return `<div class="prow${id === P.pid ? ' on' : ''}" data-prob="${id}">${I(best === 100 ? 'pass-filled' : 'circle-filled', 14)}<span>${esc(projName(x))} · ${esc(x.title)}<div class="lv">${esc(x.level || '')}</div></span><span class="sc${best === 100 ? ' full' : ''}">${best == null ? '' : best + '점'}</span></div>`;
+      const x = problemById(id); const best = L.store.get('best2.' + id, null); const full = best != null && best >= L.maxPoints(x);
+      return `<div class="prow${id === P.pid ? ' on' : ''}" data-prob="${id}">${I(full ? 'pass-filled' : 'circle-filled', 14)}<span>${esc(projName(x))} · ${esc(x.title)}<div class="lv">${esc(x.level || '')}</div></span><span class="sc${full ? ' full' : ''}">${best == null ? '' : best + ' / ' + L.maxPoints(x)}</span></div>`;
     }).join('');
     const rows = tests.map((t, i) => {
       const r = res && res[i]; const st = !r ? (gradeState.running ? (gradeState.cur === i ? 'run' : 'none') : 'none') : r.running ? 'run' : r.pass ? 'pass' : 'fail';
@@ -190,7 +190,7 @@
         <div class="plist">${list}</div>
         <div class="tv-sep"></div>
         <div class="tv-head"><div style="font-weight:600;color:#fff">${esc(projName(pr))} · ${esc(pr.title)}</div>
-          <div class="tv-score"><b>${score == null ? '–' : score}</b><span>/ 100점</span></div>
+          <div class="tv-score"><b>${score == null ? '–' : score}</b><span>/ ${L.maxPoints(pr)}점</span></div>
           <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="vbtn" data-act="grade"${gradeState.running ? ' disabled' : ''}>${I('run-all', 14)} 채점하기</button><button class="vbtn sec" data-act="open-desc">문제 보기</button></div>
           ${P.dirty.size ? '<div class="tv-note" style="margin:0;color:#cca700">저장하지 않은 파일이 있어요. 채점은 저장된 코드로 해요 (Ctrl+S).</div>' : ''}
         </div>
@@ -254,7 +254,7 @@
     const a = P.active;
     if (!a) { md.hidden = true; ed.style.visibility = 'hidden'; wl.hidden = false; return; }
     wl.hidden = true;
-    if (a === '문제.md' || a.startsWith('정답:')) { md.hidden = false; ed.style.visibility = 'hidden'; md.innerHTML = `<div class="md">${a === '문제.md' ? L.md(P.files['문제.md']) : solutionHTML()}</div>`; return; }
+    if (a === '문제.md' || a.startsWith('정답:')) { md.hidden = false; ed.style.visibility = 'hidden'; md.innerHTML = a === '문제.md' && P.pr.sheet ? L.sheet(P.pr, (L.DATA.practical || []).indexOf(P.pr) + 1) : `<div class="md">${a === '문제.md' ? L.md(P.files['문제.md']) : solutionHTML()}</div>`; return; }
     md.hidden = true; ed.style.visibility = '';
     if (!editor) return;
     const cur = editor.getModel(); if (cur) { const k = Object.keys(models).find(x => models[x] === cur); if (k) viewStates[k] = editor.saveViewState(); }
@@ -597,12 +597,12 @@
     const res = await L.grade(P.pr, savedSrc(), (i, r) => { gradeState.cur = i; if (!r.running) gradeState.results[i] = r; if (view === 'test') renderSide(); });
     gradeState.running = false; gradeState.results = res;
     const score = P.pr.tests.reduce((s, t, i) => s + (res[i] && res[i].pass ? t.points : 0), 0);
-    const best = L.store.get('best.' + P.pid, null); if (best == null || score > best) L.store.set('best.' + P.pid, score);
+    const best = L.store.get('best2.' + P.pid, null); if (best == null || score > best) L.store.set('best2.' + P.pid, score);
     if (ctx.mode === 'mock') { ctx.scores = ctx.scores || {}; ctx.scores[P.pid] = score; }
-    L.store.set('last.' + P.pid, { score, at: Date.now() });
+    L.store.set('last2.' + P.pid, { score, at: Date.now() });
     const ab = document.getElementById('ab-score'); ab.hidden = false; ab.textContent = score;
     renderSide();
-    notify(score === 100 ? `🎉 ${esc(P.pr.title)} — 100점! 모든 요구사항을 통과했어요.` : `채점 결과: <b>${score}점</b> / 100. 실패한 요구사항의 메시지를 확인해 보세요.`, score !== 100);
+    const mx = L.maxPoints(P.pr); notify(score === mx ? `🎉 ${esc(P.pr.title)} — ${mx}점 만점! 모든 요구사항을 통과했어요.` : `채점 결과: <b>${score}점</b> / ${mx}. 실패한 요구사항의 메시지를 확인해 보세요.`, score !== mx);
   }
 
   /* ---------- 열기 · 전환 ---------- */
@@ -653,7 +653,7 @@ declare module 'react-dom/client' { export function createRoot(el: Element | nul
   }
   function openProject(pid) {
     P = loadProject(pid); disposeModels(); problems = []; consoleLines = []; consoleErr = 0; gradeState = { running: false, results: null };
-    const last = L.store.get('last.' + pid, null); const ab = document.getElementById('ab-score'); ab.hidden = !last; if (last) ab.textContent = last.score;
+    const last = L.store.get('last2.' + pid, null); const ab = document.getElementById('ab-score'); ab.hidden = !last; if (last) ab.textContent = last.score;
     if (dev.running) { dev.running = false; }
     term.reset();
     document.getElementById('cc-name').textContent = P.name;
@@ -694,7 +694,7 @@ declare module 'react-dom/client' { export function createRoot(el: Element | nul
     if (P) saveAll();
     const scores = {};
     for (const id of ctx.problems) {
-      const pr = problemById(id); const saved = Object.assign({}, L.scaffold(projName(pr)), pr.files, L.store.get('files.' + id, {}) || {});
+      const pr = problemById(id); const saved = Object.assign({}, L.scaffold(projName(pr)), pr.files, L.store.get('files2.' + id, {}) || {});
       Object.keys(saved).forEach(k => { if (saved[k] === null) delete saved[k]; });
       notify(`${esc(pr.title)} 채점 중…`);
       const res = await L.grade(pr, saved);

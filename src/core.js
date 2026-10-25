@@ -144,7 +144,7 @@ window.__RL_ready=false;try{req('','/src/main.jsx')}catch(e){console.error(e)}se
   };
 
   /* ---------- 채점 ---------- */
-  function helpers(w) {
+  function helpers(w, files) {
     const d = w.document;
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const desc = x => typeof x === 'string' ? x : x && x.text != null ? `"${x.text}" ${x.sel || 'button'}` : String(x);
@@ -169,6 +169,7 @@ window.__RL_ready=false;try{req('','/src/main.jsx')}catch(e){console.error(e)}se
       expect(c, m) { if (!c) throw new Error(m || '조건이 맞지 않아요'); },
       num: s => { const v = parseFloat(String(s).replace(/,/g, '').replace(/[^0-9.\-]/g, '')); return v; },
       active: () => d.activeElement,
+      src: p => (files && files[String(p).replace(/^\.?\//, '')]) || '',
     };
     return t;
   }
@@ -187,6 +188,7 @@ window.__RL_ready=false;try{req('','/src/main.jsx')}catch(e){console.error(e)}se
     });
   }
   // problem: {tests:[{name,points,body}]}, files: saved files. onStep(i, result)
+  L.maxPoints = pr => pr.tests.reduce((s, t) => s + t.points, 0);
   L.grade = async function (problem, files, onStep) {
     await L.babel();
     const c = L.compile(files);
@@ -204,7 +206,7 @@ window.__RL_ready=false;try{req('','/src/main.jsx')}catch(e){console.error(e)}se
       const w = f.contentWindow; let r;
       try {
         const fn = new Function('t', 'return (async () => {\n' + test.body + '\n})()');
-        await Promise.race([fn(helpers(w)), new Promise((_, rej) => setTimeout(() => rej(new Error('시간 초과 (4초 안에 끝나지 않았어요)')), 4000))]);
+        await Promise.race([fn(helpers(w, files)), new Promise((_, rej) => setTimeout(() => rej(new Error('시간 초과 (4초 안에 끝나지 않았어요)')), 4000))]);
         r = { pass: true };
       } catch (e) { r = { pass: false, msg: String(e && e.message || e) }; }
       results.push(r); onStep && onStep(i, r);

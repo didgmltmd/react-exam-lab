@@ -347,3 +347,24 @@ button { font: inherit; color: inherit; }
 .dlg-back.dark .dlg-in { background: #313131; color: #cccccc; border-color: #0078d4; border-radius: 2px; font-family: var(--ui); }
 .dlg-back.dark .dlg-btn { background: #313131; border: 0; color: #cccccc; border-radius: 2px; font-weight: 400; font-size: 13px; padding: 6px 14px; }
 .dlg-back.dark .dlg-btn.pri { background: #0078d4; color: #fff; }
+
+/* 시험 문제지 (슬라이드) */
+.sheet { padding: 18px 22px 60px; display: flex; flex-direction: column; gap: 18px; max-width: 860px; margin: 0 auto; }
+.sh-note { color: #9d9d9d; font-size: 12.5px; line-height: 1.6; }
+.sh-note code { font-family: var(--mono); color: #d7ba7d; }
+.slide { background: #eef1f5; color: #111; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 10px #0006; font-family: "Malgun Gothic", "Noto Sans KR", var(--ui); user-select: text; }
+.sl-t { margin: 0; text-align: center; font-size: 22px; font-weight: 800; font-style: italic; padding: 14px 16px 10px; background: #fff; border-bottom: 5px solid; border-image: linear-gradient(90deg, #1e5aa8, #c9d8ee 70%, #fff) 1; }
+.sl-b { background: #fff; margin: 14px 18px; border-radius: 16px; padding: 18px 22px 20px; }
+.sl-f { background: linear-gradient(#e2e2e2, #bdbdbd); text-align: right; padding: 4px 14px; font-size: 12px; }
+.slide p { margin: 6px 0; line-height: 1.55; }
+.slide .o1 { font-weight: 800; font-size: 17px; padding-left: 26px; position: relative; }
+.slide .o1::before { content: ""; position: absolute; left: 2px; top: 5px; width: 11px; height: 11px; border: 3px solid #1e6fc0; border-radius: 50%; }
+.slide .o2 { font-weight: 700; font-size: 15px; padding-left: 50px; position: relative; margin-top: 10px; }
+.slide .o2::before { content: ""; position: absolute; left: 28px; top: 6px; width: 8px; height: 8px; border: 2.5px solid #e05252; border-radius: 50%; }
+.slide .o3 { font-weight: 700; font-size: 13.5px; padding-left: 72px; position: relative; color: #222; }
+.slide .o3::before { content: "▸"; position: absolute; left: 56px; color: #1e3a6b; }
+.slide .shot { margin: 12px auto 4px; max-width: 520px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; background: #fff; }
+.slide .shot img { display: block; width: 100%; }
+.slide .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
+.slide .shots .shot { margin: 0; max-width: none; }
+.slide .cap { text-align: center; font-size: 12.5px; color: #555; margin-top: 4px; font-weight: 700; }

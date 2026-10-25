@@ -6,6 +6,17 @@ css = (H / 'style.css').read_text(encoding='utf-8') + '\n' + (H / 'monaco_inline
 pp = S / 'react' / 'practical.json'
 if not pp.exists() or '--tmp' in sys.argv: pp = H / 'tmp_practical.json'
 practical = json.loads(pp.read_text(encoding='utf-8'))
+# 문제지 스크린샷 (정답 코드를 크롬에서 실행해 캡처). practical.json 이 바뀌면 다시 찍음
+import hashlib, subprocess
+if any(p.get('sheet') for p in practical):
+    hsh = hashlib.sha1(pp.read_bytes() + (H / 'core.js').read_bytes()).hexdigest()
+    cache = H / 'shots.json'; meta = H / 'shots.hash'
+    if not cache.exists() or not meta.exists() or meta.read_text() != hsh or '--shots' in sys.argv:
+        subprocess.run(['node', str(H / 'shots.cjs'), str(pp), str(cache)], check=True)
+        meta.write_text(hsh)
+    shots = json.loads(cache.read_text(encoding='utf-8'))
+    for p in practical:
+        if p.get('sheet') and p['id'] in shots: p['sheet']['shots'] = shots[p['id']]
 written = json.loads((S / 'react' / 'written.json').read_text(encoding='utf-8'))
 data = 'window.RL = window.RL || {}; window.RL.DATA = ' + json.dumps({'practical': practical, 'written': written}, ensure_ascii=False).replace('</', '<' + chr(92) + '/') + ';'
 js = '\n'.join((H / f).read_text(encoding='utf-8') for f in ['icons.js', 'core.js', 'cbt.js', 'ide.js']).replace('</script', '<' + chr(92) + '/script')

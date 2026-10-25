@@ -3,17 +3,84 @@
     "id": "p1",
     "title": "카운터",
     "level": "쉬움",
-    "desc": "## 카운터 앱 완성하기\n\n수업 시간에 만든 **[카운터] 앱**입니다. 화면(UI)과 CSS는 모두 주어져 있습니다.\n아래 요구사항을 만족하도록 코드를 완성하시오. (CSS는 채점하지 않습니다.)\n\n### 화면 구성\n- **Viewer** : `현재 카운트 :` 아래에 카운트 숫자를 표시\n- **Controller** : `-1` `-10` `-100` `+100` `+10` `+1` 버튼과 `RESET` 버튼\n- **Even** : `짝수입니다` 문구 (이미 완성됨, 수정 불필요)\n\n### 요구사항\n1. 카운트 State(`count`, 초기값 0)는 **App 컴포넌트**에 만든다. (State 끌어올리기)\n2. **Viewer**는 `count`를 props로 받아 `.count` 요소에 표시한다.\n3. **Controller**의 숫자 버튼을 클릭하면 버튼에 적힌 값만큼 카운트가 변한다. (예: `-10` → 10 감소, 음수도 허용)\n4. `RESET` 버튼을 클릭하면 카운트가 0이 된다.\n5. 카운트가 **짝수일 때만** `<Even />` 컴포넌트를 렌더링한다. (0도 짝수)\n\n### 수정할 파일\n- `src/App.jsx`, `src/components/Viewer.jsx`, `src/components/Controller.jsx`\n- 각 파일의 `TODO` 주석을 참고하세요. 함수 이름(`onClickButton`, `onReset`)은 권장 사항이며, 동작만 맞으면 됩니다.",
+    "desc": "## 1. 카운터\n\n### 요구사항(초기화면)\n\n- 버튼을 눌러 숫자를 늘리거나 줄이고, 짝수일 때 안내 문구를 보여 주는 카운터 프로그램\n- 초기 화면은 아래 [추가 스크린샷]의 '초기 화면'을 참고\n\n### 요구사항(컴포넌트 구조 – 10점)\n\n- 이 앱은 하나의 페이지이며, 두 개의 영역으로 나누어져 있음\n  - 첫 번째 영역은 현재 카운트를 표시\n    - ▸ 이 영역의 이름을 **Viewer**이라고 할 것\n  - 두 번째 영역은 카운트를 바꾸는 버튼(-1, -10, -100, +100, +10, +1, RESET)을 표시\n    - ▸ 이 영역의 이름을 **Controller**이라고 할 것\n- 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). '짝수입니다' 문구는 Even 컴포넌트로 이미 완성되어 있음\n\n### 요구사항(기능 구현 – 25점)\n\n- 숫자 버튼을 클릭하면 버튼에 적힌 값만큼 카운트가 바뀌어야 함 **(10점)**\n  - ▸ 카운트는 앞서 나타난 스크린샷처럼 0으로 초기화되어야 함\n  - ▸ 카운트가 음수가 되는 것도 허용함\n- RESET 버튼을 클릭하면 카운트가 0이 되어야 함 **(5점)**\n- 카운트가 짝수일 때만 '짝수입니다' 문구가 나타나야 함 **(5점)**\n  - ▸ 0도 짝수임\n  - ▸ 반드시 조건부 렌더링으로 Even 컴포넌트를 표시할 것\n- 기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것 **(5점)**\n  - ▸ 카운트 State는 Viewer와 Controller의 공통 부모인 App에 선언하고 props로 전달할 것 (State 끌어올리기)\n\n### 요구사항(추가 스크린샷)\n\n1. 초기 화면\n2. +100, +10, +1 버튼을 차례로 클릭 (홀수)\n3. -10 버튼을 두 번 클릭 (음수, 짝수)\n\n### 수정할 파일\n\n`src/App.jsx`, `src/components/Viewer.jsx`, `src/components/Controller.jsx`\n\n> 각 파일의 `TODO` 주석을 참고하세요. CSS는 채점하지 않습니다.",
+    "sheet": {
+      "title": "1. 카운터",
+      "summary": "버튼을 눌러 숫자를 늘리거나 줄이고, 짝수일 때 안내 문구를 보여 주는 카운터 프로그램",
+      "structure": {
+        "points": 10,
+        "lead": "이 앱은 하나의 페이지이며, 두 개의 영역으로 나누어져 있음",
+        "areas": [
+          {
+            "desc": "첫 번째 영역은 현재 카운트를 표시",
+            "name": "Viewer"
+          },
+          {
+            "desc": "두 번째 영역은 카운트를 바꾸는 버튼(-1, -10, -100, +100, +10, +1, RESET)을 표시",
+            "name": "Controller"
+          }
+        ],
+        "note": "각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). '짝수입니다' 문구는 Even 컴포넌트로 이미 완성되어 있음"
+      },
+      "features": {
+        "points": 25,
+        "items": [
+          {
+            "text": "숫자 버튼을 클릭하면 버튼에 적힌 값만큼 카운트가 바뀌어야 함",
+            "points": 10,
+            "sub": [
+              "카운트는 앞서 나타난 스크린샷처럼 0으로 초기화되어야 함",
+              "카운트가 음수가 되는 것도 허용함"
+            ]
+          },
+          {
+            "text": "RESET 버튼을 클릭하면 카운트가 0이 되어야 함",
+            "points": 5,
+            "sub": []
+          },
+          {
+            "text": "카운트가 짝수일 때만 '짝수입니다' 문구가 나타나야 함",
+            "points": 5,
+            "sub": [
+              "0도 짝수임",
+              "반드시 조건부 렌더링으로 Even 컴포넌트를 표시할 것"
+            ]
+          },
+          {
+            "text": "기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것",
+            "points": 5,
+            "sub": [
+              "카운트 State는 Viewer와 Controller의 공통 부모인 App에 선언하고 props로 전달할 것 (State 끌어올리기)"
+            ]
+          }
+        ]
+      },
+      "screens": [
+        {
+          "caption": "초기 화면",
+          "steps": ""
+        },
+        {
+          "caption": "+100, +10, +1 버튼을 차례로 클릭 (홀수)",
+          "steps": "await t.click({ text: '+100', sel: '.Controller button' }); await t.click({ text: '+10', sel: '.Controller button' }); await t.click({ text: '+1', sel: '.Controller button' }); await t.wait(30);"
+        },
+        {
+          "caption": "-10 버튼을 두 번 클릭 (음수, 짝수)",
+          "steps": "await t.click({ text: '-10', sel: '.Controller button' }); await t.click({ text: '-10', sel: '.Controller button' }); await t.wait(30);"
+        }
+      ],
+      "files": "src/App.jsx, src/components/Viewer.jsx, src/components/Controller.jsx"
+    },
     "files": {
       "src/main.jsx": "import { createRoot } from \"react-dom/client\";\nimport \"./index.css\";\nimport App from \"./App.jsx\";\n\ncreateRoot(document.getElementById(\"root\")).render(<App />);\n",
-      "src/App.jsx": "import \"./App.css\";\nimport Viewer from \"./components/Viewer\";\nimport Controller from \"./components/Controller\";\nimport Even from \"./components/Even\";\n\nfunction App() {\n  // TODO 1: 카운트를 저장할 State(count)를 만들고 초기값을 0으로 설정하세요.\n\n  // TODO 2: 전달받은 value 만큼 count를 변경하는 함수 onClickButton(value)를 만드세요.\n\n  // TODO 3: count를 0으로 되돌리는 함수 onReset()을 만드세요.\n\n  return (\n    <div className=\"App\">\n      <h1>Simple Counter</h1>\n      <section>\n        {/* TODO 4: Viewer에 count를 props로 전달하세요. */}\n        <Viewer />\n        {/* TODO 6: count가 짝수일 때만 <Even /> 컴포넌트를 렌더링하세요. */}\n      </section>\n      <section>\n        {/* TODO 5: Controller에 onClickButton, onReset 함수를 props로 전달하세요. */}\n        <Controller />\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.jsx": "import \"./App.css\";\n\n// [컴포넌트 구조] TODO 1: components 폴더의 Viewer, Controller, Even 컴포넌트를 import 하세요.\n\nfunction App() {\n  // [기능 구현] TODO 2: 카운트를 저장할 State(count)를 만들고 초기값을 0으로 설정하세요.\n\n  // TODO 3: 전달받은 value 만큼 count를 변경하는 함수 onClickButton(value)를 만드세요.\n\n  // TODO 4: count를 0으로 되돌리는 함수 onReset()을 만드세요.\n\n  return (\n    <div className=\"App\">\n      <h1>Simple Counter</h1>\n      <section>\n        {/* TODO 1-1: 첫 번째 영역 - Viewer 컴포넌트를 렌더링하세요.\n            TODO 5: Viewer에 count를 props로 전달하세요. */}\n\n        {/* TODO 6: count가 짝수일 때만 <Even /> 컴포넌트를 렌더링하세요. */}\n      </section>\n      <section>\n        {/* TODO 1-2: 두 번째 영역 - Controller 컴포넌트를 렌더링하세요.\n            TODO 7: Controller에 onClickButton, onReset 함수를 props로 전달하세요. */}\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
       "src/App.css": "/* 페이지 레이아웃 (채점하지 않음) */\n.App {\n  max-width: 500px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px;\n}\n\n.App > h1 {\n  text-align: center;\n  color: #1f93ff;\n}\n\n/* App 바로 아래의 section에만 적용 */\n.App > section {\n  background-color: white;\n  border: 1px solid rgb(240, 240, 240);\n  border-radius: 5px;\n  padding: 20px;\n  margin-bottom: 10px;\n}\n\n/* Even 컴포넌트 */\n.Even {\n  margin-top: 10px;\n  text-align: center;\n  color: #28a745;\n  font-weight: bold;\n}\n",
       "src/index.css": "/* 전역 스타일 (채점하지 않음) */\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Malgun Gothic\",\n    \"Apple SD Gothic Neo\", sans-serif;\n  background-color: #f5f7fb;\n  color: #111827;\n}\n\n* {\n  box-sizing: border-box;\n}\n",
       "src/components/Controller.css": ".Controller {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  gap: 8px;\n}\n\n.Controller button {\n  padding: 10px 14px;\n  border: 1px solid rgb(220, 220, 220);\n  border-radius: 5px;\n  background-color: white;\n  font-size: 16px;\n  cursor: pointer;\n}\n\n.Controller button:hover {\n  background-color: #eef6ff;\n}\n\n.Controller .reset {\n  background-color: #1f93ff;\n  border: none;\n  color: white;\n  font-weight: bold;\n}\n",
-      "src/components/Controller.jsx": "import \"./Controller.css\";\n\n// TODO 5: App에서 onClickButton, onReset 함수를 props로 받으세요.\n//   - 숫자 버튼을 클릭하면 onClickButton(버튼의 숫자)를 호출합니다. (예: -10 버튼 → onClickButton(-10))\n//   - RESET 버튼을 클릭하면 onReset()을 호출합니다.\nconst Controller = () => {\n  return (\n    <div className=\"Controller\">\n      <button>-1</button>\n      <button>-10</button>\n      <button>-100</button>\n      <button>+100</button>\n      <button>+10</button>\n      <button>+1</button>\n      <button className=\"reset\">RESET</button>\n    </div>\n  );\n};\n\nexport default Controller;\n",
+      "src/components/Controller.jsx": "import \"./Controller.css\";\n\n// TODO 7: App에서 onClickButton, onReset 함수를 props로 받으세요.\n//   - 숫자 버튼을 클릭하면 onClickButton(버튼의 숫자)를 호출합니다. (예: -10 버튼 → onClickButton(-10))\n//   - RESET 버튼을 클릭하면 onReset()을 호출합니다.\nconst Controller = () => {\n  return (\n    <div className=\"Controller\">\n      <button>-1</button>\n      <button>-10</button>\n      <button>-100</button>\n      <button>+100</button>\n      <button>+10</button>\n      <button>+1</button>\n      <button className=\"reset\">RESET</button>\n    </div>\n  );\n};\n\nexport default Controller;\n",
       "src/components/Even.jsx": "// 이 파일은 수정하지 않아도 됩니다.\nconst Even = () => {\n  return <div className=\"Even\">짝수입니다</div>;\n};\n\nexport default Even;\n",
       "src/components/Viewer.css": ".Viewer {\n  text-align: center;\n}\n\n.Viewer .count {\n  font-size: 48px;\n  margin: 10px 0 0 0;\n}\n",
-      "src/components/Viewer.jsx": "import \"./Viewer.css\";\n\n// TODO 4: App에서 count를 props로 받아, 0 대신 count를 화면에 표시하세요.\nconst Viewer = () => {\n  return (\n    <div className=\"Viewer\">\n      <div>현재 카운트 :</div>\n      <h1 className=\"count\">0</h1>\n    </div>\n  );\n};\n\nexport default Viewer;\n"
+      "src/components/Viewer.jsx": "import \"./Viewer.css\";\n\n// TODO 5: App에서 count를 props로 받아, 0 대신 count를 화면에 표시하세요.\nconst Viewer = () => {\n  return (\n    <div className=\"Viewer\">\n      <div>현재 카운트 :</div>\n      <h1 className=\"count\">0</h1>\n    </div>\n  );\n};\n\nexport default Viewer;\n"
     },
     "solution": {
       "src/App.jsx": "import { useState } from \"react\";\nimport \"./App.css\";\nimport Viewer from \"./components/Viewer\";\nimport Controller from \"./components/Controller\";\nimport Even from \"./components/Even\";\n\nfunction App() {\n  // 1. State는 Viewer와 Controller의 공통 부모인 App에 만든다 (State 끌어올리기)\n  const [count, setCount] = useState(0);\n\n  // 2. 버튼 값만큼 count 변경\n  const onClickButton = (value) => {\n    setCount(count + value);\n  };\n\n  // 3. 0으로 초기화\n  const onReset = () => {\n    setCount(0);\n  };\n\n  return (\n    <div className=\"App\">\n      <h1>Simple Counter</h1>\n      <section>\n        <Viewer count={count} />\n        {count % 2 === 0 && <Even />}\n      </section>\n      <section>\n        <Controller onClickButton={onClickButton} onReset={onReset} />\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
@@ -22,75 +89,171 @@
     },
     "tests": [
       {
-        "name": "+1 버튼을 누르면 카운트가 1씩 증가한다",
-        "points": 15,
-        "body": "const btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nawait press('+1');\nt.expect(count() === '1', '+1 버튼을 한 번 누르면 1이 표시되어야 해요 (현재: ' + count() + ')');\nawait press('+1');\nt.expect(count() === '2', '+1 버튼을 두 번 누르면 2가 표시되어야 해요 (현재: ' + count() + ')');"
+        "name": "컴포넌트 구조: Viewer, Controller 영역이 App에 렌더링된다",
+        "points": 10,
+        "bullet": "structure",
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = [\"Viewer\",\"Controller\"];\nconst miss = NAMES.filter((n) => !t.$('.' + n));\nt.expect(miss.length === 0, '화면에서 ' + miss.join(', ') + ' 영역을 찾을 수 없어요 (App에서 렌더링했는지, 컴포넌트 최상위 요소의 className을 바꾸지 않았는지 확인하세요)');\nconst notUsed = NAMES.filter((n) => !uses('src/App.jsx', n));\nt.expect(notUsed.length === 0, 'App.jsx에서 ' + notUsed.join(', ') + ' 컴포넌트를 import해서 렌더링해야 해요');\n"
       },
       {
-        "name": "+10, +100 버튼을 누르면 값이 누적되어 표시된다",
-        "points": 20,
-        "body": "const btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nawait press('+100');\nawait press('+10');\nawait press('+10');\nt.expect(count() === '120', '+100, +10, +10을 누르면 120이 되어야 해요 (현재: ' + count() + ')');"
+        "name": "+1, +10, +100 버튼을 누르면 값만큼 증가한다",
+        "points": 5,
+        "bullet": 0,
+        "body": "const btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nt.expect(count() === '0', '처음 카운트는 0이어야 해요 (현재: ' + count() + ')');\nawait press('+1');\nt.expect(count() === '1', '+1 버튼을 누르면 1이 되어야 해요 (현재: ' + count() + ')');\nawait press('+100');\nawait press('+10');\nt.expect(count() === '111', '+1, +100, +10을 누르면 111이 되어야 해요 (현재: ' + count() + ')');"
       },
       {
-        "name": "-1, -10, -100 버튼을 누르면 카운트가 감소한다 (음수 허용)",
-        "points": 20,
+        "name": "-1, -10, -100 버튼을 누르면 값만큼 감소한다 (음수 허용)",
+        "points": 5,
+        "bullet": 0,
         "body": "const btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nawait press('-100');\nt.expect(count() === '-100', '-100 버튼을 누르면 -100이 되어야 해요 (현재: ' + count() + ')');\nawait press('-10');\nawait press('-1');\nt.expect(count() === '-111', '-100, -10, -1을 누르면 -111이 되어야 해요 (현재: ' + count() + ')');"
       },
       {
-        "name": "RESET 버튼을 누르면 카운트가 0으로 초기화된다",
-        "points": 20,
+        "name": "RESET 버튼을 누르면 카운트가 0이 된다",
+        "points": 5,
+        "bullet": 1,
         "body": "const btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nawait press('+100');\nawait press('+1');\nt.expect(count() === '101', '+100, +1을 누르면 101이 되어야 해요 (현재: ' + count() + ')');\nawait press('RESET');\nt.expect(count() === '0', 'RESET 버튼을 누르면 0이 되어야 해요 (현재: ' + count() + ')');"
       },
       {
         "name": "카운트가 짝수일 때만 '짝수입니다'가 표시된다",
-        "points": 25,
+        "points": 5,
+        "bullet": 2,
         "body": "const btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nt.expect(!!t.$('.Even'), '처음 카운트 0은 짝수이므로 \"짝수입니다\"가 보여야 해요');\nawait press('+1');\nt.expect(count() === '1', '+1 버튼을 누르면 1이 되어야 해요');\nt.expect(!t.$('.Even'), '카운트가 1(홀수)이면 \"짝수입니다\"가 사라져야 해요');\nawait press('+1');\nt.expect(!!t.$('.Even'), '카운트가 2(짝수)이면 \"짝수입니다\"가 다시 보여야 해요');"
+      },
+      {
+        "name": "카운트 State를 App에 선언하고 props로 전달한다",
+        "points": 5,
+        "bullet": 3,
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst btn = (label) => t.$$('.Controller button').find((b) => b.textContent.trim() === label);\nconst count = () => t.text('.Viewer .count');\nconst press = async (label) => { const b = btn(label); t.expect(!!b, label + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nt.expect(/useState\\s*\\(/.test(code('src/App.jsx')), 'App.jsx에서 useState로 상태를 선언해야 해요');\nawait press('+10');\nt.expect(count() === '10', 'App의 count가 Viewer에 props로 전달되어 +10을 누르면 10이 표시되어야 해요 (현재: ' + count() + ')');"
       }
     ]
   },
   {
     "id": "p2",
-    "title": "환율 계산기",
+    "title": "길이 변환기",
     "level": "쉬움",
-    "desc": "## 환율 계산기 완성하기\n\n원화(KRW) 금액을 입력하고 통화 버튼을 누르면 환전된 금액을 보여 주는 앱입니다.\n화면(UI)과 CSS는 모두 주어져 있습니다. 아래 요구사항을 만족하도록 코드를 완성하시오. (CSS는 채점하지 않습니다.)\n\n### 화면 구성\n- **AmountInput** : 환전할 원화 입력창 (`KRW`)\n- **CurrencySelector** : `USD로 환전` `EUR로 환전` `JPY로 환전` 버튼 (환율은 고정)\n- **ConversionResult** : 환전된 금액 표시 (예: `0.70 USD`)\n\n| 통화 | 1 KRW 당 |\n|---|---|\n| USD | 0.0007 |\n| EUR | 0.0006 |\n| JPY | 0.11 |\n\n### 요구사항\n1. **App**에 금액 State `amount`(초기값 **1000**)와 통화 State `currency`(초기값 **\"USD\"**)를 만든다.\n2. **AmountInput**의 입력창은 `amount`와 연결한다. (value + onChange, props 사용)\n3. **CurrencySelector**의 버튼을 누르면 `currency`가 해당 통화로 바뀐다.\n4. 환전 결과는 `amount × RATES[currency]`를 `toFixed(2)`로 소수점 둘째 자리까지 계산하고,\n   **ConversionResult**의 `<h1>`에 `결과 통화` 형식으로 표시한다. (예: `7.00 USD`)\n5. 통화를 고른 뒤 **금액만 바꿔도 결과가 즉시 갱신**되어야 한다.\n   (힌트: 결과를 별도 State로 저장하지 말고, 렌더링할 때 `amount`와 `currency`로 계산하세요.)\n\n### 수정할 파일\n- `src/App.jsx`, `src/components/AmountInput.jsx`, `src/components/CurrencySelector.jsx`, `src/components/ConversionResult.jsx`\n- 각 파일의 `TODO` 주석을 참고하세요.",
+    "desc": "## 2. 미니 길이 변환기\n\n### 요구사항(초기화면)\n\n- 미터(m) 단위의 길이를 인치(in)·피트(ft)·야드(yd)로 바꿔 주는 프로그램\n- 초기 화면은 아래 [추가 스크린샷]의 '초기 화면'을 참고\n\n### 요구사항(컴포넌트 구조 – 10점)\n\n- 이 앱은 하나의 페이지이며, 세 개의 영역으로 나누어져 있음\n  - 첫 번째 영역은 변환하고 싶은 길이(m)를 표시 및 수정\n    - ▸ 이 영역의 이름을 **LengthInput**이라고 할 것\n  - 두 번째 영역은 단위별 변환 비율을 표시 및 수정하고, 단위별 변환 버튼을 표시\n    - ▸ 이 영역의 이름을 **UnitSelector**이라고 할 것\n  - 세 번째 영역은 변환된 길이를 표시\n    - ▸ 이 영역의 이름을 **ResultDisplay**이라고 할 것\n- 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것)\n\n### 요구사항(기능 구현 – 25점)\n\n- 총 4개의 input 창이 있으며, 모두 수정이 가능해야 함 **(10점)**\n  - ▸ 각 입력 창 및 결과는 앞서 나타난 스크린샷의 값으로 초기화되어야 함 (길이 10, 비율 39.37 / 3.28 / 1.09, 결과 393.70 in)\n- 변환 버튼을 클릭할 경우, 현재 비율에 맞게 길이가 계산되어야 함 **(5점)**\n  - ▸ 변환 결과 = 길이 × 클릭한 단위의 비율\n- 변환된 길이는 버튼을 클릭한 단위(in, ft, yd)가 함께 나타나야 함 **(5점)**\n  - ▸ 반드시 .toFixed(2) 함수 호출을 통해 소수점 2번째 자리까지 출력할 것\n- 기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것 **(5점)**\n\n### 요구사항(추가 스크린샷)\n\n1. 초기 화면\n2. 3.5 m를 피트로 변환\n3. 인치 비율을 40으로 수정 후 변환\n\n### 수정할 파일\n\n`src/App.jsx`, `src/components/LengthInput.jsx`, `src/components/UnitSelector.jsx`, `src/components/ResultDisplay.jsx`\n\n> 각 파일의 `TODO` 주석을 참고하세요. CSS는 채점하지 않습니다.",
+    "sheet": {
+      "title": "2. 미니 길이 변환기",
+      "summary": "미터(m) 단위의 길이를 인치(in)·피트(ft)·야드(yd)로 바꿔 주는 프로그램",
+      "structure": {
+        "points": 10,
+        "lead": "이 앱은 하나의 페이지이며, 세 개의 영역으로 나누어져 있음",
+        "areas": [
+          {
+            "desc": "첫 번째 영역은 변환하고 싶은 길이(m)를 표시 및 수정",
+            "name": "LengthInput"
+          },
+          {
+            "desc": "두 번째 영역은 단위별 변환 비율을 표시 및 수정하고, 단위별 변환 버튼을 표시",
+            "name": "UnitSelector"
+          },
+          {
+            "desc": "세 번째 영역은 변환된 길이를 표시",
+            "name": "ResultDisplay"
+          }
+        ],
+        "note": "각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것)"
+      },
+      "features": {
+        "points": 25,
+        "items": [
+          {
+            "text": "총 4개의 input 창이 있으며, 모두 수정이 가능해야 함",
+            "points": 10,
+            "sub": [
+              "각 입력 창 및 결과는 앞서 나타난 스크린샷의 값으로 초기화되어야 함 (길이 10, 비율 39.37 / 3.28 / 1.09, 결과 393.70 in)"
+            ]
+          },
+          {
+            "text": "변환 버튼을 클릭할 경우, 현재 비율에 맞게 길이가 계산되어야 함",
+            "points": 5,
+            "sub": [
+              "변환 결과 = 길이 × 클릭한 단위의 비율"
+            ]
+          },
+          {
+            "text": "변환된 길이는 버튼을 클릭한 단위(in, ft, yd)가 함께 나타나야 함",
+            "points": 5,
+            "sub": [
+              "반드시 .toFixed(2) 함수 호출을 통해 소수점 2번째 자리까지 출력할 것"
+            ]
+          },
+          {
+            "text": "기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것",
+            "points": 5,
+            "sub": []
+          }
+        ]
+      },
+      "screens": [
+        {
+          "caption": "초기 화면",
+          "steps": ""
+        },
+        {
+          "caption": "3.5 m를 피트로 변환",
+          "steps": "await t.type('.LengthInput input', '3.5'); await t.click({ text: '피트로 변환' }); await t.wait(30);"
+        },
+        {
+          "caption": "인치 비율을 40으로 수정 후 변환",
+          "steps": "await t.type(t.$$('.UnitSelector input')[0], '40'); await t.click({ text: '인치로 변환' }); await t.wait(30);"
+        }
+      ],
+      "files": "src/App.jsx, src/components/LengthInput.jsx, src/components/UnitSelector.jsx, src/components/ResultDisplay.jsx"
+    },
     "files": {
       "src/main.jsx": "import { createRoot } from \"react-dom/client\";\nimport \"./index.css\";\nimport App from \"./App.jsx\";\n\ncreateRoot(document.getElementById(\"root\")).render(<App />);\n",
-      "src/App.jsx": "import \"./App.css\";\nimport AmountInput from \"./components/AmountInput\";\nimport CurrencySelector from \"./components/CurrencySelector\";\nimport ConversionResult from \"./components/ConversionResult\";\n\n// 1원(KRW)당 환율 (수정하지 마세요)\nconst RATES = {\n  USD: 0.0007,\n  EUR: 0.0006,\n  JPY: 0.11,\n};\n\nfunction App() {\n  // TODO 1: 환전할 원화 금액 State(amount, 초기값 1000)를 만드세요.\n\n  // TODO 2: 선택한 통화 State(currency, 초기값 \"USD\")를 만드세요.\n\n  // TODO 3: amount와 currency로 환전 결과를 계산하세요.\n  //   result = (amount × RATES[currency])를 소수점 둘째 자리까지 표시 → toFixed(2)\n  //   (State를 하나 더 만들지 말고, 렌더링할 때 계산하면 금액이 바뀔 때 결과도 바로 바뀝니다.)\n\n  return (\n    <div className=\"App\">\n      <section>\n        {/* TODO 4: amount와 amount를 바꾸는 함수를 props로 전달하세요. */}\n        <AmountInput />\n      </section>\n      <section>\n        {/* TODO 5: 통화를 바꾸는 함수를 props로 전달하세요. */}\n        <CurrencySelector />\n      </section>\n      <section>\n        {/* TODO 6: 계산 결과와 currency를 props로 전달하세요. */}\n        <ConversionResult />\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.jsx": "import \"./App.css\";\n\n// [컴포넌트 구조] TODO 1: components 폴더의 LengthInput, UnitSelector, ResultDisplay 컴포넌트를 import 하세요.\n\nfunction App() {\n  // [기능 구현] 화면의 초기값: 길이 10 m / 비율 1 m = 39.37 in, 3.28 ft, 1.09 yd / 결과 393.70 in\n  // TODO 2: 변환할 길이(m)를 저장할 State를 만드세요. (초기값 10)\n\n  // TODO 3: 단위별 비율(in, ft, yd)을 저장할 State를 만드세요. (초기값 39.37, 3.28, 1.09)\n  //   - 비율 입력 창도 수정할 수 있어야 하므로 State로 관리해야 합니다.\n  //   - 객체 하나로 만들어도 되고, 단위별로 따로 만들어도 됩니다.\n\n  // TODO 4: 변환 결과와 결과 단위를 저장할 State를 만드세요. (초기값 \"393.70\", \"in\")\n\n  // TODO 5: 변환 버튼을 클릭했을 때 호출할 함수를 만드세요.\n  //   - 결과 = (현재 길이 × 클릭한 단위의 현재 비율).toFixed(2)\n  //   - 결과 단위 = 클릭한 단위 (\"in\" / \"ft\" / \"yd\")\n\n  return (\n    <div className=\"App\">\n      <section>\n        {/* TODO 1-1: 첫 번째 영역 - LengthInput 컴포넌트를 렌더링하고, 길이와 길이를 바꾸는 함수를 props로 전달하세요. */}\n      </section>\n      <section>\n        {/* TODO 1-2: 두 번째 영역 - UnitSelector 컴포넌트를 렌더링하고, 비율·비율을 바꾸는 함수·변환 함수를 props로 전달하세요. */}\n      </section>\n      <section>\n        {/* TODO 1-3: 세 번째 영역 - ResultDisplay 컴포넌트를 렌더링하고, 결과와 단위를 props로 전달하세요. */}\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
       "src/App.css": "/* 메인 컨테이너 중앙 정렬 (채점하지 않음) */\n.App {\n  margin: 0 auto;\n  max-width: 600px;\n  width: 100%;\n  padding: 20px;\n}\n\n/* 섹션 공통 스타일 */\n.App section {\n  padding: 20px;\n  background-color: #ffffff;\n  border: 1px solid #f0f0f0;\n  border-radius: 10px;\n  margin-bottom: 20px;\n}\n\n/* 섹션 제목 스타일 */\n.App section h2 {\n  margin: 0;\n  font-weight: normal;\n  font-size: 18px;\n  color: gray;\n}\n\n/* 입력 필드 공통 스타일 */\n.App input {\n  font-weight: bold;\n  height: 1.5em;\n  border-radius: 10px;\n  text-align: center;\n}\n",
       "src/index.css": "/* 전역 스타일 (채점하지 않음) */\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Malgun Gothic\",\n    \"Apple SD Gothic Neo\", sans-serif;\n  background-color: #f5f7fb;\n  color: #111827;\n}\n\n* {\n  box-sizing: border-box;\n}\n",
-      "src/components/AmountInput.css": "/* 금액 입력 필드 */\n.App .AmountInput input {\n  width: 40%;\n  font-size: 1em;\n  margin-left: 20px;\n}\n",
-      "src/components/AmountInput.jsx": "import \"./AmountInput.css\";\n\n// TODO 4: App에서 amount와 amount를 바꾸는 함수를 props로 받으세요.\n//   - input의 value는 amount\n//   - 입력이 바뀔 때(onChange) e.target.value로 amount를 변경\nconst AmountInput = () => {\n  return (\n    <div className=\"AmountInput\">\n      <h2>환전할 원화:</h2>\n      <h1>\n        <input type=\"number\" /> KRW\n      </h1>\n    </div>\n  );\n};\n\nexport default AmountInput;\n",
-      "src/components/ConversionResult.css": "/* 변환 결과 */\n.App .ConversionResult h1 {\n  border-bottom: gray 2px solid;\n  display: inline-flex;\n  min-width: 120px;\n  min-height: 1.2em;\n  margin-left: 20px;\n}\n",
-      "src/components/ConversionResult.jsx": "import \"./ConversionResult.css\";\n\n// TODO 6: App에서 환전 결과와 통화를 props로 받아 \"결과 통화\" 형식으로 표시하세요.\n//   예) 0.70 USD\nconst ConversionResult = () => {\n  return (\n    <div className=\"ConversionResult\">\n      <h2>환전된 금액:</h2>\n      <h1></h1>\n    </div>\n  );\n};\n\nexport default ConversionResult;\n",
-      "src/components/CurrencySelector.css": "/* 통화 선택 컨테이너 */\n.CurrencySelector {\n  display: flex;\n  gap: 20px;\n}\n\n/* 통화 옵션 (개별 통화) */\n.CurrencyOption {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 8px;\n}\n\n/* 환율 안내 문구 */\n.CurrencyOption .rate {\n  color: gray;\n  font-size: 14px;\n}\n\n/* 통화 선택 버튼 */\n.CurrencyOption button {\n  width: 100%;\n  padding: 10px;\n  font-size: 1em;\n  font-weight: bold;\n  border: none;\n  border-radius: 10px;\n  background-color: #1f93ff;\n  color: white;\n  cursor: pointer;\n}\n",
-      "src/components/CurrencySelector.jsx": "import \"./CurrencySelector.css\";\n\n// TODO 5: App에서 통화를 바꾸는 함수를 props로 받으세요.\n//   - \"USD로 환전\" 버튼 클릭 → 통화를 \"USD\"로 변경\n//   - \"EUR로 환전\" 버튼 클릭 → 통화를 \"EUR\"로 변경\n//   - \"JPY로 환전\" 버튼 클릭 → 통화를 \"JPY\"로 변경\nconst CurrencySelector = () => {\n  return (\n    <div className=\"CurrencySelector\">\n      <div className=\"CurrencyOption\">\n        <div className=\"rate\">1 KRW = 0.0007 USD</div>\n        <button>USD로 환전</button>\n      </div>\n      <div className=\"CurrencyOption\">\n        <div className=\"rate\">1 KRW = 0.0006 EUR</div>\n        <button>EUR로 환전</button>\n      </div>\n      <div className=\"CurrencyOption\">\n        <div className=\"rate\">1 KRW = 0.11 JPY</div>\n        <button>JPY로 환전</button>\n      </div>\n    </div>\n  );\n};\n\nexport default CurrencySelector;\n"
+      "src/components/LengthInput.css": "/* 길이 입력 필드 */\n.App .LengthInput input {\n  width: 40%;\n  font-size: 1em;\n  margin-left: 20px;\n}\n",
+      "src/components/LengthInput.jsx": "import \"./LengthInput.css\";\n\n// TODO 6: App에서 길이와 길이를 바꾸는 함수를 props로 받으세요.\n//   - input의 value는 길이\n//   - 입력이 바뀔 때(onChange) e.target.value로 길이를 변경\nconst LengthInput = () => {\n  return (\n    <div className=\"LengthInput\">\n      <h2>변환할 길이:</h2>\n      <h1>\n        <input type=\"number\" /> m\n      </h1>\n    </div>\n  );\n};\n\nexport default LengthInput;\n",
+      "src/components/ResultDisplay.css": "/* 변환 결과 */\n.App .ResultDisplay h1 {\n  border-bottom: gray 2px solid;\n  display: inline-flex;\n  min-width: 120px;\n  min-height: 1.2em;\n  margin-left: 20px;\n}\n",
+      "src/components/ResultDisplay.jsx": "import \"./ResultDisplay.css\";\n\n// TODO 8: App에서 변환 결과와 단위를 props로 받아 <h1>에 \"결과 단위\" 형식으로 표시하세요.\n//   예) 393.70 in\nconst ResultDisplay = () => {\n  return (\n    <div className=\"ResultDisplay\">\n      <h2>변환된 길이:</h2>\n      <h1></h1>\n    </div>\n  );\n};\n\nexport default ResultDisplay;\n",
+      "src/components/UnitSelector.css": "/* 단위 선택 컨테이너 */\n.UnitSelector {\n  display: flex;\n  gap: 20px;\n}\n\n/* 단위 옵션 (개별 단위) */\n.UnitOption {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 8px;\n}\n\n/* 비율 표시 + 입력 */\n.UnitOption .rate {\n  color: gray;\n  font-size: 14px;\n  white-space: nowrap;\n}\n\n.App .UnitOption .rate input {\n  width: 70px;\n  font-size: 14px;\n}\n\n/* 변환 버튼 */\n.UnitOption button {\n  width: 100%;\n  padding: 10px;\n  font-size: 1em;\n  font-weight: bold;\n  border: none;\n  border-radius: 10px;\n  background-color: #1f93ff;\n  color: white;\n  cursor: pointer;\n}\n",
+      "src/components/UnitSelector.jsx": "import \"./UnitSelector.css\";\n\n// TODO 7: App에서 비율, 비율을 바꾸는 함수, 변환 함수를 props로 받으세요.\n//   - 세 개의 비율 input은 각각 in / ft / yd 비율과 연결 (value + onChange)\n//   - \"인치로 변환\" 버튼 클릭 → in 비율로 변환\n//   - \"피트로 변환\" 버튼 클릭 → ft 비율로 변환\n//   - \"야드로 변환\" 버튼 클릭 → yd 비율로 변환\nconst UnitSelector = () => {\n  return (\n    <div className=\"UnitSelector\">\n      <div className=\"UnitOption\">\n        <div className=\"rate\">\n          1 m = <input type=\"number\" /> in\n        </div>\n        <button>인치로 변환</button>\n      </div>\n      <div className=\"UnitOption\">\n        <div className=\"rate\">\n          1 m = <input type=\"number\" /> ft\n        </div>\n        <button>피트로 변환</button>\n      </div>\n      <div className=\"UnitOption\">\n        <div className=\"rate\">\n          1 m = <input type=\"number\" /> yd\n        </div>\n        <button>야드로 변환</button>\n      </div>\n    </div>\n  );\n};\n\nexport default UnitSelector;\n"
     },
     "solution": {
-      "src/App.jsx": "import { useState } from \"react\";\nimport \"./App.css\";\nimport AmountInput from \"./components/AmountInput\";\nimport CurrencySelector from \"./components/CurrencySelector\";\nimport ConversionResult from \"./components/ConversionResult\";\n\n// 1원(KRW)당 환율 (수정하지 마세요)\nconst RATES = {\n  USD: 0.0007,\n  EUR: 0.0006,\n  JPY: 0.11,\n};\n\nfunction App() {\n  const [amount, setAmount] = useState(1000);\n  const [currency, setCurrency] = useState(\"USD\");\n\n  // 렌더링할 때마다 계산 → amount나 currency가 바뀌면 결과도 즉시 바뀜\n  const result = (Number(amount) * RATES[currency]).toFixed(2);\n\n  return (\n    <div className=\"App\">\n      <section>\n        <AmountInput amount={amount} onChangeAmount={setAmount} />\n      </section>\n      <section>\n        <CurrencySelector onSelect={setCurrency} />\n      </section>\n      <section>\n        <ConversionResult result={result} currency={currency} />\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
-      "src/components/AmountInput.jsx": "import \"./AmountInput.css\";\n\nconst AmountInput = ({ amount, onChangeAmount }) => {\n  const handleOnChange = (e) => {\n    onChangeAmount(e.target.value);\n  };\n\n  return (\n    <div className=\"AmountInput\">\n      <h2>환전할 원화:</h2>\n      <h1>\n        <input type=\"number\" value={amount} onChange={handleOnChange} /> KRW\n      </h1>\n    </div>\n  );\n};\n\nexport default AmountInput;\n",
-      "src/components/ConversionResult.jsx": "import \"./ConversionResult.css\";\n\nconst ConversionResult = ({ result, currency }) => {\n  return (\n    <div className=\"ConversionResult\">\n      <h2>환전된 금액:</h2>\n      <h1>\n        {result} {currency}\n      </h1>\n    </div>\n  );\n};\n\nexport default ConversionResult;\n",
-      "src/components/CurrencySelector.jsx": "import \"./CurrencySelector.css\";\n\nconst CurrencySelector = ({ onSelect }) => {\n  return (\n    <div className=\"CurrencySelector\">\n      <div className=\"CurrencyOption\">\n        <div className=\"rate\">1 KRW = 0.0007 USD</div>\n        <button onClick={() => onSelect(\"USD\")}>USD로 환전</button>\n      </div>\n      <div className=\"CurrencyOption\">\n        <div className=\"rate\">1 KRW = 0.0006 EUR</div>\n        <button onClick={() => onSelect(\"EUR\")}>EUR로 환전</button>\n      </div>\n      <div className=\"CurrencyOption\">\n        <div className=\"rate\">1 KRW = 0.11 JPY</div>\n        <button onClick={() => onSelect(\"JPY\")}>JPY로 환전</button>\n      </div>\n    </div>\n  );\n};\n\nexport default CurrencySelector;\n"
+      "src/App.jsx": "import { useState } from \"react\";\nimport \"./App.css\";\nimport LengthInput from \"./components/LengthInput\";\nimport UnitSelector from \"./components/UnitSelector\";\nimport ResultDisplay from \"./components/ResultDisplay\";\n\nfunction App() {\n  const [length, setLength] = useState(10);\n  const [rates, setRates] = useState({ in: 39.37, ft: 3.28, yd: 1.09 });\n  const [result, setResult] = useState((10 * 39.37).toFixed(2));\n  const [unit, setUnit] = useState(\"in\");\n\n  // 비율 하나만 바꾸고 나머지는 그대로 (객체 State는 스프레드로 복사)\n  const onChangeRate = (key, value) => {\n    setRates({ ...rates, [key]: value });\n  };\n\n  // 버튼을 클릭한 순간의 길이 × 비율로 계산\n  const onConvert = (key) => {\n    setResult((Number(length) * Number(rates[key])).toFixed(2));\n    setUnit(key);\n  };\n\n  return (\n    <div className=\"App\">\n      <section>\n        <LengthInput length={length} onChangeLength={setLength} />\n      </section>\n      <section>\n        <UnitSelector rates={rates} onChangeRate={onChangeRate} onConvert={onConvert} />\n      </section>\n      <section>\n        <ResultDisplay result={result} unit={unit} />\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/components/LengthInput.jsx": "import \"./LengthInput.css\";\n\nconst LengthInput = ({ length, onChangeLength }) => {\n  const handleOnChange = (e) => {\n    onChangeLength(e.target.value);\n  };\n\n  return (\n    <div className=\"LengthInput\">\n      <h2>변환할 길이:</h2>\n      <h1>\n        <input type=\"number\" value={length} onChange={handleOnChange} /> m\n      </h1>\n    </div>\n  );\n};\n\nexport default LengthInput;\n",
+      "src/components/ResultDisplay.jsx": "import \"./ResultDisplay.css\";\n\nconst ResultDisplay = ({ result, unit }) => {\n  return (\n    <div className=\"ResultDisplay\">\n      <h2>변환된 길이:</h2>\n      <h1>\n        {result} {unit}\n      </h1>\n    </div>\n  );\n};\n\nexport default ResultDisplay;\n",
+      "src/components/UnitSelector.jsx": "import \"./UnitSelector.css\";\n\nconst UnitSelector = ({ rates, onChangeRate, onConvert }) => {\n  return (\n    <div className=\"UnitSelector\">\n      <div className=\"UnitOption\">\n        <div className=\"rate\">\n          1 m = <input type=\"number\" value={rates.in} onChange={(e) => onChangeRate(\"in\", e.target.value)} /> in\n        </div>\n        <button onClick={() => onConvert(\"in\")}>인치로 변환</button>\n      </div>\n      <div className=\"UnitOption\">\n        <div className=\"rate\">\n          1 m = <input type=\"number\" value={rates.ft} onChange={(e) => onChangeRate(\"ft\", e.target.value)} /> ft\n        </div>\n        <button onClick={() => onConvert(\"ft\")}>피트로 변환</button>\n      </div>\n      <div className=\"UnitOption\">\n        <div className=\"rate\">\n          1 m = <input type=\"number\" value={rates.yd} onChange={(e) => onChangeRate(\"yd\", e.target.value)} /> yd\n        </div>\n        <button onClick={() => onConvert(\"yd\")}>야드로 변환</button>\n      </div>\n    </div>\n  );\n};\n\nexport default UnitSelector;\n"
     },
     "tests": [
       {
-        "name": "처음 화면에 1000 KRW의 USD 환전 결과(0.70 USD)가 표시된다",
-        "points": 20,
-        "body": "const res = () => t.text('.ConversionResult h1');\nconst num = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ''));\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst cur = (c) => t.$$('.CurrencyOption button').find((b) => b.textContent.includes(c));\nconst choose = async (c) => { const b = cur(c); t.expect(!!b, c + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setAmount = async (v) => { await t.type('.AmountInput input', v); await t.wait(30); };\nconst check = (value, code, msg) => {\n  const r = res();\n  t.expect(r.includes(code) && near(num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + code + ', 현재: \"' + r + '\")');\n};\nconst input = t.$('.AmountInput input');\nt.expect(!!input && input.value === '1000', '금액 입력창의 초기값은 1000이어야 해요 (현재: \"' + (input ? input.value : '') + '\")');\ncheck(0.7, 'USD', '처음 화면에 0.70 USD가 표시되어야 해요');"
+        "name": "컴포넌트 구조: LengthInput, UnitSelector, ResultDisplay 영역이 App에 렌더링된다",
+        "points": 10,
+        "bullet": "structure",
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = [\"LengthInput\",\"UnitSelector\",\"ResultDisplay\"];\nconst miss = NAMES.filter((n) => !t.$('.' + n));\nt.expect(miss.length === 0, '화면에서 ' + miss.join(', ') + ' 영역을 찾을 수 없어요 (App에서 렌더링했는지, 컴포넌트 최상위 요소의 className을 바꾸지 않았는지 확인하세요)');\nconst notUsed = NAMES.filter((n) => !uses('src/App.jsx', n));\nt.expect(notUsed.length === 0, 'App.jsx에서 ' + notUsed.join(', ') + ' 컴포넌트를 import해서 렌더링해야 해요');\n"
       },
       {
-        "name": "금액을 입력하고 USD 버튼을 누르면 환전 결과가 표시된다",
-        "points": 25,
-        "body": "const res = () => t.text('.ConversionResult h1');\nconst num = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ''));\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst cur = (c) => t.$$('.CurrencyOption button').find((b) => b.textContent.includes(c));\nconst choose = async (c) => { const b = cur(c); t.expect(!!b, c + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setAmount = async (v) => { await t.type('.AmountInput input', v); await t.wait(30); };\nconst check = (value, code, msg) => {\n  const r = res();\n  t.expect(r.includes(code) && near(num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + code + ', 현재: \"' + r + '\")');\n};\nawait setAmount('10000');\nawait choose('USD');\ncheck(7, 'USD', '10000원을 USD로 환전하면 7.00 USD가 표시되어야 해요');"
+        "name": "입력 창과 결과가 스크린샷의 값으로 초기화된다",
+        "points": 5,
+        "bullet": 0,
+        "body": "const res = () => t.text('.ResultDisplay h1');\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst rateInputs = () => t.$$('.UnitSelector input');\nconst btnOf = (label) => t.$$('.UnitSelector button').find((b) => b.textContent.includes(label));\nconst convert = async (label) => { const b = btnOf(label); t.expect(!!b, '\"' + label + '\" 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setLen = async (v) => { t.expect(!!t.$('.LengthInput input'), '길이 입력 창(.LengthInput input)을 찾을 수 없어요'); await t.type('.LengthInput input', v); await t.wait(30); };\nconst setRate = async (i, v) => { const el = rateInputs()[i]; t.expect(!!el, (i + 1) + '번째 비율 입력 창을 찾을 수 없어요'); await t.type(el, v); await t.wait(30); };\nconst check = (value, unit, msg) => {\n  const r = res();\n  t.expect(r.includes(unit) && near(t.num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + unit + ', 현재: \"' + r + '\")');\n};\nconst len = t.$('.LengthInput input');\nt.expect(!!len && Number(len.value) === 10 && len.value !== '', '길이 입력 창의 초기값은 10이어야 해요 (현재: \"' + (len ? len.value : '') + '\")');\nconst r = rateInputs();\nt.expect(r.length === 3, '비율 입력 창이 3개 있어야 해요 (현재: ' + r.length + '개)');\nconst want = [39.37, 3.28, 1.09];\nwant.forEach((w, i) => t.expect(r[i].value !== '' && Number(r[i].value) === w, (i + 1) + '번째 비율 입력 창의 초기값은 ' + w + '이어야 해요 (현재: \"' + r[i].value + '\")'));\nt.expect(/^393\\.70\\s*in$/.test(res()), '처음 결과는 \"393.70 in\"이어야 해요 (현재: \"' + res() + '\")');"
       },
       {
-        "name": "EUR, JPY 버튼을 누르면 해당 통화로 환전된다",
-        "points": 25,
-        "body": "const res = () => t.text('.ConversionResult h1');\nconst num = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ''));\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst cur = (c) => t.$$('.CurrencyOption button').find((b) => b.textContent.includes(c));\nconst choose = async (c) => { const b = cur(c); t.expect(!!b, c + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setAmount = async (v) => { await t.type('.AmountInput input', v); await t.wait(30); };\nconst check = (value, code, msg) => {\n  const r = res();\n  t.expect(r.includes(code) && near(num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + code + ', 현재: \"' + r + '\")');\n};\nawait setAmount('5000');\nawait choose('EUR');\ncheck(3, 'EUR', '5000원을 EUR로 환전하면 3.00 EUR이 표시되어야 해요');\nawait choose('JPY');\ncheck(550, 'JPY', '5000원을 JPY로 환전하면 550.00 JPY가 표시되어야 해요');"
+        "name": "4개의 입력 창을 모두 수정할 수 있다",
+        "points": 5,
+        "bullet": 0,
+        "body": "const res = () => t.text('.ResultDisplay h1');\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst rateInputs = () => t.$$('.UnitSelector input');\nconst btnOf = (label) => t.$$('.UnitSelector button').find((b) => b.textContent.includes(label));\nconst convert = async (label) => { const b = btnOf(label); t.expect(!!b, '\"' + label + '\" 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setLen = async (v) => { t.expect(!!t.$('.LengthInput input'), '길이 입력 창(.LengthInput input)을 찾을 수 없어요'); await t.type('.LengthInput input', v); await t.wait(30); };\nconst setRate = async (i, v) => { const el = rateInputs()[i]; t.expect(!!el, (i + 1) + '번째 비율 입력 창을 찾을 수 없어요'); await t.type(el, v); await t.wait(30); };\nconst check = (value, unit, msg) => {\n  const r = res();\n  t.expect(r.includes(unit) && near(t.num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + unit + ', 현재: \"' + r + '\")');\n};\nawait setLen('7');\nawait setRate(0, '40');\nawait setRate(1, '3.3');\nawait setRate(2, '1.1');\nconst vals = () => [t.value('.LengthInput input')].concat(rateInputs().map((e) => e.value)).join(' / ');\nt.expect(vals() === '7 / 40 / 3.3 / 1.1', '입력한 값이 입력 창에 그대로 남아 있어야 해요 (기대: 7 / 40 / 3.3 / 1.1, 현재: ' + vals() + ')');\nawait convert('피트');\nt.expect(vals() === '7 / 40 / 3.3 / 1.1', '버튼을 누른 뒤에도 수정한 값이 유지되어야 해요 (현재: ' + vals() + ')');"
       },
       {
-        "name": "통화를 고른 뒤 금액만 바꿔도 결과가 즉시 갱신된다",
-        "points": 30,
-        "body": "const res = () => t.text('.ConversionResult h1');\nconst num = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ''));\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst cur = (c) => t.$$('.CurrencyOption button').find((b) => b.textContent.includes(c));\nconst choose = async (c) => { const b = cur(c); t.expect(!!b, c + ' 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setAmount = async (v) => { await t.type('.AmountInput input', v); await t.wait(30); };\nconst check = (value, code, msg) => {\n  const r = res();\n  t.expect(r.includes(code) && near(num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + code + ', 현재: \"' + r + '\")');\n};\nawait choose('JPY');\ncheck(110, 'JPY', '1000원 상태에서 JPY 버튼을 누르면 110.00 JPY가 표시되어야 해요');\nawait setAmount('2000');\ncheck(220, 'JPY', '버튼을 다시 누르지 않아도 금액을 2000으로 바꾸면 220.00 JPY로 바뀌어야 해요');\nawait setAmount('30000');\ncheck(3300, 'JPY', '금액을 30000으로 바꾸면 3300.00 JPY로 바뀌어야 해요');"
+        "name": "변환 버튼을 누르면 현재 길이와 비율로 계산된다",
+        "points": 5,
+        "bullet": 1,
+        "body": "const res = () => t.text('.ResultDisplay h1');\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst rateInputs = () => t.$$('.UnitSelector input');\nconst btnOf = (label) => t.$$('.UnitSelector button').find((b) => b.textContent.includes(label));\nconst convert = async (label) => { const b = btnOf(label); t.expect(!!b, '\"' + label + '\" 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setLen = async (v) => { t.expect(!!t.$('.LengthInput input'), '길이 입력 창(.LengthInput input)을 찾을 수 없어요'); await t.type('.LengthInput input', v); await t.wait(30); };\nconst setRate = async (i, v) => { const el = rateInputs()[i]; t.expect(!!el, (i + 1) + '번째 비율 입력 창을 찾을 수 없어요'); await t.type(el, v); await t.wait(30); };\nconst check = (value, unit, msg) => {\n  const r = res();\n  t.expect(r.includes(unit) && near(t.num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + unit + ', 현재: \"' + r + '\")');\n};\nawait setLen('3.5');\nawait convert('피트');\ncheck(11.48, 'ft', '3.5 m를 피트로 변환하면 11.48 ft가 되어야 해요');\nawait setRate(1, '3.3');\nawait convert('피트');\ncheck(11.55, 'ft', '피트 비율을 3.3으로 바꾸고 변환하면 11.55 ft가 되어야 해요');\nawait setRate(0, '40');\nawait convert('인치');\ncheck(140, 'in', '인치 비율을 40으로 바꾸고 변환하면 140.00 in이 되어야 해요');"
+      },
+      {
+        "name": "결과에 단위가 함께 표시되고 소수점 2번째 자리까지 출력된다",
+        "points": 5,
+        "bullet": 2,
+        "body": "const res = () => t.text('.ResultDisplay h1');\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst rateInputs = () => t.$$('.UnitSelector input');\nconst btnOf = (label) => t.$$('.UnitSelector button').find((b) => b.textContent.includes(label));\nconst convert = async (label) => { const b = btnOf(label); t.expect(!!b, '\"' + label + '\" 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setLen = async (v) => { t.expect(!!t.$('.LengthInput input'), '길이 입력 창(.LengthInput input)을 찾을 수 없어요'); await t.type('.LengthInput input', v); await t.wait(30); };\nconst setRate = async (i, v) => { const el = rateInputs()[i]; t.expect(!!el, (i + 1) + '번째 비율 입력 창을 찾을 수 없어요'); await t.type(el, v); await t.wait(30); };\nconst check = (value, unit, msg) => {\n  const r = res();\n  t.expect(r.includes(unit) && near(t.num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + unit + ', 현재: \"' + r + '\")');\n};\nawait setLen('5');\nawait convert('피트');\nt.expect(/^16\\.40\\s*ft$/.test(res()), '5 m를 피트로 변환하면 \"16.40 ft\"로 표시되어야 해요 (toFixed(2) 사용, 현재: \"' + res() + '\")');\nawait setLen('2');\nawait convert('야드');\nt.expect(/^2\\.18\\s*yd$/.test(res()), '2 m를 야드로 변환하면 \"2.18 yd\"로 표시되어야 해요 (현재: \"' + res() + '\")');\nawait convert('인치');\nt.expect(/^78\\.74\\s*in$/.test(res()), '2 m를 인치로 변환하면 \"78.74 in\"으로 표시되어야 해요 (현재: \"' + res() + '\")');"
+      },
+      {
+        "name": "상태(useState)를 선언하고 변환 함수를 작성한다",
+        "points": 5,
+        "bullet": 3,
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst res = () => t.text('.ResultDisplay h1');\nconst near = (a, b) => Math.abs(a - b) < 0.006;\nconst rateInputs = () => t.$$('.UnitSelector input');\nconst btnOf = (label) => t.$$('.UnitSelector button').find((b) => b.textContent.includes(label));\nconst convert = async (label) => { const b = btnOf(label); t.expect(!!b, '\"' + label + '\" 버튼을 찾을 수 없어요'); await t.click(b); await t.wait(30); };\nconst setLen = async (v) => { t.expect(!!t.$('.LengthInput input'), '길이 입력 창(.LengthInput input)을 찾을 수 없어요'); await t.type('.LengthInput input', v); await t.wait(30); };\nconst setRate = async (i, v) => { const el = rateInputs()[i]; t.expect(!!el, (i + 1) + '번째 비율 입력 창을 찾을 수 없어요'); await t.type(el, v); await t.wait(30); };\nconst check = (value, unit, msg) => {\n  const r = res();\n  t.expect(r.includes(unit) && near(t.num(r), value), msg + ' (기대: ' + value.toFixed(2) + ' ' + unit + ', 현재: \"' + r + '\")');\n};\nconst all = ['src/App.jsx', 'src/components/LengthInput.jsx', 'src/components/UnitSelector.jsx', 'src/components/ResultDisplay.jsx'].map(code).join('\\n');\nt.expect(/useState\\s*\\(/.test(all), 'useState로 길이·비율·결과 상태를 선언해야 해요');\nawait convert('야드');\ncheck(10.9, 'yd', '야드로 변환 버튼을 누르면 10.90 yd가 표시되어야 해요');"
       }
     ]
   },
@@ -98,12 +261,90 @@
     "id": "p3",
     "title": "할 일 목록",
     "level": "보통",
-    "desc": "## 할 일 관리 앱 완성하기\n\n수업 시간에 만든 **[할 일 관리] 앱**입니다. 화면(UI)과 CSS는 모두 주어져 있습니다.\n아래 요구사항을 만족하도록 코드를 완성하시오. (CSS는 채점하지 않습니다.)\n\n### 화면 구성\n- **Header** (App 안에 포함) : 오늘 날짜 표시 — 이미 완성됨\n- **TodoEditor** : 할 일 입력창 + `추가` 버튼\n- **TodoList** : 검색창(`.searchbar`) + 할 일 목록(`.list_wrapper`)\n- **TodoItem** : 체크박스, 내용(`.title_col`), 날짜, `삭제` 버튼\n\n### 요구사항\n1. **App**에 할 일 목록 State `todo`를 만들고 초기값을 `mockTodo`(3개)로 설정한다.\n2. **TodoList**는 `todo` 배열을 `map`으로 순회하며 **TodoItem**을 렌더링한다. (`key` 필수)\n3. **TodoEditor**에 내용을 입력하고 `추가`를 누르면 새 할 일이 목록에 추가되고 입력창이 비워진다.\n   - 새 아이템의 `id`는 `useRef`(초기값 3)로 만들어 1씩 증가시킨다.\n   - 입력창이 비어 있으면 추가하지 않는다.\n4. **TodoItem**의 체크박스를 클릭하면 해당 아이템의 `isDone`이 토글된다. (`onUpdate`)\n5. **TodoItem**의 `삭제` 버튼을 누르면 해당 아이템만 삭제된다. (`onDelete`)\n6. **TodoList**의 검색창에 검색어를 입력하면 내용에 검색어가 포함된 할 일만 보인다. (빈 검색어 → 전체)\n\n> 데이터 모델: `{ id, isDone, content, createdDate }`\n> State와 데이터를 바꾸는 함수(`onCreate`, `onUpdate`, `onDelete`)는 모두 App에 두고 props로 내려 주세요.\n\n### 수정할 파일\n- `src/App.jsx`, `src/components/TodoEditor.jsx`, `src/components/TodoList.jsx`, `src/components/TodoItem.jsx`",
+    "desc": "## 3. 할 일 관리\n\n### 요구사항(초기화면)\n\n- 할 일을 추가하고, 완료 표시·삭제·검색을 할 수 있는 할 일 관리 프로그램\n- 초기 화면은 아래 [추가 스크린샷]의 '초기 화면'을 참고\n\n### 요구사항(컴포넌트 구조 – 10점)\n\n- 이 앱은 하나의 페이지이며, 세 개의 영역으로 나누어져 있음\n  - 첫 번째 영역은 오늘 날짜를 표시\n    - ▸ 이 영역의 이름을 **Header**이라고 할 것\n  - 두 번째 영역은 새로운 할 일을 입력하고 추가\n    - ▸ 이 영역의 이름을 **TodoEditor**이라고 할 것\n  - 세 번째 영역은 검색 창과 할 일 목록을 표시\n    - ▸ 이 영역의 이름을 **TodoList**이라고 할 것\n- 목록의 각 할 일은 TodoItem 컴포넌트로 표시할 것. 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). Header는 이미 완성되어 있음\n\n### 요구사항(기능 구현 – 25점)\n\n- 할 일을 입력하고 추가 버튼을 클릭하면 목록에 새 할 일이 추가되어야 함 **(5점)**\n  - ▸ 추가한 뒤 입력 창은 비워져야 함\n  - ▸ 입력 창이 비어 있으면 추가되지 않아야 함\n- 체크박스를 클릭하면 해당 할 일의 완료 여부(isDone)가 바뀌어야 함 **(5점)**\n- 삭제 버튼을 클릭하면 해당 할 일만 삭제되어야 함 **(5점)**\n- 검색 창에 검색어를 입력하면 내용에 검색어가 포함된 할 일만 나타나야 함 **(5점)**\n  - ▸ 검색어가 비어 있으면 전체 목록이 나타나야 함\n- 기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것 **(5점)**\n  - ▸ 할 일 목록 State는 App에 선언하고 mockTodo(3개)로 초기화할 것\n  - ▸ 추가·수정·삭제 함수(onCreate, onUpdate, onDelete)는 App에 작성하고 props로 전달할 것 (새 할 일의 id는 useRef로 관리)\n\n### 요구사항(추가 스크린샷)\n\n1. 초기 화면\n2. 새 할 일 추가(시험 공부) 후 '빨래 널기' 완료 표시\n3. '공부'로 검색\n\n### 수정할 파일\n\n`src/App.jsx`, `src/components/TodoEditor.jsx`, `src/components/TodoList.jsx`, `src/components/TodoItem.jsx`\n\n> 각 파일의 `TODO` 주석을 참고하세요. CSS는 채점하지 않습니다.",
+    "sheet": {
+      "title": "3. 할 일 관리",
+      "summary": "할 일을 추가하고, 완료 표시·삭제·검색을 할 수 있는 할 일 관리 프로그램",
+      "structure": {
+        "points": 10,
+        "lead": "이 앱은 하나의 페이지이며, 세 개의 영역으로 나누어져 있음",
+        "areas": [
+          {
+            "desc": "첫 번째 영역은 오늘 날짜를 표시",
+            "name": "Header"
+          },
+          {
+            "desc": "두 번째 영역은 새로운 할 일을 입력하고 추가",
+            "name": "TodoEditor"
+          },
+          {
+            "desc": "세 번째 영역은 검색 창과 할 일 목록을 표시",
+            "name": "TodoList"
+          }
+        ],
+        "note": "목록의 각 할 일은 TodoItem 컴포넌트로 표시할 것. 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). Header는 이미 완성되어 있음"
+      },
+      "features": {
+        "points": 25,
+        "items": [
+          {
+            "text": "할 일을 입력하고 추가 버튼을 클릭하면 목록에 새 할 일이 추가되어야 함",
+            "points": 5,
+            "sub": [
+              "추가한 뒤 입력 창은 비워져야 함",
+              "입력 창이 비어 있으면 추가되지 않아야 함"
+            ]
+          },
+          {
+            "text": "체크박스를 클릭하면 해당 할 일의 완료 여부(isDone)가 바뀌어야 함",
+            "points": 5,
+            "sub": []
+          },
+          {
+            "text": "삭제 버튼을 클릭하면 해당 할 일만 삭제되어야 함",
+            "points": 5,
+            "sub": []
+          },
+          {
+            "text": "검색 창에 검색어를 입력하면 내용에 검색어가 포함된 할 일만 나타나야 함",
+            "points": 5,
+            "sub": [
+              "검색어가 비어 있으면 전체 목록이 나타나야 함"
+            ]
+          },
+          {
+            "text": "기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것",
+            "points": 5,
+            "sub": [
+              "할 일 목록 State는 App에 선언하고 mockTodo(3개)로 초기화할 것",
+              "추가·수정·삭제 함수(onCreate, onUpdate, onDelete)는 App에 작성하고 props로 전달할 것 (새 할 일의 id는 useRef로 관리)"
+            ]
+          }
+        ]
+      },
+      "screens": [
+        {
+          "caption": "초기 화면",
+          "steps": ""
+        },
+        {
+          "caption": "새 할 일 추가(시험 공부) 후 '빨래 널기' 완료 표시",
+          "steps": "await t.type('.TodoEditor input', '시험 공부'); await t.click('.TodoEditor button'); await t.wait(30); const it = t.$$('.TodoItem').find((el) => el.textContent.includes('빨래 널기')); await t.click(it.querySelector('input[type=checkbox]')); await t.wait(30);"
+        },
+        {
+          "caption": "'공부'로 검색",
+          "steps": "await t.type('.TodoList .searchbar', '공부'); await t.wait(30);"
+        }
+      ],
+      "files": "src/App.jsx, src/components/TodoEditor.jsx, src/components/TodoList.jsx, src/components/TodoItem.jsx"
+    },
     "files": {
       "src/main.jsx": "import { createRoot } from \"react-dom/client\";\nimport \"./index.css\";\nimport App from \"./App.jsx\";\n\ncreateRoot(document.getElementById(\"root\")).render(<App />);\n",
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport TodoEditor from \"./components/TodoEditor\";\nimport TodoList from \"./components/TodoList\";\n\n// 목(Mock) 데이터 (수정하지 마세요)\nconst mockTodo = [\n  { id: 0, isDone: false, content: \"React 공부하기\", createdDate: new Date().getTime() },\n  { id: 1, isDone: false, content: \"빨래 널기\", createdDate: new Date().getTime() },\n  { id: 2, isDone: false, content: \"노래 연습하기\", createdDate: new Date().getTime() },\n];\n\nfunction App() {\n  // TODO 1: 할 일 목록 State(todo)를 만들고 초기값을 mockTodo로 설정하세요.\n\n  // TODO 2: 새 아이템의 id로 사용할 Ref 객체(idRef)를 초기값 3으로 만드세요.\n\n  // TODO 3: onCreate(content) - 새 할 일 아이템을 todo에 추가하세요.\n  //   새 아이템: { id: idRef.current, isDone: false, content, createdDate: new Date().getTime() }\n  //   추가한 뒤 idRef.current를 1 증가시키세요.\n\n  // TODO 4: onUpdate(targetId) - id가 targetId인 아이템의 isDone을 반대로 바꾸세요. (map 사용)\n\n  // TODO 5: onDelete(targetId) - id가 targetId인 아이템을 삭제하세요. (filter 사용)\n\n  return (\n    <div className=\"App\">\n      <div className=\"Header\">\n        <h3>오늘은 📆</h3>\n        <h1>{new Date().toDateString()}</h1>\n      </div>\n      {/* TODO 6: 필요한 State와 함수를 props로 전달하세요. */}\n      <TodoEditor />\n      <TodoList />\n    </div>\n  );\n}\n\nexport default App;\n",
-      "src/App.css": "/* 페이지 레이아웃 (채점하지 않음) */\n.App {\n  max-width: 500px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 30px;\n}\n\n/* 헤더: 오늘 날짜 */\n.Header h3 {\n  margin: 0;\n}\n\n.Header h1 {\n  margin: 0;\n  color: #1f93ff;\n}\n",
+      "src/App.jsx": "import \"./App.css\";\n\n// [컴포넌트 구조] TODO 1: components 폴더의 Header, TodoEditor, TodoList 컴포넌트를 import 하세요.\n//   (필요한 Hook도 react에서 import 하세요.)\n\n// 목(Mock) 데이터 (수정하지 마세요)\nconst mockTodo = [\n  { id: 0, isDone: false, content: \"React 공부하기\", createdDate: new Date().getTime() },\n  { id: 1, isDone: false, content: \"빨래 널기\", createdDate: new Date().getTime() },\n  { id: 2, isDone: false, content: \"노래 연습하기\", createdDate: new Date().getTime() },\n];\n\nfunction App() {\n  // [기능 구현] TODO 2: 할 일 목록 State(todo)를 만들고 초기값을 mockTodo로 설정하세요.\n\n  // TODO 3: 새 아이템의 id로 사용할 Ref 객체(idRef)를 초기값 3으로 만드세요.\n\n  // TODO 4: onCreate(content) - 새 할 일 아이템을 todo에 추가하세요.\n  //   새 아이템: { id: idRef.current, isDone: false, content, createdDate: new Date().getTime() }\n  //   추가한 뒤 idRef.current를 1 증가시키세요.\n\n  // TODO 5: onUpdate(targetId) - id가 targetId인 아이템의 isDone을 반대로 바꾸세요. (map 사용)\n\n  // TODO 6: onDelete(targetId) - id가 targetId인 아이템을 삭제하세요. (filter 사용)\n\n  return (\n    <div className=\"App\">\n      {/* TODO 1-1: 첫 번째 영역 - Header 컴포넌트를 렌더링하세요. */}\n\n      {/* TODO 1-2: 두 번째 영역 - TodoEditor 컴포넌트를 렌더링하고 onCreate를 props로 전달하세요. */}\n\n      {/* TODO 1-3: 세 번째 영역 - TodoList 컴포넌트를 렌더링하고 todo, onUpdate, onDelete를 props로 전달하세요. */}\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.css": "/* 페이지 레이아웃 (채점하지 않음) */\n.App {\n  max-width: 500px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 30px;\n}\n",
       "src/index.css": "/* 전역 스타일 (채점하지 않음) */\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Malgun Gothic\",\n    \"Apple SD Gothic Neo\", sans-serif;\n  background-color: #f5f7fb;\n  color: #111827;\n}\n\n* {\n  box-sizing: border-box;\n}\n",
+      "src/components/Header.css": "/* 헤더: 오늘 날짜 */\n.Header h3 {\n  margin: 0;\n}\n\n.Header h1 {\n  margin: 0;\n  color: #1f93ff;\n}\n",
+      "src/components/Header.jsx": "import \"./Header.css\";\n\n// 이 파일은 수정하지 않아도 됩니다. (오늘 날짜 표시)\nconst Header = () => {\n  return (\n    <div className=\"Header\">\n      <h3>오늘은 📆</h3>\n      <h1>{new Date().toDateString()}</h1>\n    </div>\n  );\n};\n\nexport default Header;\n",
       "src/components/TodoEditor.css": ".TodoEditor h4 {\n  margin: 0 0 10px 0;\n}\n\n.TodoEditor .editor_wrapper {\n  width: 100%;\n  display: flex;\n  gap: 10px;\n}\n\n.TodoEditor input {\n  flex: 1;\n  padding: 15px;\n  border: 1px solid rgb(220, 220, 220);\n  border-radius: 5px;\n}\n\n.TodoEditor input:focus {\n  outline: none;\n  border: 1px solid #1f93ff;\n}\n\n.TodoEditor button {\n  cursor: pointer;\n  width: 80px;\n  border: none;\n  background-color: #1f93ff;\n  color: white;\n  border-radius: 5px;\n}\n",
       "src/components/TodoEditor.jsx": "import { useState } from \"react\";\nimport \"./TodoEditor.css\";\n\n// props: onCreate(content)\nconst TodoEditor = () => {\n  // TODO 7: 입력한 내용을 저장할 State(content)를 만들고 input과 연결하세요. (value + onChange)\n\n  // TODO 8: <추가> 버튼을 클릭하면\n  //   - content가 빈 문자열이면 아무것도 하지 않습니다.\n  //   - 아니면 onCreate(content)를 호출하고, 입력창을 비웁니다.\n\n  return (\n    <div className=\"TodoEditor\">\n      <h4>새로운 Todo 작성하기 ✏️</h4>\n      <div className=\"editor_wrapper\">\n        <input placeholder=\"새로운 Todo...\" />\n        <button>추가</button>\n      </div>\n    </div>\n  );\n};\n\nexport default TodoEditor;\n",
       "src/components/TodoItem.css": ".TodoItem {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n  padding-bottom: 20px;\n  border-bottom: 1px solid rgb(240, 240, 240);\n}\n\n.TodoItem .checkbox_col {\n  width: 20px;\n}\n\n.TodoItem .title_col {\n  flex: 1;\n}\n\n.TodoItem .date_col {\n  font-size: 14px;\n  color: gray;\n}\n\n.TodoItem .btn_col button {\n  cursor: pointer;\n  color: gray;\n  font-size: 14px;\n  border: none;\n  border-radius: 5px;\n  padding: 5px;\n}\n",
@@ -112,146 +353,334 @@
       "src/components/TodoList.jsx": "import { useState } from \"react\";\nimport TodoItem from \"./TodoItem\";\nimport \"./TodoList.css\";\n\n// props: todo(할 일 배열), onUpdate, onDelete\nconst TodoList = () => {\n  // TODO 9: 검색어를 저장할 State(search)를 만들고 검색 입력창과 연결하세요.\n\n  // TODO 10: getSearchResult() - search가 빈 문자열이면 todo 전체를,\n  //   아니면 content에 search가 포함된 아이템만 반환하세요. (filter, includes 사용)\n\n  return (\n    <div className=\"TodoList\">\n      <h4>Todo List 🌱</h4>\n      <input className=\"searchbar\" placeholder=\"검색어를 입력하세요\" />\n      <div className=\"list_wrapper\">\n        {/* TODO 11: 검색 결과 배열을 map으로 순회하며 TodoItem을 렌더링하세요.\n            - key는 아이템의 id\n            - 아이템의 정보(id, content, isDone, createdDate)와 onUpdate, onDelete를 props로 전달 */}\n      </div>\n    </div>\n  );\n};\n\nexport default TodoList;\n"
     },
     "solution": {
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport TodoEditor from \"./components/TodoEditor\";\nimport TodoList from \"./components/TodoList\";\n\n// 목(Mock) 데이터 (수정하지 마세요)\nconst mockTodo = [\n  { id: 0, isDone: false, content: \"React 공부하기\", createdDate: new Date().getTime() },\n  { id: 1, isDone: false, content: \"빨래 널기\", createdDate: new Date().getTime() },\n  { id: 2, isDone: false, content: \"노래 연습하기\", createdDate: new Date().getTime() },\n];\n\nfunction App() {\n  const [todo, setTodo] = useState(mockTodo);\n  const idRef = useRef(3);\n\n  const onCreate = (content) => {\n    const newItem = {\n      id: idRef.current,\n      isDone: false,\n      content,\n      createdDate: new Date().getTime(),\n    };\n    setTodo([newItem, ...todo]);\n    idRef.current += 1;\n  };\n\n  const onUpdate = (targetId) => {\n    setTodo(\n      todo.map((it) => (it.id === targetId ? { ...it, isDone: !it.isDone } : it))\n    );\n  };\n\n  const onDelete = (targetId) => {\n    setTodo(todo.filter((it) => it.id !== targetId));\n  };\n\n  return (\n    <div className=\"App\">\n      <div className=\"Header\">\n        <h3>오늘은 📆</h3>\n        <h1>{new Date().toDateString()}</h1>\n      </div>\n      <TodoEditor onCreate={onCreate} />\n      <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport Header from \"./components/Header\";\nimport TodoEditor from \"./components/TodoEditor\";\nimport TodoList from \"./components/TodoList\";\n\n// 목(Mock) 데이터 (수정하지 마세요)\nconst mockTodo = [\n  { id: 0, isDone: false, content: \"React 공부하기\", createdDate: new Date().getTime() },\n  { id: 1, isDone: false, content: \"빨래 널기\", createdDate: new Date().getTime() },\n  { id: 2, isDone: false, content: \"노래 연습하기\", createdDate: new Date().getTime() },\n];\n\nfunction App() {\n  const [todo, setTodo] = useState(mockTodo);\n  const idRef = useRef(3);\n\n  const onCreate = (content) => {\n    const newItem = {\n      id: idRef.current,\n      isDone: false,\n      content,\n      createdDate: new Date().getTime(),\n    };\n    setTodo([newItem, ...todo]);\n    idRef.current += 1;\n  };\n\n  const onUpdate = (targetId) => {\n    setTodo(\n      todo.map((it) => (it.id === targetId ? { ...it, isDone: !it.isDone } : it))\n    );\n  };\n\n  const onDelete = (targetId) => {\n    setTodo(todo.filter((it) => it.id !== targetId));\n  };\n\n  return (\n    <div className=\"App\">\n      <Header />\n      <TodoEditor onCreate={onCreate} />\n      <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />\n    </div>\n  );\n}\n\nexport default App;\n",
       "src/components/TodoEditor.jsx": "import { useState } from \"react\";\nimport \"./TodoEditor.css\";\n\nconst TodoEditor = ({ onCreate }) => {\n  const [content, setContent] = useState(\"\");\n\n  const onChangeContent = (e) => {\n    setContent(e.target.value);\n  };\n\n  const onSubmit = () => {\n    if (!content) {\n      return;\n    }\n    onCreate(content);\n    setContent(\"\");\n  };\n\n  return (\n    <div className=\"TodoEditor\">\n      <h4>새로운 Todo 작성하기 ✏️</h4>\n      <div className=\"editor_wrapper\">\n        <input value={content} onChange={onChangeContent} placeholder=\"새로운 Todo...\" />\n        <button onClick={onSubmit}>추가</button>\n      </div>\n    </div>\n  );\n};\n\nexport default TodoEditor;\n",
       "src/components/TodoItem.jsx": "import \"./TodoItem.css\";\n\nconst TodoItem = ({ id, content, isDone, createdDate, onUpdate, onDelete }) => {\n  const onChangeCheckbox = () => {\n    onUpdate(id);\n  };\n\n  const onClickDelete = () => {\n    onDelete(id);\n  };\n\n  return (\n    <div className=\"TodoItem\">\n      <div className=\"checkbox_col\">\n        <input type=\"checkbox\" checked={isDone} onChange={onChangeCheckbox} />\n      </div>\n      <div className=\"title_col\">{content}</div>\n      <div className=\"date_col\">{new Date(createdDate).toLocaleDateString()}</div>\n      <div className=\"btn_col\">\n        <button onClick={onClickDelete}>삭제</button>\n      </div>\n    </div>\n  );\n};\n\nexport default TodoItem;\n",
       "src/components/TodoList.jsx": "import { useState } from \"react\";\nimport TodoItem from \"./TodoItem\";\nimport \"./TodoList.css\";\n\nconst TodoList = ({ todo, onUpdate, onDelete }) => {\n  const [search, setSearch] = useState(\"\");\n\n  const onChangeSearch = (e) => {\n    setSearch(e.target.value);\n  };\n\n  const getSearchResult = () => {\n    return search === \"\"\n      ? todo\n      : todo.filter((it) => it.content.toLowerCase().includes(search.toLowerCase()));\n  };\n\n  return (\n    <div className=\"TodoList\">\n      <h4>Todo List 🌱</h4>\n      <input\n        className=\"searchbar\"\n        value={search}\n        onChange={onChangeSearch}\n        placeholder=\"검색어를 입력하세요\"\n      />\n      <div className=\"list_wrapper\">\n        {getSearchResult().map((it) => (\n          <TodoItem key={it.id} {...it} onUpdate={onUpdate} onDelete={onDelete} />\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default TodoList;\n"
     },
     "tests": [
       {
-        "name": "처음 화면에 목 데이터 3개가 목록으로 렌더링된다",
-        "points": 15,
-        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nt.expect(items().length === 3, '처음에 TodoItem이 3개 보여야 해요 (현재: ' + items().length + '개)');\nt.expect(!!find('React 공부하기') && !!find('빨래 널기') && !!find('노래 연습하기'), 'mockTodo의 내용(React 공부하기, 빨래 널기, 노래 연습하기)이 보여야 해요 (현재: ' + titles() + ')');"
-      },
-      {
-        "name": "할 일을 입력하고 추가를 누르면 목록에 추가되고 입력창이 비워진다",
-        "points": 25,
-        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nawait add('시험 공부');\nt.expect(!!find('시험 공부'), '추가한 \"시험 공부\"가 목록에 보여야 해요 (현재: ' + titles() + ')');\nt.expect(items().length === 4, '추가 후 할 일이 4개여야 해요 (현재: ' + items().length + '개)');\nt.expect(t.$('.TodoEditor input').value === '', '추가한 뒤 입력창이 비워져야 해요');\nawait add('운동하기');\nt.expect(items().length === 5 && !!find('운동하기'), '두 번째로 추가한 \"운동하기\"도 보여야 해요 (현재: ' + titles() + ')');"
-      },
-      {
-        "name": "입력창이 비어 있으면 할 일이 추가되지 않는다",
+        "name": "컴포넌트 구조: Header, TodoEditor, TodoList 영역이 App에 렌더링된다",
         "points": 10,
-        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nawait add('장보기');\nt.expect(items().length === 4, '먼저 \"장보기\"를 추가하면 4개가 되어야 해요 (현재: ' + items().length + '개)');\nawait t.type('.TodoEditor input', '');\nawait t.wait(30);\nawait t.click('.TodoEditor button');\nawait t.wait(30);\nt.expect(items().length === 4, '빈 입력으로 추가를 누르면 아무것도 추가되면 안 돼요 (현재: ' + items().length + '개)');"
+        "bullet": "structure",
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = [\"Header\",\"TodoEditor\",\"TodoList\"];\nconst miss = NAMES.filter((n) => !t.$('.' + n));\nt.expect(miss.length === 0, '화면에서 ' + miss.join(', ') + ' 영역을 찾을 수 없어요 (App에서 렌더링했는지, 컴포넌트 최상위 요소의 className을 바꾸지 않았는지 확인하세요)');\nconst notUsed = NAMES.filter((n) => !uses('src/App.jsx', n));\nt.expect(notUsed.length === 0, 'App.jsx에서 ' + notUsed.join(', ') + ' 컴포넌트를 import해서 렌더링해야 해요');\n"
+      },
+      {
+        "name": "할 일을 추가하면 목록에 추가되고 입력 창이 비워진다 (빈 입력은 추가 안 됨)",
+        "points": 5,
+        "bullet": 0,
+        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  t.expect(!!t.$('.TodoEditor input') && !!t.$('.TodoEditor button'), 'TodoEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nconst before = items().length;\nawait add('시험 공부');\nt.expect(!!find('시험 공부'), '추가한 \"시험 공부\"가 목록에 보여야 해요 (현재: ' + titles() + ')');\nt.expect(items().length === before + 1, '추가 후 할 일이 ' + (before + 1) + '개여야 해요 (현재: ' + items().length + '개)');\nt.expect(t.$('.TodoEditor input').value === '', '추가한 뒤 입력 창이 비워져야 해요');\nawait t.type('.TodoEditor input', '');\nawait t.click('.TodoEditor button');\nawait t.wait(30);\nt.expect(items().length === before + 1, '빈 입력으로 추가를 누르면 아무것도 추가되면 안 돼요 (현재: ' + items().length + '개)');"
       },
       {
         "name": "체크박스를 클릭하면 완료 여부(isDone)가 토글된다",
-        "points": 20,
-        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nconst cb = () => { const el = find('빨래 널기'); return el ? el.querySelector('input[type=checkbox]') : null; };\nt.expect(!!cb(), '\"빨래 널기\" 아이템의 체크박스를 찾을 수 없어요');\nawait t.click(cb());\nawait t.wait(30);\nt.expect(cb().checked === true, '체크박스를 클릭하면 체크되어야 해요 (isDone: true)');\nconst other = find('React 공부하기').querySelector('input[type=checkbox]');\nt.expect(other.checked === false, '다른 아이템은 체크되면 안 돼요');\nawait t.click(cb());\nawait t.wait(30);\nt.expect(cb().checked === false, '한 번 더 클릭하면 체크가 해제되어야 해요 (isDone: false)');"
+        "points": 5,
+        "bullet": 1,
+        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  t.expect(!!t.$('.TodoEditor input') && !!t.$('.TodoEditor button'), 'TodoEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nconst cb = () => { const el = find('빨래 널기'); return el ? el.querySelector('input[type=checkbox]') : null; };\nt.expect(!!cb(), '\"빨래 널기\" 아이템의 체크박스를 찾을 수 없어요');\nawait t.click(cb());\nawait t.wait(30);\nt.expect(cb().checked === true, '체크박스를 클릭하면 체크되어야 해요 (isDone: true)');\nconst other = find('React 공부하기').querySelector('input[type=checkbox]');\nt.expect(other.checked === false, '다른 아이템은 체크되면 안 돼요');\nawait t.click(cb());\nawait t.wait(30);\nt.expect(cb().checked === false, '한 번 더 클릭하면 체크가 해제되어야 해요 (isDone: false)');"
       },
       {
         "name": "삭제 버튼을 누르면 해당 할 일만 삭제된다",
-        "points": 20,
-        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nconst target = find('빨래 널기');\nt.expect(!!target, '\"빨래 널기\" 아이템을 찾을 수 없어요');\nawait t.click(target.querySelector('.btn_col button'));\nawait t.wait(30);\nt.expect(!find('빨래 널기'), '\"빨래 널기\"가 목록에서 사라져야 해요');\nt.expect(items().length === 2 && !!find('React 공부하기') && !!find('노래 연습하기'), '나머지 2개는 그대로 남아 있어야 해요 (현재: ' + titles() + ')');"
+        "points": 5,
+        "bullet": 2,
+        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  t.expect(!!t.$('.TodoEditor input') && !!t.$('.TodoEditor button'), 'TodoEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nconst target = find('빨래 널기');\nt.expect(!!target, '\"빨래 널기\" 아이템을 찾을 수 없어요');\nawait t.click(target.querySelector('.btn_col button'));\nawait t.wait(30);\nt.expect(!find('빨래 널기'), '\"빨래 널기\"가 목록에서 사라져야 해요');\nt.expect(items().length === 2 && !!find('React 공부하기') && !!find('노래 연습하기'), '나머지 2개는 그대로 남아 있어야 해요 (현재: ' + titles() + ')');"
       },
       {
         "name": "검색어를 입력하면 내용에 검색어가 포함된 할 일만 보인다",
-        "points": 10,
-        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nt.expect(items().length === 3, '처음에 3개가 보여야 해요');\nawait t.type('.TodoList .searchbar', '공부');\nawait t.wait(30);\nt.expect(items().length === 1 && !!find('React 공부하기'), '\"공부\"로 검색하면 \"React 공부하기\"만 보여야 해요 (현재: ' + titles() + ')');\nawait t.type('.TodoList .searchbar', '');\nawait t.wait(30);\nt.expect(items().length === 3, '검색어를 지우면 다시 전체 3개가 보여야 해요 (현재: ' + items().length + '개)');"
+        "points": 5,
+        "bullet": 3,
+        "body": "const items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  t.expect(!!t.$('.TodoEditor input') && !!t.$('.TodoEditor button'), 'TodoEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nt.expect(items().length === 3, '처음에 3개가 보여야 해요');\nt.expect(!!t.$('.TodoList .searchbar'), '검색 창(.searchbar)을 찾을 수 없어요');\nawait t.type('.TodoList .searchbar', '공부');\nawait t.wait(30);\nt.expect(items().length === 1 && !!find('React 공부하기'), '\"공부\"로 검색하면 \"React 공부하기\"만 보여야 해요 (현재: ' + titles() + ')');\nawait t.type('.TodoList .searchbar', '');\nawait t.wait(30);\nt.expect(items().length === 3, '검색어를 지우면 다시 전체 3개가 보여야 해요 (현재: ' + items().length + '개)');"
+      },
+      {
+        "name": "할 일 State를 App에 선언하고 mockTodo로 초기화한다",
+        "points": 5,
+        "bullet": 4,
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst items = () => t.$$('.TodoItem');\nconst find = (c) => items().find((el) => t.text(el.querySelector('.title_col')) === c);\nconst titles = () => items().map((el) => t.text(el.querySelector('.title_col'))).join(', ');\nconst add = async (c) => {\n  t.expect(!!t.$('.TodoEditor input') && !!t.$('.TodoEditor button'), 'TodoEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.TodoEditor input', c);\n  await t.wait(30);\n  await t.click('.TodoEditor button');\n  await t.wait(30);\n};\nt.expect(/useState\\s*\\(/.test(code('src/App.jsx')), 'App.jsx에서 useState로 상태를 선언해야 해요');\nt.expect(items().length === 3, '처음 화면에 TodoItem이 3개 보여야 해요 (현재: ' + items().length + '개)');\nt.expect(!!find('React 공부하기') && !!find('빨래 널기') && !!find('노래 연습하기'), 'mockTodo의 내용(React 공부하기, 빨래 널기, 노래 연습하기)이 보여야 해요 (현재: ' + titles() + ')');"
       }
     ]
   },
   {
     "id": "p4",
-    "title": "가계부",
+    "title": "공부 기록장",
     "level": "보통",
-    "desc": "## 가계부 앱 완성하기\n\n수입/지출 내역을 추가하고, 합계를 보여 주고, 삭제할 수 있는 가계부 앱입니다.\n화면(UI)과 CSS는 모두 주어져 있습니다. 아래 요구사항을 만족하도록 코드를 완성하시오. (CSS는 채점하지 않습니다.)\n\n### 화면 구성\n- **ExpenseEditor** : 내용 입력창(`.desc_input`), 금액 입력창(`.amount_input`), `수입 추가` / `지출 추가` 버튼\n- **ExpenseSummary** : 총 수입 / 총 지출 / 잔액 카드\n- **ExpenseList** : 내역 목록 → 각 항목은 **ExpenseItem** (구분, 내용, 금액, `삭제` 버튼)\n\n### 요구사항\n1. **App**에 내역 목록 State `list`(초기값 `[]`)를 만든다. 내역 하나는 `{ id, type, description, amount }` 형태이다.\n   - `type`은 `\"income\"`(수입) 또는 `\"expense\"`(지출), `amount`는 **숫자**\n   - `id`는 `useRef`로 0부터 1씩 증가\n2. **ExpenseEditor**에서 내용과 금액을 입력하고\n   - `수입 추가`를 누르면 수입 내역이, `지출 추가`를 누르면 지출 내역이 추가된다.\n   - 추가한 뒤 두 입력창을 비운다.\n   - 내용이나 금액이 비어 있으면 추가하지 않는다.\n3. **ExpenseList**는 `list`를 `map`으로 렌더링한다. (`key` 필수)\n4. **ExpenseSummary**는 `list`로부터 **총 수입, 총 지출, 잔액(총 수입 − 총 지출)**을 계산해 표시한다. (예: `15,000원`)\n5. **ExpenseItem**의 `삭제` 버튼을 누르면 해당 내역이 삭제되고, 요약도 함께 바뀐다.\n\n### 수정할 파일\n- `src/App.jsx`, `src/components/ExpenseEditor.jsx`, `src/components/ExpenseSummary.jsx`, `src/components/ExpenseList.jsx`, `src/components/ExpenseItem.jsx`",
+    "desc": "## 4. 미니 공부 기록장\n\n### 요구사항(초기화면)\n\n- 전공·교양 공부 기록을 추가·삭제하고, 공부 시간 합계를 보여 주며, 구분과 검색어로 기록을 찾아볼 수 있는 프로그램\n- 초기 화면은 아래 [추가 스크린샷]의 '초기 화면'을 참고\n\n### 요구사항(컴포넌트 구조 – 10점)\n\n- 이 앱은 하나의 페이지이며, 네 개의 영역으로 나누어져 있음\n  - 첫 번째 영역은 앱의 제목을 표시\n    - ▸ 이 영역의 이름을 **Header**이라고 할 것\n  - 두 번째 영역은 새 공부 기록(구분, 내용, 시간, 날짜)을 입력하고 추가\n    - ▸ 이 영역의 이름을 **StudyEditor**이라고 할 것\n  - 세 번째 영역은 전공·교양 공부 시간과 합계를 표시\n    - ▸ 이 영역의 이름을 **StudySummary**이라고 할 것\n  - 네 번째 영역은 구분 필터, 검색 창, 공부 기록 목록을 표시\n    - ▸ 이 영역의 이름을 **StudyList**이라고 할 것\n- 목록의 각 기록은 StudyItem 컴포넌트로 표시할 것. 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). Header는 이미 완성되어 있음\n\n### 요구사항(기능 구현 – 25점)\n\n- 구분(전공/교양), 공부 내용, 공부 시간(분), 날짜를 입력하고 추가 버튼을 클릭하면 목록에 새 기록이 추가되어야 함 **(5점)**\n  - ▸ 추가한 뒤 공부 내용과 공부 시간 입력 창은 비워져야 함\n- 삭제 버튼을 클릭하면 해당 기록이 삭제되어야 함 **(5점)**\n- 요약 영역에 전공 공부 시간, 교양 공부 시간, 전체 합계가 나타나야 함 **(5점)**\n  - ▸ 기록이 추가되면 합계도 함께 바뀌어야 함 (예: 150분)\n- 목록 영역에서 구분(전체/전공만/교양만)과 검색어에 맞는 기록만 나타나야 함 **(5점)**\n  - ▸ 구분 필터와 검색어는 함께 적용되어야 함 (검색어가 비어 있으면 구분만 적용)\n- 기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것 **(5점)**\n  - ▸ 기록 목록 State는 App에 선언하고 mockRecords(3개)로 초기화할 것\n  - ▸ 추가·삭제 함수는 App에 작성하고 props로 전달할 것\n\n### 요구사항(추가 스크린샷)\n\n1. 초기 화면\n2. 교양만 출력\n3. 전공만 출력 후 검색어(React) 적용\n4. 새 기록 추가(교양, 중국어 단어, 30분)\n\n### 수정할 파일\n\n`src/App.jsx`, `src/components/StudyEditor.jsx`, `src/components/StudySummary.jsx`, `src/components/StudyList.jsx`, `src/components/StudyItem.jsx`\n\n> 각 파일의 `TODO` 주석을 참고하세요. CSS는 채점하지 않습니다.",
+    "sheet": {
+      "title": "4. 미니 공부 기록장",
+      "summary": "전공·교양 공부 기록을 추가·삭제하고, 공부 시간 합계를 보여 주며, 구분과 검색어로 기록을 찾아볼 수 있는 프로그램",
+      "structure": {
+        "points": 10,
+        "lead": "이 앱은 하나의 페이지이며, 네 개의 영역으로 나누어져 있음",
+        "areas": [
+          {
+            "desc": "첫 번째 영역은 앱의 제목을 표시",
+            "name": "Header"
+          },
+          {
+            "desc": "두 번째 영역은 새 공부 기록(구분, 내용, 시간, 날짜)을 입력하고 추가",
+            "name": "StudyEditor"
+          },
+          {
+            "desc": "세 번째 영역은 전공·교양 공부 시간과 합계를 표시",
+            "name": "StudySummary"
+          },
+          {
+            "desc": "네 번째 영역은 구분 필터, 검색 창, 공부 기록 목록을 표시",
+            "name": "StudyList"
+          }
+        ],
+        "note": "목록의 각 기록은 StudyItem 컴포넌트로 표시할 것. 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). Header는 이미 완성되어 있음"
+      },
+      "features": {
+        "points": 25,
+        "items": [
+          {
+            "text": "구분(전공/교양), 공부 내용, 공부 시간(분), 날짜를 입력하고 추가 버튼을 클릭하면 목록에 새 기록이 추가되어야 함",
+            "points": 5,
+            "sub": [
+              "추가한 뒤 공부 내용과 공부 시간 입력 창은 비워져야 함"
+            ]
+          },
+          {
+            "text": "삭제 버튼을 클릭하면 해당 기록이 삭제되어야 함",
+            "points": 5,
+            "sub": []
+          },
+          {
+            "text": "요약 영역에 전공 공부 시간, 교양 공부 시간, 전체 합계가 나타나야 함",
+            "points": 5,
+            "sub": [
+              "기록이 추가되면 합계도 함께 바뀌어야 함 (예: 150분)"
+            ]
+          },
+          {
+            "text": "목록 영역에서 구분(전체/전공만/교양만)과 검색어에 맞는 기록만 나타나야 함",
+            "points": 5,
+            "sub": [
+              "구분 필터와 검색어는 함께 적용되어야 함 (검색어가 비어 있으면 구분만 적용)"
+            ]
+          },
+          {
+            "text": "기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것",
+            "points": 5,
+            "sub": [
+              "기록 목록 State는 App에 선언하고 mockRecords(3개)로 초기화할 것",
+              "추가·삭제 함수는 App에 작성하고 props로 전달할 것"
+            ]
+          }
+        ]
+      },
+      "screens": [
+        {
+          "caption": "초기 화면",
+          "steps": ""
+        },
+        {
+          "caption": "교양만 출력",
+          "steps": "await t.type('.StudyList .filter', 'general'); await t.wait(30);"
+        },
+        {
+          "caption": "전공만 출력 후 검색어(React) 적용",
+          "steps": "await t.type('.StudyList .filter', 'major'); await t.type('.StudyList .searchbar', 'React'); await t.wait(30);"
+        },
+        {
+          "caption": "새 기록 추가(교양, 중국어 단어, 30분)",
+          "steps": "await t.type('.StudyEditor .type_select', 'general'); await t.type('.StudyEditor .subject_input', '중국어 단어'); await t.type('.StudyEditor .minutes_input', '30'); await t.type('.StudyEditor .date_input', '2026-10-23'); await t.click('.StudyEditor .add_btn'); await t.wait(30);"
+        }
+      ],
+      "files": "src/App.jsx, src/components/StudyEditor.jsx, src/components/StudySummary.jsx, src/components/StudyList.jsx, src/components/StudyItem.jsx"
+    },
     "files": {
       "src/main.jsx": "import { createRoot } from \"react-dom/client\";\nimport \"./index.css\";\nimport App from \"./App.jsx\";\n\ncreateRoot(document.getElementById(\"root\")).render(<App />);\n",
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport ExpenseEditor from \"./components/ExpenseEditor\";\nimport ExpenseSummary from \"./components/ExpenseSummary\";\nimport ExpenseList from \"./components/ExpenseList\";\n\nfunction App() {\n  // TODO 1: 내역 목록 State(list)를 만들고 초기값을 빈 배열로 설정하세요.\n  //   내역 하나의 모양: { id, type, description, amount }\n  //   type은 \"income\"(수입) 또는 \"expense\"(지출), amount는 숫자\n\n  // TODO 2: 새 내역의 id로 사용할 Ref 객체(idRef)를 초기값 0으로 만드세요.\n\n  // TODO 3: onCreate(type, description, amount) - 새 내역을 list에 추가하고 idRef.current를 1 증가시키세요.\n\n  // TODO 4: onDelete(targetId) - id가 targetId인 내역을 list에서 삭제하세요.\n\n  return (\n    <div className=\"App\">\n      <div className=\"Header\">\n        <h1>나의 가계부</h1>\n      </div>\n      {/* TODO 5: 각 컴포넌트에 필요한 State와 함수를 props로 전달하세요. */}\n      <ExpenseEditor />\n      <ExpenseSummary />\n      <ExpenseList />\n    </div>\n  );\n}\n\nexport default App;\n",
-      "src/App.css": "/* App 전체 레이아웃 (채점하지 않음) */\n.App {\n  max-width: 700px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 30px;\n}\n\n.Header h1 {\n  margin: 0;\n  color: #1f93ff;\n}\n",
+      "src/App.jsx": "import \"./App.css\";\n\n// [컴포넌트 구조] TODO 1: components 폴더의 Header, StudyEditor, StudySummary, StudyList 컴포넌트를 import 하세요.\n//   (필요한 Hook도 react에서 import 하세요.)\n\n// 목(Mock) 데이터 (수정하지 마세요)\n//   type: \"major\"(전공) 또는 \"general\"(교양), minutes: 공부 시간(분, 숫자), date: \"YYYY-MM-DD\"\nconst mockRecords = [\n  { id: 0, type: \"major\", subject: \"자료구조 과제\", minutes: 90, date: \"2026-10-20\" },\n  { id: 1, type: \"general\", subject: \"영어 회화\", minutes: 40, date: \"2026-10-21\" },\n  { id: 2, type: \"major\", subject: \"React 복습\", minutes: 60, date: \"2026-10-22\" },\n];\n\nfunction App() {\n  // [기능 구현] TODO 2: 기록 목록 State(records)를 만들고 초기값을 mockRecords로 설정하세요.\n\n  // TODO 3: 새 기록의 id로 사용할 Ref 객체(idRef)를 초기값 3으로 만드세요.\n\n  // TODO 4: onCreate(type, subject, minutes, date) - 새 기록을 records에 추가하고 idRef.current를 1 증가시키세요.\n\n  // TODO 5: onDelete(targetId) - id가 targetId인 기록을 records에서 삭제하세요. (filter 사용)\n\n  return (\n    <div className=\"App\">\n      <section>\n        {/* TODO 1-1: 첫 번째 영역 - Header 컴포넌트를 렌더링하세요. */}\n      </section>\n      <section>\n        {/* TODO 1-2: 두 번째 영역 - StudyEditor 컴포넌트를 렌더링하고 onCreate를 props로 전달하세요. */}\n      </section>\n      <section>\n        {/* TODO 1-3: 세 번째 영역 - StudySummary 컴포넌트를 렌더링하고 records를 props로 전달하세요. */}\n      </section>\n      <section>\n        {/* TODO 1-4: 네 번째 영역 - StudyList 컴포넌트를 렌더링하고 records와 onDelete를 props로 전달하세요. */}\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.css": "/* App 전체 레이아웃 (채점하지 않음) */\n.App {\n  max-width: 720px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n}\n\n.App > section:empty {\n  display: none;\n}\n",
       "src/index.css": "/* 전역 스타일 (채점하지 않음) */\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Malgun Gothic\",\n    \"Apple SD Gothic Neo\", sans-serif;\n  background-color: #f5f7fb;\n  color: #111827;\n}\n\n* {\n  box-sizing: border-box;\n}\n",
-      "src/components/ExpenseEditor.css": "/* 수입/지출 입력 폼 */\n.ExpenseEditor {\n  display: flex;\n  flex-direction: column;\n  gap: 15px;\n  padding: 20px;\n  border: 1px solid rgb(240, 240, 240);\n  border-radius: 5px;\n  background-color: white;\n}\n\n.ExpenseEditor .editor_title {\n  margin: 0;\n  font-size: 18px;\n}\n\n.ExpenseEditor .editor_wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.ExpenseEditor input {\n  flex: 1;\n  padding: 10px;\n  border: 1px solid rgb(220, 220, 220);\n  border-radius: 5px;\n}\n\n.ExpenseEditor .amount_input {\n  flex: 0 0 140px;\n}\n\n.ExpenseEditor .btn_wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.ExpenseEditor button {\n  flex: 1;\n  cursor: pointer;\n  border: none;\n  border-radius: 5px;\n  color: white;\n  font-weight: bold;\n  height: 36px;\n}\n\n.ExpenseEditor .income_btn {\n  background-color: rgb(40, 167, 69);\n}\n\n.ExpenseEditor .expense_btn {\n  background-color: rgb(220, 53, 69);\n}\n",
-      "src/components/ExpenseEditor.jsx": "import { useState } from \"react\";\nimport \"./ExpenseEditor.css\";\n\n// props: onCreate(type, description, amount)\nconst ExpenseEditor = () => {\n  // TODO 6: 내용(description)과 금액(amount)을 저장할 State를 만들고 각 입력창과 연결하세요.\n\n  // TODO 7: \"수입 추가\" 버튼 → onCreate(\"income\", 내용, 금액)\n  //         \"지출 추가\" 버튼 → onCreate(\"expense\", 내용, 금액)\n  //   - 내용이 비어 있거나 금액이 비어 있으면(또는 0 이하이면) 추가하지 않습니다.\n  //   - 금액은 Number()로 숫자로 바꿔서 전달합니다.\n  //   - 추가한 뒤에는 두 입력창을 모두 비웁니다.\n\n  return (\n    <div className=\"ExpenseEditor\">\n      <h4 className=\"editor_title\">새 항목 추가하기</h4>\n      <div className=\"editor_wrapper\">\n        <input type=\"text\" className=\"desc_input\" placeholder=\"내용을 입력하세요\" />\n        <input type=\"number\" className=\"amount_input\" placeholder=\"금액\" />\n      </div>\n      <div className=\"btn_wrapper\">\n        <button className=\"income_btn\">수입 추가</button>\n        <button className=\"expense_btn\">지출 추가</button>\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseEditor;\n",
-      "src/components/ExpenseItem.css": "/* 수입/지출 항목 */\n.ExpenseItem {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n  padding: 15px 0;\n  border-bottom: 1px solid rgb(240, 240, 240);\n}\n\n.ExpenseItem .type_col {\n  flex: 0.8;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.ExpenseItem .description_col {\n  flex: 2;\n}\n\n.ExpenseItem .amount_col {\n  flex: 1.2;\n  font-weight: bold;\n  text-align: right;\n}\n\n.ExpenseItem.expense .amount_col {\n  color: rgb(220, 53, 69);\n}\n\n.ExpenseItem.income .amount_col {\n  color: rgb(40, 167, 69);\n}\n\n.ExpenseItem .btn_col {\n  flex: 0.5;\n}\n\n.ExpenseItem button {\n  cursor: pointer;\n  width: 100%;\n  border: none;\n  border-radius: 5px;\n  padding: 5px;\n  color: white;\n  background-color: rgb(255, 80, 80);\n}\n",
-      "src/components/ExpenseItem.jsx": "import \"./ExpenseItem.css\";\n\nconst ExpenseItem = ({ id, type, description, amount, onDelete }) => {\n  const onClickDelete = () => {\n    // TODO 10: onDelete를 호출해 이 내역(id)을 삭제하세요.\n  };\n\n  return (\n    <div className={`ExpenseItem ${type}`}>\n      <div className=\"type_col\">{type === \"income\" ? \"수입\" : \"지출\"}</div>\n      <div className=\"description_col\">{description}</div>\n      <div className=\"amount_col\">\n        {type === \"income\" ? \"+\" : \"-\"}\n        {Number(amount).toLocaleString()}원\n      </div>\n      <div className=\"btn_col\">\n        <button onClick={onClickDelete}>삭제</button>\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseItem;\n",
-      "src/components/ExpenseList.css": ".ExpenseList h4 {\n  margin: 0 0 10px 0;\n  font-size: 18px;\n}\n\n.ExpenseList .list_wrapper {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n",
-      "src/components/ExpenseList.jsx": "import ExpenseItem from \"./ExpenseItem\";\nimport \"./ExpenseList.css\";\n\n// props: list(내역 배열), onDelete\nconst ExpenseList = () => {\n  return (\n    <div className=\"ExpenseList\">\n      <h4>수입/지출 내역</h4>\n      <div className=\"list_wrapper\">\n        {/* TODO 9: list를 map으로 순회하며 ExpenseItem을 렌더링하세요.\n            - key는 내역의 id\n            - 내역 정보(id, type, description, amount)와 onDelete를 props로 전달 */}\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseList;\n",
-      "src/components/ExpenseSummary.css": "/* 요약 카드 영역 */\n.ExpenseSummary {\n  display: flex;\n  gap: 15px;\n}\n\n.ExpenseSummary .summary_item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  padding: 20px;\n  border-radius: 10px;\n  background-color: white;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.ExpenseSummary .label {\n  font-size: 14px;\n  color: rgb(120, 120, 120);\n}\n\n.ExpenseSummary .value {\n  font-size: 22px;\n  font-weight: bold;\n}\n\n.ExpenseSummary .income .value {\n  color: rgb(40, 167, 69);\n}\n\n.ExpenseSummary .expense .value {\n  color: rgb(220, 53, 69);\n}\n\n.ExpenseSummary .balance .value {\n  color: rgb(37, 147, 255);\n}\n",
-      "src/components/ExpenseSummary.jsx": "import \"./ExpenseSummary.css\";\n\n// props: list(내역 배열)\nconst ExpenseSummary = () => {\n  // TODO 8: list로부터 총 수입, 총 지출, 잔액(총 수입 - 총 지출)을 계산하세요.\n  //   - 총 수입: type이 \"income\"인 내역의 amount 합계\n  //   - 총 지출: type이 \"expense\"인 내역의 amount 합계 (양수로 표시)\n  //   - 화면의 0 대신 계산한 값을 toLocaleString()으로 표시하세요. (예: 15,000원)\n\n  return (\n    <div className=\"ExpenseSummary\">\n      <div className=\"summary_item income\">\n        <div className=\"label\">총 수입</div>\n        <div className=\"value\">0원</div>\n      </div>\n      <div className=\"summary_item expense\">\n        <div className=\"label\">총 지출</div>\n        <div className=\"value\">0원</div>\n      </div>\n      <div className=\"summary_item balance\">\n        <div className=\"label\">잔액</div>\n        <div className=\"value\">0원</div>\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseSummary;\n"
+      "src/components/Header.css": ".Header h1 {\n  margin: 0;\n  color: #1f93ff;\n}\n",
+      "src/components/Header.jsx": "import \"./Header.css\";\n\n// 이 파일은 수정하지 않아도 됩니다.\nconst Header = () => {\n  return (\n    <div className=\"Header\">\n      <h1>나의 공부 기록장 📚</h1>\n    </div>\n  );\n};\n\nexport default Header;\n",
+      "src/components/StudyEditor.css": "/* 새 기록 입력 영역 */\n.StudyEditor {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n  padding: 20px;\n  border: 1px solid rgb(240, 240, 240);\n  border-radius: 8px;\n  background-color: white;\n}\n\n.StudyEditor .editor_title {\n  margin: 0;\n  font-size: 18px;\n}\n\n.StudyEditor .editor_wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n\n.StudyEditor select,\n.StudyEditor input {\n  padding: 10px;\n  border: 1px solid rgb(220, 220, 220);\n  border-radius: 5px;\n  background: white;\n}\n\n.StudyEditor .subject_input {\n  flex: 1 1 160px;\n}\n\n.StudyEditor .minutes_input {\n  width: 100px;\n}\n\n.StudyEditor .add_btn {\n  padding: 10px 18px;\n  border: none;\n  border-radius: 5px;\n  background-color: #1f93ff;\n  color: white;\n  font-weight: bold;\n  cursor: pointer;\n}\n",
+      "src/components/StudyEditor.jsx": "import { useState } from \"react\";\nimport \"./StudyEditor.css\";\n\n// props: onCreate(type, subject, minutes, date)\nconst StudyEditor = () => {\n  // TODO 6: 아래 4개의 State를 만들고 각 입력 창과 연결하세요. (value + onChange)\n  //   - 구분(type): 초기값 \"major\"   → <select className=\"type_select\">\n  //   - 공부 내용(subject): 초기값 \"\" → <input className=\"subject_input\">\n  //   - 공부 시간(minutes, 분): 초기값 \"\" → <input className=\"minutes_input\">\n  //   - 날짜(date): 초기값 \"\"         → <input className=\"date_input\">\n\n  // TODO 7: <추가> 버튼을 클릭하면\n  //   - onCreate(type, subject, Number(minutes), date)를 호출합니다. (시간은 숫자로 바꿔서 전달)\n  //   - 추가한 뒤 공부 내용·공부 시간 입력 창을 비웁니다.\n\n  return (\n    <div className=\"StudyEditor\">\n      <h4 className=\"editor_title\">새 기록 추가하기</h4>\n      <div className=\"editor_wrapper\">\n        <select className=\"type_select\">\n          <option value=\"major\">전공</option>\n          <option value=\"general\">교양</option>\n        </select>\n        <input type=\"text\" className=\"subject_input\" placeholder=\"공부한 내용\" />\n        <input type=\"number\" className=\"minutes_input\" placeholder=\"시간(분)\" />\n        <input type=\"date\" className=\"date_input\" />\n        <button className=\"add_btn\">추가</button>\n      </div>\n    </div>\n  );\n};\n\nexport default StudyEditor;\n",
+      "src/components/StudyItem.css": "/* 공부 기록 한 줄 */\n.StudyItem {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  padding: 12px 0;\n  border-bottom: 1px solid rgb(240, 240, 240);\n}\n\n.StudyItem .type_col {\n  flex: 0 0 44px;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.StudyItem.major .type_col {\n  color: #6d4aff;\n}\n\n.StudyItem.general .type_col {\n  color: #12a37f;\n}\n\n.StudyItem .subject_col {\n  flex: 2;\n}\n\n.StudyItem .minutes_col {\n  flex: 0 0 70px;\n  font-weight: bold;\n  text-align: right;\n}\n\n.StudyItem .date_col {\n  flex: 0 0 100px;\n  font-size: 14px;\n  color: gray;\n}\n\n.StudyItem .btn_col button {\n  cursor: pointer;\n  border: none;\n  border-radius: 5px;\n  padding: 5px 10px;\n  color: white;\n  background-color: rgb(255, 80, 80);\n}\n",
+      "src/components/StudyItem.jsx": "import \"./StudyItem.css\";\n\nconst StudyItem = ({ id, type, subject, minutes, date, onDelete }) => {\n  const onClickDelete = () => {\n    // TODO 12: onDelete를 호출해 이 기록(id)을 삭제하세요.\n  };\n\n  return (\n    <div className={`StudyItem ${type}`}>\n      <div className=\"type_col\">{type === \"major\" ? \"전공\" : \"교양\"}</div>\n      <div className=\"subject_col\">{subject}</div>\n      <div className=\"minutes_col\">{minutes}분</div>\n      <div className=\"date_col\">{date}</div>\n      <div className=\"btn_col\">\n        <button onClick={onClickDelete}>삭제</button>\n      </div>\n    </div>\n  );\n};\n\nexport default StudyItem;\n",
+      "src/components/StudyList.css": ".StudyList h4 {\n  margin: 0 0 10px 0;\n  font-size: 18px;\n}\n\n.StudyList .filter_search_wrapper {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n\n.StudyList .filter {\n  padding: 8px;\n  border: 1px solid rgb(220, 220, 220);\n  border-radius: 5px;\n  background: white;\n}\n\n.StudyList .searchbar {\n  flex: 1;\n  border: none;\n  border-bottom: 1px solid rgb(220, 220, 220);\n  padding: 8px 0;\n  background: transparent;\n}\n\n.StudyList .searchbar:focus {\n  outline: none;\n  border-bottom: 1px solid #1f93ff;\n}\n\n.StudyList .list_wrapper {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n",
+      "src/components/StudyList.jsx": "import { useState } from \"react\";\nimport StudyItem from \"./StudyItem\";\nimport \"./StudyList.css\";\n\n// props: records(기록 배열), onDelete\nconst StudyList = () => {\n  // TODO 9: 구분 필터(filter, 초기값 \"all\")와 검색어(search, 초기값 \"\") State를 만들고\n  //   <select className=\"filter\">, <input className=\"searchbar\">와 각각 연결하세요.\n\n  // TODO 10: records 중에서 아래 두 조건을 모두 만족하는 기록만 걸러 내세요. (filter 사용)\n  //   - filter가 \"all\"이면 모든 구분, 아니면 type이 filter와 같은 기록\n  //   - search가 빈 문자열이면 전체, 아니면 subject에 search가 포함된 기록 (includes)\n\n  return (\n    <div className=\"StudyList\">\n      <h4>공부 기록</h4>\n      <div className=\"filter_search_wrapper\">\n        <select className=\"filter\">\n          <option value=\"all\">전체</option>\n          <option value=\"major\">전공만</option>\n          <option value=\"general\">교양만</option>\n        </select>\n        <input className=\"searchbar\" placeholder=\"검색어를 입력하세요\" />\n      </div>\n      <div className=\"list_wrapper\">\n        {/* TODO 11: 걸러 낸 배열을 map으로 순회하며 StudyItem을 렌더링하세요.\n            - key는 기록의 id\n            - 기록 정보(id, type, subject, minutes, date)와 onDelete를 props로 전달 */}\n      </div>\n    </div>\n  );\n};\n\nexport default StudyList;\n",
+      "src/components/StudySummary.css": "/* 공부 시간 요약 카드 */\n.StudySummary {\n  display: flex;\n  gap: 15px;\n}\n\n.StudySummary .summary_item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  padding: 18px;\n  border-radius: 10px;\n  background-color: white;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.StudySummary .label {\n  font-size: 14px;\n  color: rgb(120, 120, 120);\n}\n\n.StudySummary .value {\n  font-size: 22px;\n  font-weight: bold;\n}\n\n.StudySummary .major .value {\n  color: #6d4aff;\n}\n\n.StudySummary .general .value {\n  color: #12a37f;\n}\n\n.StudySummary .total .value {\n  color: #1f93ff;\n}\n",
+      "src/components/StudySummary.jsx": "import \"./StudySummary.css\";\n\n// props: records(기록 배열)\nconst StudySummary = () => {\n  // TODO 8: records로부터 공부 시간 합계를 계산하세요.\n  //   - 전공: type이 \"major\"인 기록의 minutes 합계\n  //   - 교양: type이 \"general\"인 기록의 minutes 합계\n  //   - 합계: 전공 + 교양\n  //   화면의 0 대신 계산한 값을 표시하세요. (예: 150분)\n\n  return (\n    <div className=\"StudySummary\">\n      <div className=\"summary_item major\">\n        <div className=\"label\">전공</div>\n        <div className=\"value\">0분</div>\n      </div>\n      <div className=\"summary_item general\">\n        <div className=\"label\">교양</div>\n        <div className=\"value\">0분</div>\n      </div>\n      <div className=\"summary_item total\">\n        <div className=\"label\">합계</div>\n        <div className=\"value\">0분</div>\n      </div>\n    </div>\n  );\n};\n\nexport default StudySummary;\n"
     },
     "solution": {
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport ExpenseEditor from \"./components/ExpenseEditor\";\nimport ExpenseSummary from \"./components/ExpenseSummary\";\nimport ExpenseList from \"./components/ExpenseList\";\n\nfunction App() {\n  const [list, setList] = useState([]);\n  const idRef = useRef(0);\n\n  const onCreate = (type, description, amount) => {\n    const newItem = {\n      id: idRef.current,\n      type,\n      description,\n      amount,\n    };\n    setList([newItem, ...list]);\n    idRef.current += 1;\n  };\n\n  const onDelete = (targetId) => {\n    setList(list.filter((it) => it.id !== targetId));\n  };\n\n  return (\n    <div className=\"App\">\n      <div className=\"Header\">\n        <h1>나의 가계부</h1>\n      </div>\n      <ExpenseEditor onCreate={onCreate} />\n      <ExpenseSummary list={list} />\n      <ExpenseList list={list} onDelete={onDelete} />\n    </div>\n  );\n}\n\nexport default App;\n",
-      "src/components/ExpenseEditor.jsx": "import { useState } from \"react\";\nimport \"./ExpenseEditor.css\";\n\nconst ExpenseEditor = ({ onCreate }) => {\n  const [description, setDescription] = useState(\"\");\n  const [amount, setAmount] = useState(\"\");\n\n  const onChangeDescription = (e) => {\n    setDescription(e.target.value);\n  };\n\n  const onChangeAmount = (e) => {\n    setAmount(e.target.value);\n  };\n\n  const onSubmit = (type) => {\n    if (description === \"\" || amount === \"\" || Number(amount) <= 0) {\n      return;\n    }\n    onCreate(type, description, Number(amount));\n    setDescription(\"\");\n    setAmount(\"\");\n  };\n\n  return (\n    <div className=\"ExpenseEditor\">\n      <h4 className=\"editor_title\">새 항목 추가하기</h4>\n      <div className=\"editor_wrapper\">\n        <input\n          type=\"text\"\n          className=\"desc_input\"\n          value={description}\n          onChange={onChangeDescription}\n          placeholder=\"내용을 입력하세요\"\n        />\n        <input\n          type=\"number\"\n          className=\"amount_input\"\n          value={amount}\n          onChange={onChangeAmount}\n          placeholder=\"금액\"\n        />\n      </div>\n      <div className=\"btn_wrapper\">\n        <button className=\"income_btn\" onClick={() => onSubmit(\"income\")}>\n          수입 추가\n        </button>\n        <button className=\"expense_btn\" onClick={() => onSubmit(\"expense\")}>\n          지출 추가\n        </button>\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseEditor;\n",
-      "src/components/ExpenseItem.jsx": "import \"./ExpenseItem.css\";\n\nconst ExpenseItem = ({ id, type, description, amount, onDelete }) => {\n  const onClickDelete = () => {\n    onDelete(id);\n  };\n\n  return (\n    <div className={`ExpenseItem ${type}`}>\n      <div className=\"type_col\">{type === \"income\" ? \"수입\" : \"지출\"}</div>\n      <div className=\"description_col\">{description}</div>\n      <div className=\"amount_col\">\n        {type === \"income\" ? \"+\" : \"-\"}\n        {Number(amount).toLocaleString()}원\n      </div>\n      <div className=\"btn_col\">\n        <button onClick={onClickDelete}>삭제</button>\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseItem;\n",
-      "src/components/ExpenseList.jsx": "import ExpenseItem from \"./ExpenseItem\";\nimport \"./ExpenseList.css\";\n\nconst ExpenseList = ({ list, onDelete }) => {\n  return (\n    <div className=\"ExpenseList\">\n      <h4>수입/지출 내역</h4>\n      <div className=\"list_wrapper\">\n        {list.map((it) => (\n          <ExpenseItem key={it.id} {...it} onDelete={onDelete} />\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseList;\n",
-      "src/components/ExpenseSummary.jsx": "import \"./ExpenseSummary.css\";\n\nconst ExpenseSummary = ({ list }) => {\n  let income = 0;\n  let expense = 0;\n  list.forEach((it) => {\n    if (it.type === \"income\") {\n      income += it.amount;\n    } else {\n      expense += it.amount;\n    }\n  });\n  const balance = income - expense;\n\n  return (\n    <div className=\"ExpenseSummary\">\n      <div className=\"summary_item income\">\n        <div className=\"label\">총 수입</div>\n        <div className=\"value\">{income.toLocaleString()}원</div>\n      </div>\n      <div className=\"summary_item expense\">\n        <div className=\"label\">총 지출</div>\n        <div className=\"value\">{expense.toLocaleString()}원</div>\n      </div>\n      <div className=\"summary_item balance\">\n        <div className=\"label\">잔액</div>\n        <div className=\"value\">{balance.toLocaleString()}원</div>\n      </div>\n    </div>\n  );\n};\n\nexport default ExpenseSummary;\n"
+      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport Header from \"./components/Header\";\nimport StudyEditor from \"./components/StudyEditor\";\nimport StudySummary from \"./components/StudySummary\";\nimport StudyList from \"./components/StudyList\";\n\n// 목(Mock) 데이터 (수정하지 마세요)\n//   type: \"major\"(전공) 또는 \"general\"(교양), minutes: 공부 시간(분, 숫자), date: \"YYYY-MM-DD\"\nconst mockRecords = [\n  { id: 0, type: \"major\", subject: \"자료구조 과제\", minutes: 90, date: \"2026-10-20\" },\n  { id: 1, type: \"general\", subject: \"영어 회화\", minutes: 40, date: \"2026-10-21\" },\n  { id: 2, type: \"major\", subject: \"React 복습\", minutes: 60, date: \"2026-10-22\" },\n];\n\nfunction App() {\n  const [records, setRecords] = useState(mockRecords);\n  const idRef = useRef(3);\n\n  const onCreate = (type, subject, minutes, date) => {\n    const newRecord = { id: idRef.current, type, subject, minutes, date };\n    setRecords([newRecord, ...records]);\n    idRef.current += 1;\n  };\n\n  const onDelete = (targetId) => {\n    setRecords(records.filter((it) => it.id !== targetId));\n  };\n\n  return (\n    <div className=\"App\">\n      <section>\n        <Header />\n      </section>\n      <section>\n        <StudyEditor onCreate={onCreate} />\n      </section>\n      <section>\n        <StudySummary records={records} />\n      </section>\n      <section>\n        <StudyList records={records} onDelete={onDelete} />\n      </section>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/components/StudyEditor.jsx": "import { useState } from \"react\";\nimport \"./StudyEditor.css\";\n\nconst StudyEditor = ({ onCreate }) => {\n  const [type, setType] = useState(\"major\");\n  const [subject, setSubject] = useState(\"\");\n  const [minutes, setMinutes] = useState(\"\");\n  const [date, setDate] = useState(\"\");\n\n  const onSubmit = () => {\n    onCreate(type, subject, Number(minutes), date);\n    setSubject(\"\");\n    setMinutes(\"\");\n  };\n\n  return (\n    <div className=\"StudyEditor\">\n      <h4 className=\"editor_title\">새 기록 추가하기</h4>\n      <div className=\"editor_wrapper\">\n        <select className=\"type_select\" value={type} onChange={(e) => setType(e.target.value)}>\n          <option value=\"major\">전공</option>\n          <option value=\"general\">교양</option>\n        </select>\n        <input\n          type=\"text\"\n          className=\"subject_input\"\n          value={subject}\n          onChange={(e) => setSubject(e.target.value)}\n          placeholder=\"공부한 내용\"\n        />\n        <input\n          type=\"number\"\n          className=\"minutes_input\"\n          value={minutes}\n          onChange={(e) => setMinutes(e.target.value)}\n          placeholder=\"시간(분)\"\n        />\n        <input\n          type=\"date\"\n          className=\"date_input\"\n          value={date}\n          onChange={(e) => setDate(e.target.value)}\n        />\n        <button className=\"add_btn\" onClick={onSubmit}>\n          추가\n        </button>\n      </div>\n    </div>\n  );\n};\n\nexport default StudyEditor;\n",
+      "src/components/StudyItem.jsx": "import \"./StudyItem.css\";\n\nconst StudyItem = ({ id, type, subject, minutes, date, onDelete }) => {\n  const onClickDelete = () => {\n    onDelete(id);\n  };\n\n  return (\n    <div className={`StudyItem ${type}`}>\n      <div className=\"type_col\">{type === \"major\" ? \"전공\" : \"교양\"}</div>\n      <div className=\"subject_col\">{subject}</div>\n      <div className=\"minutes_col\">{minutes}분</div>\n      <div className=\"date_col\">{date}</div>\n      <div className=\"btn_col\">\n        <button onClick={onClickDelete}>삭제</button>\n      </div>\n    </div>\n  );\n};\n\nexport default StudyItem;\n",
+      "src/components/StudyList.jsx": "import { useState } from \"react\";\nimport StudyItem from \"./StudyItem\";\nimport \"./StudyList.css\";\n\nconst StudyList = ({ records, onDelete }) => {\n  const [filter, setFilter] = useState(\"all\");\n  const [search, setSearch] = useState(\"\");\n\n  const filtered = records.filter(\n    (it) =>\n      (filter === \"all\" || it.type === filter) &&\n      (search === \"\" || it.subject.toLowerCase().includes(search.toLowerCase()))\n  );\n\n  return (\n    <div className=\"StudyList\">\n      <h4>공부 기록</h4>\n      <div className=\"filter_search_wrapper\">\n        <select className=\"filter\" value={filter} onChange={(e) => setFilter(e.target.value)}>\n          <option value=\"all\">전체</option>\n          <option value=\"major\">전공만</option>\n          <option value=\"general\">교양만</option>\n        </select>\n        <input\n          className=\"searchbar\"\n          value={search}\n          onChange={(e) => setSearch(e.target.value)}\n          placeholder=\"검색어를 입력하세요\"\n        />\n      </div>\n      <div className=\"list_wrapper\">\n        {filtered.map((it) => (\n          <StudyItem key={it.id} {...it} onDelete={onDelete} />\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default StudyList;\n",
+      "src/components/StudySummary.jsx": "import \"./StudySummary.css\";\n\nconst StudySummary = ({ records }) => {\n  let major = 0;\n  let general = 0;\n  records.forEach((it) => {\n    if (it.type === \"major\") {\n      major += it.minutes;\n    } else {\n      general += it.minutes;\n    }\n  });\n  const total = major + general;\n\n  return (\n    <div className=\"StudySummary\">\n      <div className=\"summary_item major\">\n        <div className=\"label\">전공</div>\n        <div className=\"value\">{major}분</div>\n      </div>\n      <div className=\"summary_item general\">\n        <div className=\"label\">교양</div>\n        <div className=\"value\">{general}분</div>\n      </div>\n      <div className=\"summary_item total\">\n        <div className=\"label\">합계</div>\n        <div className=\"value\">{total}분</div>\n      </div>\n    </div>\n  );\n};\n\nexport default StudySummary;\n"
     },
     "tests": [
       {
-        "name": "지출 추가 버튼을 누르면 목록에 지출 항목이 추가되고 입력창이 비워진다",
-        "points": 25,
-        "body": "const num = (s) => Number(String(s).replace(/[^0-9.-]/g, ''));\nconst items = () => t.$$('.ExpenseItem');\nconst find = (d) => items().find((el) => t.text(el.querySelector('.description_col')) === d);\nconst sum = (cls) => num(t.text('.ExpenseSummary .' + cls + ' .value'));\nconst add = async (type, d, a) => {\n  await t.type('.ExpenseEditor .desc_input', d);\n  await t.type('.ExpenseEditor .amount_input', String(a));\n  await t.wait(30);\n  await t.click(type === 'income' ? '.ExpenseEditor .income_btn' : '.ExpenseEditor .expense_btn');\n  await t.wait(30);\n};\nawait add('expense', '점심', 8000);\nt.expect(items().length === 1, '지출을 추가하면 목록에 항목이 1개 보여야 해요 (현재: ' + items().length + '개)');\nconst it = find('점심');\nt.expect(!!it, '추가한 내용 \"점심\"이 목록에 보여야 해요');\nt.expect(t.text(it.querySelector('.type_col')) === '지출', '구분이 \"지출\"로 표시되어야 해요');\nt.expect(Math.abs(num(t.text(it.querySelector('.amount_col')))) === 8000, '금액 8,000이 표시되어야 해요 (현재: ' + t.text(it.querySelector('.amount_col')) + ')');\nt.expect(t.$('.ExpenseEditor .desc_input').value === '' && t.$('.ExpenseEditor .amount_input').value === '', '추가한 뒤 내용/금액 입력창이 모두 비워져야 해요');"
-      },
-      {
-        "name": "수입 추가 버튼을 누르면 '수입' 항목으로 추가된다",
-        "points": 15,
-        "body": "const num = (s) => Number(String(s).replace(/[^0-9.-]/g, ''));\nconst items = () => t.$$('.ExpenseItem');\nconst find = (d) => items().find((el) => t.text(el.querySelector('.description_col')) === d);\nconst sum = (cls) => num(t.text('.ExpenseSummary .' + cls + ' .value'));\nconst add = async (type, d, a) => {\n  await t.type('.ExpenseEditor .desc_input', d);\n  await t.type('.ExpenseEditor .amount_input', String(a));\n  await t.wait(30);\n  await t.click(type === 'income' ? '.ExpenseEditor .income_btn' : '.ExpenseEditor .expense_btn');\n  await t.wait(30);\n};\nawait add('income', '용돈', 50000);\nconst it = find('용돈');\nt.expect(!!it, '추가한 내용 \"용돈\"이 목록에 보여야 해요');\nt.expect(t.text(it.querySelector('.type_col')) === '수입', '구분이 \"수입\"으로 표시되어야 해요 (현재: ' + t.text(it.querySelector('.type_col')) + ')');\nt.expect(Math.abs(num(t.text(it.querySelector('.amount_col')))) === 50000, '금액 50,000이 표시되어야 해요');"
-      },
-      {
-        "name": "총 수입, 총 지출, 잔액이 내역에 맞게 계산된다",
-        "points": 30,
-        "body": "const num = (s) => Number(String(s).replace(/[^0-9.-]/g, ''));\nconst items = () => t.$$('.ExpenseItem');\nconst find = (d) => items().find((el) => t.text(el.querySelector('.description_col')) === d);\nconst sum = (cls) => num(t.text('.ExpenseSummary .' + cls + ' .value'));\nconst add = async (type, d, a) => {\n  await t.type('.ExpenseEditor .desc_input', d);\n  await t.type('.ExpenseEditor .amount_input', String(a));\n  await t.wait(30);\n  await t.click(type === 'income' ? '.ExpenseEditor .income_btn' : '.ExpenseEditor .expense_btn');\n  await t.wait(30);\n};\nawait add('income', '월급', 50000);\nawait add('expense', '교통비', 12000);\nawait add('expense', '커피', 3000);\nt.expect(items().length === 3, '내역 3개가 추가되어야 해요 (현재: ' + items().length + '개)');\nt.expect(sum('income') === 50000, '총 수입은 50,000원이어야 해요 (현재: ' + t.text('.ExpenseSummary .income .value') + ')');\nt.expect(Math.abs(sum('expense')) === 15000, '총 지출은 15,000원이어야 해요 (현재: ' + t.text('.ExpenseSummary .expense .value') + ')');\nt.expect(sum('balance') === 35000, '잔액은 35,000원이어야 해요 (현재: ' + t.text('.ExpenseSummary .balance .value') + ')');"
-      },
-      {
-        "name": "삭제 버튼을 누르면 항목이 삭제되고 요약도 갱신된다",
-        "points": 20,
-        "body": "const num = (s) => Number(String(s).replace(/[^0-9.-]/g, ''));\nconst items = () => t.$$('.ExpenseItem');\nconst find = (d) => items().find((el) => t.text(el.querySelector('.description_col')) === d);\nconst sum = (cls) => num(t.text('.ExpenseSummary .' + cls + ' .value'));\nconst add = async (type, d, a) => {\n  await t.type('.ExpenseEditor .desc_input', d);\n  await t.type('.ExpenseEditor .amount_input', String(a));\n  await t.wait(30);\n  await t.click(type === 'income' ? '.ExpenseEditor .income_btn' : '.ExpenseEditor .expense_btn');\n  await t.wait(30);\n};\nawait add('income', '용돈', 10000);\nawait add('expense', '간식', 4000);\nt.expect(items().length === 2, '내역 2개가 추가되어야 해요');\nt.expect(sum('balance') === 6000, '삭제 전 잔액은 6,000원이어야 해요 (현재: ' + t.text('.ExpenseSummary .balance .value') + ')');\nt.expect(!!find('간식'), '\"간식\" 항목을 찾을 수 없어요');\nawait t.click(find('간식').querySelector('.btn_col button'));\nawait t.wait(30);\nt.expect(!find('간식') && items().length === 1, '\"간식\" 항목이 목록에서 사라져야 해요');\nt.expect(!!find('용돈'), '\"용돈\" 항목은 남아 있어야 해요');\nt.expect(sum('expense') === 0 && sum('balance') === 10000, '삭제 후 총 지출은 0원, 잔액은 10,000원이 되어야 해요');"
-      },
-      {
-        "name": "내용이나 금액이 비어 있으면 추가되지 않는다",
+        "name": "컴포넌트 구조: Header, StudyEditor, StudySummary, StudyList 영역이 App에 렌더링된다",
         "points": 10,
-        "body": "const num = (s) => Number(String(s).replace(/[^0-9.-]/g, ''));\nconst items = () => t.$$('.ExpenseItem');\nconst find = (d) => items().find((el) => t.text(el.querySelector('.description_col')) === d);\nconst sum = (cls) => num(t.text('.ExpenseSummary .' + cls + ' .value'));\nconst add = async (type, d, a) => {\n  await t.type('.ExpenseEditor .desc_input', d);\n  await t.type('.ExpenseEditor .amount_input', String(a));\n  await t.wait(30);\n  await t.click(type === 'income' ? '.ExpenseEditor .income_btn' : '.ExpenseEditor .expense_btn');\n  await t.wait(30);\n};\nawait add('expense', '책', 15000);\nt.expect(items().length === 1, '먼저 정상 입력 \"책\"을 추가하면 1개가 되어야 해요 (현재: ' + items().length + '개)');\nawait t.type('.ExpenseEditor .desc_input', '');\nawait t.type('.ExpenseEditor .amount_input', '1000');\nawait t.wait(30);\nawait t.click('.ExpenseEditor .expense_btn');\nawait t.wait(30);\nt.expect(items().length === 1, '내용이 비어 있으면 추가되면 안 돼요');\nawait t.type('.ExpenseEditor .desc_input', '영화');\nawait t.type('.ExpenseEditor .amount_input', '');\nawait t.wait(30);\nawait t.click('.ExpenseEditor .income_btn');\nawait t.wait(30);\nt.expect(items().length === 1, '금액이 비어 있으면 추가되면 안 돼요');"
+        "bullet": "structure",
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = [\"Header\",\"StudyEditor\",\"StudySummary\",\"StudyList\"];\nconst miss = NAMES.filter((n) => !t.$('.' + n));\nt.expect(miss.length === 0, '화면에서 ' + miss.join(', ') + ' 영역을 찾을 수 없어요 (App에서 렌더링했는지, 컴포넌트 최상위 요소의 className을 바꾸지 않았는지 확인하세요)');\nconst notUsed = NAMES.filter((n) => !uses('src/App.jsx', n));\nt.expect(notUsed.length === 0, 'App.jsx에서 ' + notUsed.join(', ') + ' 컴포넌트를 import해서 렌더링해야 해요');\n"
+      },
+      {
+        "name": "구분·내용·시간·날짜를 입력하고 추가하면 목록에 추가된다",
+        "points": 5,
+        "bullet": 0,
+        "body": "const items = () => t.$$('.StudyItem');\nconst find = (s) => items().find((el) => t.text(el.querySelector('.subject_col')) === s);\nconst subjects = () => items().map((el) => t.text(el.querySelector('.subject_col'))).join(', ') || '없음';\nconst sum = (cls) => t.num(t.text('.StudySummary .' + cls + ' .value'));\nconst sums = () => '전공 ' + t.text('.StudySummary .major .value') + ', 교양 ' + t.text('.StudySummary .general .value') + ', 합계 ' + t.text('.StudySummary .total .value');\nconst add = async (type, subject, minutes, date) => {\n  t.expect(!!t.$('.StudyEditor .type_select') && !!t.$('.StudyEditor .add_btn'), 'StudyEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.StudyEditor .type_select', type);\n  await t.type('.StudyEditor .subject_input', subject);\n  await t.type('.StudyEditor .minutes_input', String(minutes));\n  await t.type('.StudyEditor .date_input', date);\n  await t.wait(30);\n  await t.click('.StudyEditor .add_btn');\n  await t.wait(30);\n};\nconst view = async (filter, search) => {\n  t.expect(!!t.$('.StudyList .filter') && !!t.$('.StudyList .searchbar'), 'StudyList의 필터/검색 창을 찾을 수 없어요');\n  await t.type('.StudyList .filter', filter);\n  await t.type('.StudyList .searchbar', search);\n  await t.wait(30);\n};\nconst before = items().length;\nawait add('general', '중국어 단어', 30, '2026-10-23');\nconst it = find('중국어 단어');\nt.expect(!!it, '추가한 \"중국어 단어\"가 목록에 보여야 해요 (현재: ' + subjects() + ')');\nt.expect(items().length === before + 1, '추가 후 기록이 ' + (before + 1) + '개여야 해요 (현재: ' + items().length + '개)');\nt.expect(t.text(it.querySelector('.type_col')) === '교양', '구분이 \"교양\"으로 표시되어야 해요 (현재: ' + t.text(it.querySelector('.type_col')) + ')');\nt.expect(t.num(t.text(it.querySelector('.minutes_col'))) === 30, '공부 시간 30분이 표시되어야 해요 (현재: ' + t.text(it.querySelector('.minutes_col')) + ')');\nt.expect(t.text(it.querySelector('.date_col')).includes('2026-10-23'), '날짜 2026-10-23이 표시되어야 해요 (현재: ' + t.text(it.querySelector('.date_col')) + ')');\nt.expect(t.value('.StudyEditor .subject_input') === '' && t.value('.StudyEditor .minutes_input') === '', '추가한 뒤 공부 내용·공부 시간 입력 창이 비워져야 해요');\nawait add('major', '운영체제 퀴즈', 45, '2026-10-24');\nconst it2 = find('운영체제 퀴즈');\nt.expect(!!it2 && t.text(it2.querySelector('.type_col')) === '전공', '전공으로 추가한 \"운영체제 퀴즈\"가 \"전공\"으로 표시되어야 해요 (현재: ' + subjects() + ')');"
+      },
+      {
+        "name": "삭제 버튼을 누르면 해당 기록만 삭제된다",
+        "points": 5,
+        "bullet": 1,
+        "body": "const items = () => t.$$('.StudyItem');\nconst find = (s) => items().find((el) => t.text(el.querySelector('.subject_col')) === s);\nconst subjects = () => items().map((el) => t.text(el.querySelector('.subject_col'))).join(', ') || '없음';\nconst sum = (cls) => t.num(t.text('.StudySummary .' + cls + ' .value'));\nconst sums = () => '전공 ' + t.text('.StudySummary .major .value') + ', 교양 ' + t.text('.StudySummary .general .value') + ', 합계 ' + t.text('.StudySummary .total .value');\nconst add = async (type, subject, minutes, date) => {\n  t.expect(!!t.$('.StudyEditor .type_select') && !!t.$('.StudyEditor .add_btn'), 'StudyEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.StudyEditor .type_select', type);\n  await t.type('.StudyEditor .subject_input', subject);\n  await t.type('.StudyEditor .minutes_input', String(minutes));\n  await t.type('.StudyEditor .date_input', date);\n  await t.wait(30);\n  await t.click('.StudyEditor .add_btn');\n  await t.wait(30);\n};\nconst view = async (filter, search) => {\n  t.expect(!!t.$('.StudyList .filter') && !!t.$('.StudyList .searchbar'), 'StudyList의 필터/검색 창을 찾을 수 없어요');\n  await t.type('.StudyList .filter', filter);\n  await t.type('.StudyList .searchbar', search);\n  await t.wait(30);\n};\nconst target = find('영어 회화');\nt.expect(!!target, '\"영어 회화\" 기록을 찾을 수 없어요 (현재: ' + subjects() + ')');\nawait t.click(target.querySelector('.btn_col button'));\nawait t.wait(30);\nt.expect(!find('영어 회화'), '\"영어 회화\"가 목록에서 사라져야 해요');\nt.expect(items().length === 2 && !!find('자료구조 과제') && !!find('React 복습'), '나머지 2개는 그대로 남아 있어야 해요 (현재: ' + subjects() + ')');"
+      },
+      {
+        "name": "전공·교양 공부 시간과 합계가 표시되고 추가하면 갱신된다",
+        "points": 5,
+        "bullet": 2,
+        "body": "const items = () => t.$$('.StudyItem');\nconst find = (s) => items().find((el) => t.text(el.querySelector('.subject_col')) === s);\nconst subjects = () => items().map((el) => t.text(el.querySelector('.subject_col'))).join(', ') || '없음';\nconst sum = (cls) => t.num(t.text('.StudySummary .' + cls + ' .value'));\nconst sums = () => '전공 ' + t.text('.StudySummary .major .value') + ', 교양 ' + t.text('.StudySummary .general .value') + ', 합계 ' + t.text('.StudySummary .total .value');\nconst add = async (type, subject, minutes, date) => {\n  t.expect(!!t.$('.StudyEditor .type_select') && !!t.$('.StudyEditor .add_btn'), 'StudyEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.StudyEditor .type_select', type);\n  await t.type('.StudyEditor .subject_input', subject);\n  await t.type('.StudyEditor .minutes_input', String(minutes));\n  await t.type('.StudyEditor .date_input', date);\n  await t.wait(30);\n  await t.click('.StudyEditor .add_btn');\n  await t.wait(30);\n};\nconst view = async (filter, search) => {\n  t.expect(!!t.$('.StudyList .filter') && !!t.$('.StudyList .searchbar'), 'StudyList의 필터/검색 창을 찾을 수 없어요');\n  await t.type('.StudyList .filter', filter);\n  await t.type('.StudyList .searchbar', search);\n  await t.wait(30);\n};\nt.expect(!!t.$('.StudySummary'), 'StudySummary 영역을 찾을 수 없어요');\nt.expect(sum('major') === 150 && sum('general') === 40 && sum('total') === 190, '처음에는 전공 150분, 교양 40분, 합계 190분이어야 해요 (현재: ' + sums() + ')');\nawait add('general', '토익 단어', 30, '2026-10-23');\nt.expect(sum('major') === 150 && sum('general') === 70 && sum('total') === 220, '교양 30분을 추가하면 전공 150분, 교양 70분, 합계 220분이어야 해요 (현재: ' + sums() + ')');"
+      },
+      {
+        "name": "구분 필터와 검색어에 맞는 기록만 보인다",
+        "points": 5,
+        "bullet": 3,
+        "body": "const items = () => t.$$('.StudyItem');\nconst find = (s) => items().find((el) => t.text(el.querySelector('.subject_col')) === s);\nconst subjects = () => items().map((el) => t.text(el.querySelector('.subject_col'))).join(', ') || '없음';\nconst sum = (cls) => t.num(t.text('.StudySummary .' + cls + ' .value'));\nconst sums = () => '전공 ' + t.text('.StudySummary .major .value') + ', 교양 ' + t.text('.StudySummary .general .value') + ', 합계 ' + t.text('.StudySummary .total .value');\nconst add = async (type, subject, minutes, date) => {\n  t.expect(!!t.$('.StudyEditor .type_select') && !!t.$('.StudyEditor .add_btn'), 'StudyEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.StudyEditor .type_select', type);\n  await t.type('.StudyEditor .subject_input', subject);\n  await t.type('.StudyEditor .minutes_input', String(minutes));\n  await t.type('.StudyEditor .date_input', date);\n  await t.wait(30);\n  await t.click('.StudyEditor .add_btn');\n  await t.wait(30);\n};\nconst view = async (filter, search) => {\n  t.expect(!!t.$('.StudyList .filter') && !!t.$('.StudyList .searchbar'), 'StudyList의 필터/검색 창을 찾을 수 없어요');\n  await t.type('.StudyList .filter', filter);\n  await t.type('.StudyList .searchbar', search);\n  await t.wait(30);\n};\nawait view('major', '');\nt.expect(items().length === 2 && !!find('자료구조 과제') && !!find('React 복습'), '\"전공만\"을 고르면 전공 기록 2개만 보여야 해요 (현재: ' + subjects() + ')');\nawait view('general', '');\nt.expect(items().length === 1 && !!find('영어 회화'), '\"교양만\"을 고르면 \"영어 회화\"만 보여야 해요 (현재: ' + subjects() + ')');\nawait view('all', 'React');\nt.expect(items().length === 1 && !!find('React 복습'), '\"전체\" + 검색어 \"React\"이면 \"React 복습\"만 보여야 해요 (현재: ' + subjects() + ')');\nawait view('major', '과제');\nt.expect(items().length === 1 && !!find('자료구조 과제'), '\"전공만\" + 검색어 \"과제\"이면 \"자료구조 과제\"만 보여야 해요 (현재: ' + subjects() + ')');\nawait view('general', '과제');\nt.expect(items().length === 0, '\"교양만\" + 검색어 \"과제\"이면 아무 기록도 보이지 않아야 해요 (현재: ' + subjects() + ')');\nawait view('all', '');\nt.expect(items().length === 3, '\"전체\" + 빈 검색어이면 3개가 모두 보여야 해요 (현재: ' + subjects() + ')');"
+      },
+      {
+        "name": "기록 State를 App에 선언하고 mockRecords로 초기화한다",
+        "points": 5,
+        "bullet": 4,
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst items = () => t.$$('.StudyItem');\nconst find = (s) => items().find((el) => t.text(el.querySelector('.subject_col')) === s);\nconst subjects = () => items().map((el) => t.text(el.querySelector('.subject_col'))).join(', ') || '없음';\nconst sum = (cls) => t.num(t.text('.StudySummary .' + cls + ' .value'));\nconst sums = () => '전공 ' + t.text('.StudySummary .major .value') + ', 교양 ' + t.text('.StudySummary .general .value') + ', 합계 ' + t.text('.StudySummary .total .value');\nconst add = async (type, subject, minutes, date) => {\n  t.expect(!!t.$('.StudyEditor .type_select') && !!t.$('.StudyEditor .add_btn'), 'StudyEditor의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type('.StudyEditor .type_select', type);\n  await t.type('.StudyEditor .subject_input', subject);\n  await t.type('.StudyEditor .minutes_input', String(minutes));\n  await t.type('.StudyEditor .date_input', date);\n  await t.wait(30);\n  await t.click('.StudyEditor .add_btn');\n  await t.wait(30);\n};\nconst view = async (filter, search) => {\n  t.expect(!!t.$('.StudyList .filter') && !!t.$('.StudyList .searchbar'), 'StudyList의 필터/검색 창을 찾을 수 없어요');\n  await t.type('.StudyList .filter', filter);\n  await t.type('.StudyList .searchbar', search);\n  await t.wait(30);\n};\nt.expect(/useState\\s*\\(/.test(code('src/App.jsx')), 'App.jsx에서 useState로 상태를 선언해야 해요');\nt.expect(items().length === 3, '처음 화면에 StudyItem이 3개 보여야 해요 (현재: ' + items().length + '개)');\nt.expect(!!find('자료구조 과제') && !!find('영어 회화') && !!find('React 복습'), 'mockRecords의 내용(자료구조 과제, 영어 회화, React 복습)이 보여야 해요 (현재: ' + subjects() + ')');"
       }
     ]
   },
   {
     "id": "p5",
-    "title": "칸반 보드",
+    "title": "카페 주문 현황판",
     "level": "보통",
-    "desc": "## 미니 칸반 보드 완성하기\n\n카드를 추가하고 `Todo → In Progress → Done` 컬럼 사이로 옮기는 칸반 보드입니다.\n화면(UI)과 CSS는 모두 주어져 있습니다. 아래 요구사항을 만족하도록 코드를 완성하시오. (CSS는 채점하지 않습니다.)\n\n### 화면 구성\n- **CardEditor** : 새 카드 제목 입력창 + `추가` 버튼 (새 카드는 항상 Todo 컬럼에 추가)\n- **KanbanColumn** × 3 : 컬럼 제목, 카드 개수 뱃지(`.count`), 카드 목록(`.cards`)\n- **KanbanCard** : 카드 제목(`.title`), `←`(`.left`) / `→`(`.right`) 이동 버튼\n\n### 요구사항\n1. **App**에 카드 목록 State `cards`(초기값 `[]`)를 만든다. 카드 하나는 `{ id, title, status }` 형태이다.\n   - `status`는 `\"todo\"`, `\"progress\"`, `\"done\"` 중 하나, `id`는 `useRef`로 0부터 1씩 증가\n2. **CardEditor**에 제목을 입력하고 `추가`를 누르면 Todo 컬럼에 카드가 추가되고 입력창이 비워진다. (빈 제목은 추가하지 않음)\n3. 각 **KanbanColumn**에는 해당 `status`의 카드만 전달(`filter`)하고, `map`으로 **KanbanCard**를 렌더링한다.\n4. 각 컬럼의 `.count`에는 그 컬럼의 카드 개수를 표시한다.\n5. `→` 버튼을 누르면 카드가 오른쪽 컬럼으로, `←` 버튼을 누르면 왼쪽 컬럼으로 이동한다.\n6. **Todo** 컬럼의 카드에는 `←` 버튼이, **Done** 컬럼의 카드에는 `→` 버튼이 **보이지 않는다**. (조건부 렌더링)\n\n> 카드 State는 App 한 곳에서 관리하고, 카드를 옮기는 함수 `onMove(id, direction)`를 props로 내려 주세요.\n\n### 수정할 파일\n- `src/App.jsx`, `src/components/CardEditor.jsx`, `src/components/KanbanColumn.jsx`, `src/components/KanbanCard.jsx`",
+    "desc": "## 5. 미니 카페 주문 현황판\n\n### 요구사항(초기화면)\n\n- 카페 주문을 '주문 접수 → 제조 중 → 픽업 완료' 상태별로 보여 주고, 주문을 추가·삭제·이동할 수 있는 프로그램\n- 초기 화면은 아래 [추가 스크린샷]의 '초기 화면'을 참고\n\n### 요구사항(컴포넌트 구조 – 10점)\n\n- 이 앱은 하나의 페이지이며, 세 개의 영역(열)으로 나누어져 있음\n  - 첫 번째 영역은 '주문 접수' 상태의 주문과 주문 개수를 표시\n    - ▸ 이 영역의 이름을 **OrderColumn**이라고 할 것\n  - 두 번째 영역은 '제조 중' 상태의 주문과 주문 개수를 표시\n    - ▸ 이 영역의 이름을 **OrderColumn**이라고 할 것\n  - 세 번째 영역은 '픽업 완료' 상태의 주문과 주문 개수를 표시\n    - ▸ 이 영역의 이름을 **OrderColumn**이라고 할 것\n- 세 영역은 같은 OrderColumn 컴포넌트를 재사용하고(제목은 props로 전달), 각 주문은 OrderCard 컴포넌트로 표시할 것. 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것)\n\n### 요구사항(기능 구현 – 25점)\n\n- 각 열의 입력 창에 메뉴 이름을 입력하고 추가 버튼을 클릭하면 그 열에 새 주문이 추가되어야 함 **(5점)**\n  - ▸ 추가한 뒤 입력 창은 비워져야 함\n  - ▸ 입력 창이 비어 있으면 추가되지 않아야 함\n- 각 열의 제목 옆에 그 열의 주문 개수가 나타나야 함 **(5점)**\n- 주문 카드의 x 버튼을 클릭하면 해당 주문이 삭제되어야 함 **(5점)**\n- 주문 카드의 → 버튼을 클릭하면 오른쪽 열로, ← 버튼을 클릭하면 왼쪽 열로 이동해야 함 **(5점)**\n  - ▸ '주문 접수' 열의 ←, '픽업 완료' 열의 →는 동작하지 않아야 함 (버튼을 숨겨도 됨)\n- 기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것 **(5점)**\n  - ▸ 주문 목록 State는 App 한 곳에 선언하고 mockOrders(4개)로 초기화할 것\n  - ▸ 각 열에는 해당 상태의 주문만 filter로 걸러서 전달할 것\n\n### 요구사항(추가 스크린샷)\n\n1. 초기 화면\n2. 주문 접수 열에 새 주문 추가(카푸치노)\n3. '아이스 아메리카노'를 제조 중으로 이동(→) 후 '녹차라떼' 삭제(x)\n\n### 수정할 파일\n\n`src/App.jsx`, `src/components/OrderColumn.jsx`, `src/components/OrderCard.jsx`\n\n> 각 파일의 `TODO` 주석을 참고하세요. CSS는 채점하지 않습니다.",
+    "sheet": {
+      "title": "5. 미니 카페 주문 현황판",
+      "summary": "카페 주문을 '주문 접수 → 제조 중 → 픽업 완료' 상태별로 보여 주고, 주문을 추가·삭제·이동할 수 있는 프로그램",
+      "structure": {
+        "points": 10,
+        "lead": "이 앱은 하나의 페이지이며, 세 개의 영역(열)으로 나누어져 있음",
+        "areas": [
+          {
+            "desc": "첫 번째 영역은 '주문 접수' 상태의 주문과 주문 개수를 표시",
+            "name": "OrderColumn"
+          },
+          {
+            "desc": "두 번째 영역은 '제조 중' 상태의 주문과 주문 개수를 표시",
+            "name": "OrderColumn"
+          },
+          {
+            "desc": "세 번째 영역은 '픽업 완료' 상태의 주문과 주문 개수를 표시",
+            "name": "OrderColumn"
+          }
+        ],
+        "note": "세 영역은 같은 OrderColumn 컴포넌트를 재사용하고(제목은 props로 전달), 각 주문은 OrderCard 컴포넌트로 표시할 것. 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것)"
+      },
+      "features": {
+        "points": 25,
+        "items": [
+          {
+            "text": "각 열의 입력 창에 메뉴 이름을 입력하고 추가 버튼을 클릭하면 그 열에 새 주문이 추가되어야 함",
+            "points": 5,
+            "sub": [
+              "추가한 뒤 입력 창은 비워져야 함",
+              "입력 창이 비어 있으면 추가되지 않아야 함"
+            ]
+          },
+          {
+            "text": "각 열의 제목 옆에 그 열의 주문 개수가 나타나야 함",
+            "points": 5,
+            "sub": []
+          },
+          {
+            "text": "주문 카드의 x 버튼을 클릭하면 해당 주문이 삭제되어야 함",
+            "points": 5,
+            "sub": []
+          },
+          {
+            "text": "주문 카드의 → 버튼을 클릭하면 오른쪽 열로, ← 버튼을 클릭하면 왼쪽 열로 이동해야 함",
+            "points": 5,
+            "sub": [
+              "'주문 접수' 열의 ←, '픽업 완료' 열의 →는 동작하지 않아야 함 (버튼을 숨겨도 됨)"
+            ]
+          },
+          {
+            "text": "기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것",
+            "points": 5,
+            "sub": [
+              "주문 목록 State는 App 한 곳에 선언하고 mockOrders(4개)로 초기화할 것",
+              "각 열에는 해당 상태의 주문만 filter로 걸러서 전달할 것"
+            ]
+          }
+        ]
+      },
+      "screens": [
+        {
+          "caption": "초기 화면",
+          "steps": ""
+        },
+        {
+          "caption": "주문 접수 열에 새 주문 추가(카푸치노)",
+          "steps": "const col = t.$$('.OrderColumn')[0]; await t.type(col.querySelector('.order-editor input'), '카푸치노'); await t.click(col.querySelector('.order-editor button')); await t.wait(30);"
+        },
+        {
+          "caption": "'아이스 아메리카노'를 제조 중으로 이동(→) 후 '녹차라떼' 삭제(x)",
+          "steps": "const a = t.$$('.OrderCard').find((c) => c.textContent.includes('아이스 아메리카노')); await t.click(a.querySelector('.right')); await t.wait(30); const g = t.$$('.OrderCard').find((c) => c.textContent.includes('녹차라떼')); await t.click(g.querySelector('.delete')); await t.wait(30);"
+        }
+      ],
+      "files": "src/App.jsx, src/components/OrderColumn.jsx, src/components/OrderCard.jsx"
+    },
     "files": {
       "src/main.jsx": "import { createRoot } from \"react-dom/client\";\nimport \"./index.css\";\nimport App from \"./App.jsx\";\n\ncreateRoot(document.getElementById(\"root\")).render(<App />);\n",
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport CardEditor from \"./components/CardEditor\";\nimport KanbanColumn from \"./components/KanbanColumn\";\n\n// 컬럼 순서 (왼쪽 → 오른쪽). 수정하지 마세요.\nconst STATUSES = [\"todo\", \"progress\", \"done\"];\n\nfunction App() {\n  // TODO 1: 카드 목록 State(cards)를 만들고 초기값을 빈 배열로 설정하세요.\n  //   카드 하나의 모양: { id, title, status }   (status는 \"todo\" | \"progress\" | \"done\")\n\n  // TODO 2: 새 카드의 id로 사용할 Ref 객체(idRef)를 초기값 0으로 만드세요.\n\n  // TODO 3: onCreate(title) - status가 \"todo\"인 새 카드를 cards에 추가하세요.\n\n  // TODO 4: onMove(targetId, direction) - id가 targetId인 카드의 status를 바꾸세요.\n  //   direction이 1이면 오른쪽 컬럼으로, -1이면 왼쪽 컬럼으로 이동합니다.\n  //   힌트: STATUSES.indexOf(card.status) + direction\n\n  return (\n    <div className=\"App\">\n      <div className=\"header\">\n        <h2>미니 칸반 보드</h2>\n      </div>\n      {/* TODO 5: CardEditor에 onCreate를 전달하세요. */}\n      <CardEditor />\n      <div className=\"kanban-columns\">\n        {/* TODO 6: 각 컬럼에 해당 status의 카드들만(filter) cards로, 그리고 onMove를 전달하세요. */}\n        <KanbanColumn title=\"Todo\" />\n        <KanbanColumn title=\"In Progress\" />\n        <KanbanColumn title=\"Done\" />\n      </div>\n    </div>\n  );\n}\n\nexport default App;\n",
-      "src/App.css": "/* 앱 레이아웃 (채점하지 않음) */\n.App {\n  width: 100%;\n  padding: 24px;\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n}\n\n.App .header h2 {\n  margin: 0;\n}\n\n/* 칸반 컬럼 그리드: 3열 동일 너비 */\n.kanban-columns {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}\n\n@media (max-width: 700px) {\n  .kanban-columns {\n    grid-template-columns: 1fr;\n  }\n}\n",
+      "src/App.jsx": "import \"./App.css\";\n\n// [컴포넌트 구조] TODO 1: components 폴더의 OrderColumn 컴포넌트를 import 하세요.\n//   (필요한 Hook도 react에서 import 하세요.)\n\n// 주문 상태 순서 (왼쪽 → 오른쪽). 수정하지 마세요.\n//   \"received\": 주문 접수 / \"making\": 제조 중 / \"done\": 픽업 완료\nconst STATUSES = [\"received\", \"making\", \"done\"];\n\n// 목(Mock) 데이터 (수정하지 마세요)\nconst mockOrders = [\n  { id: 0, menu: \"아이스 아메리카노\", status: \"received\" },\n  { id: 1, menu: \"카페라떼\", status: \"received\" },\n  { id: 2, menu: \"바닐라라떼\", status: \"making\" },\n  { id: 3, menu: \"녹차라떼\", status: \"done\" },\n];\n\nfunction App() {\n  // [기능 구현] TODO 2: 주문 목록 State(orders)를 만들고 초기값을 mockOrders로 설정하세요.\n\n  // TODO 3: 새 주문의 id로 사용할 Ref 객체(idRef)를 초기값 4로 만드세요.\n\n  // TODO 4: onCreate(menu, status) - { id, menu, status } 형태의 새 주문을 orders에 추가하세요.\n\n  // TODO 5: onDelete(targetId) - id가 targetId인 주문을 삭제하세요. (filter 사용)\n\n  // TODO 6: onMove(targetId, direction) - id가 targetId인 주문의 status를 바꾸세요. (map 사용)\n  //   direction이 1이면 오른쪽 열로, -1이면 왼쪽 열로 이동합니다.\n  //   힌트: STATUSES.indexOf(order.status) + direction  (0보다 작거나 2보다 크면 이동하지 않음)\n\n  return (\n    <div className=\"App\">\n      <div className=\"header\">\n        <h2>☕ 카페 주문 현황판</h2>\n      </div>\n      <div className=\"board\">\n        {/* TODO 1-1: 첫 번째 영역 - OrderColumn을 렌더링하세요. (title=\"주문 접수\", status=\"received\")\n            TODO 1-2: 두 번째 영역 - OrderColumn을 렌더링하세요. (title=\"제조 중\", status=\"making\")\n            TODO 1-3: 세 번째 영역 - OrderColumn을 렌더링하세요. (title=\"픽업 완료\", status=\"done\")\n            TODO 7: 각 열에 해당 status의 주문만 걸러서(filter) orders로 전달하고,\n                    onCreate, onDelete, onMove도 props로 전달하세요. */}\n      </div>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.css": "/* 앱 레이아웃 (채점하지 않음) */\n.App {\n  width: 100%;\n  padding: 24px;\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n}\n\n.App .header h2 {\n  margin: 0;\n}\n\n/* 주문 현황판: 3열 동일 너비 */\n.board {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}\n\n@media (max-width: 700px) {\n  .board {\n    grid-template-columns: 1fr;\n  }\n}\n",
       "src/index.css": "/* 전역 스타일 (채점하지 않음) */\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Malgun Gothic\",\n    \"Apple SD Gothic Neo\", sans-serif;\n  background-color: #f5f7fb;\n  color: #111827;\n}\n\n* {\n  box-sizing: border-box;\n}\n",
-      "src/components/CardEditor.css": "/* 새 카드 추가 영역 */\n.CardEditor {\n  display: flex;\n  gap: 8px;\n  max-width: 500px;\n}\n\n.CardEditor input {\n  flex: 1;\n  padding: 10px 12px;\n  border: 1px solid #e5e7eb;\n  border-radius: 8px;\n  background: #fff;\n}\n\n.CardEditor button {\n  padding: 10px 16px;\n  border: none;\n  background: #4f46e5;\n  color: white;\n  border-radius: 8px;\n  cursor: pointer;\n}\n",
-      "src/components/CardEditor.jsx": "import { useState } from \"react\";\nimport \"./CardEditor.css\";\n\n// props: onCreate(title)\nconst CardEditor = () => {\n  // TODO 7: 카드 제목을 저장할 State(title)를 만들고 input과 연결하세요.\n\n  // TODO 8: <추가> 버튼을 클릭하면\n  //   - title이 빈 문자열이면 아무것도 하지 않습니다.\n  //   - 아니면 onCreate(title)을 호출하고 입력창을 비웁니다.\n\n  return (\n    <div className=\"CardEditor\">\n      <input placeholder=\"새 카드 제목 (Todo에 추가됩니다)\" />\n      <button>추가</button>\n    </div>\n  );\n};\n\nexport default CardEditor;\n",
-      "src/components/KanbanCard.css": "/* 칸반 카드 */\n.KanbanCard {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background: #ffffff;\n  border: 1px solid #e5e7eb;\n  border-radius: 10px;\n  padding: 12px 14px;\n  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);\n}\n\n.KanbanCard .title {\n  font-size: 14px;\n}\n\n.KanbanCard .controls {\n  display: flex;\n  gap: 6px;\n}\n\n.KanbanCard .controls .move {\n  width: 28px;\n  height: 28px;\n  border: 1px solid #e5e7eb;\n  border-radius: 6px;\n  background: #f9fafb;\n  cursor: pointer;\n}\n\n.KanbanCard .controls .move:hover {\n  background: #eef2ff;\n}\n",
-      "src/components/KanbanCard.jsx": "import \"./KanbanCard.css\";\n\n// props: card({ id, title, status }), onMove(id, direction)\nconst KanbanCard = ({ card, onMove }) => {\n  return (\n    <div className=\"KanbanCard\">\n      <div className=\"title\">{card.title}</div>\n      <div className=\"controls\">\n        {/* TODO 11: ← 버튼은 Todo 컬럼(status가 \"todo\")의 카드에서는 보이지 않게 하세요. (조건부 렌더링)\n                     클릭하면 onMove(card.id, -1) 호출 */}\n        <button className=\"move left\">←</button>\n        {/* TODO 12: → 버튼은 Done 컬럼(status가 \"done\")의 카드에서는 보이지 않게 하세요. (조건부 렌더링)\n                     클릭하면 onMove(card.id, 1) 호출 */}\n        <button className=\"move right\">→</button>\n      </div>\n    </div>\n  );\n};\n\nexport default KanbanCard;\n",
-      "src/components/KanbanColumn.css": "/* 칸반 컬럼 */\n.KanbanColumn {\n  background: #ffffff;\n  border: 1px solid #e5e7eb;\n  border-radius: 10px;\n  padding: 14px;\n  min-height: 260px;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n\n.KanbanColumn .column-header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.KanbanColumn .column-header h3 {\n  margin: 0;\n}\n\n/* 카드 개수 뱃지 */\n.KanbanColumn .column-header .count {\n  border: 1px solid #e5e7eb;\n  border-radius: 999px;\n  padding: 2px 8px;\n  font-size: 12px;\n  color: #6b7280;\n}\n\n.KanbanColumn .cards {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n",
-      "src/components/KanbanColumn.jsx": "import KanbanCard from \"./KanbanCard\";\nimport \"./KanbanColumn.css\";\n\n// props: title(컬럼 이름), cards(이 컬럼에 속한 카드 배열), onMove\nconst KanbanColumn = ({ title }) => {\n  return (\n    <div className=\"KanbanColumn\">\n      <div className=\"column-header\">\n        <h3>{title}</h3>\n        {/* TODO 9: 0 대신 이 컬럼의 카드 개수를 표시하세요. */}\n        <div className=\"count\">0</div>\n      </div>\n      <div className=\"cards\">\n        {/* TODO 10: cards를 map으로 순회하며 KanbanCard를 렌더링하세요. (key 필수, card와 onMove 전달) */}\n      </div>\n    </div>\n  );\n};\n\nexport default KanbanColumn;\n"
+      "src/components/OrderCard.css": "/* 주문 카드 */\n.OrderCard {\n  background: #fffaf3;\n  border: 1px solid #eadbc8;\n  border-radius: 10px;\n  padding: 10px 12px;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);\n}\n\n.OrderCard .card-top {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.OrderCard .menu {\n  font-size: 14px;\n  font-weight: bold;\n}\n\n.OrderCard .delete {\n  border: none;\n  background: transparent;\n  color: #9ca3af;\n  font-size: 16px;\n  cursor: pointer;\n}\n\n.OrderCard .controls {\n  display: flex;\n  justify-content: flex-end;\n  gap: 6px;\n}\n\n.OrderCard .controls .move {\n  width: 28px;\n  height: 28px;\n  border: 1px solid #eadbc8;\n  border-radius: 6px;\n  background: white;\n  cursor: pointer;\n}\n",
+      "src/components/OrderCard.jsx": "import \"./OrderCard.css\";\n\n// props: order({ id, menu, status }), onDelete(id), onMove(id, direction)\nconst OrderCard = ({ order }) => {\n  // TODO 12: x 버튼을 클릭하면 onDelete(order.id)를 호출하세요.\n\n  // TODO 13: ← 버튼을 클릭하면 onMove(order.id, -1), → 버튼을 클릭하면 onMove(order.id, 1)을 호출하세요.\n  //   (맨 왼쪽 열의 ←, 맨 오른쪽 열의 →는 동작하지 않아야 합니다. 조건부 렌더링으로 숨겨도 됩니다.)\n\n  return (\n    <div className=\"OrderCard\">\n      <div className=\"card-top\">\n        <span className=\"menu\">{order.menu}</span>\n        <button className=\"delete\">x</button>\n      </div>\n      <div className=\"controls\">\n        <button className=\"move left\">←</button>\n        <button className=\"move right\">→</button>\n      </div>\n    </div>\n  );\n};\n\nexport default OrderCard;\n",
+      "src/components/OrderColumn.css": "/* 주문 상태 열 */\n.OrderColumn {\n  background: #ffffff;\n  border: 1px solid #e5e7eb;\n  border-radius: 10px;\n  padding: 14px;\n  min-height: 300px;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n\n.OrderColumn .column-header {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n\n.OrderColumn .column-header h3 {\n  margin: 0;\n}\n\n/* 주문 개수 뱃지 */\n.OrderColumn .column-header .count {\n  min-width: 24px;\n  border-radius: 999px;\n  padding: 2px 8px;\n  font-size: 12px;\n  font-weight: bold;\n  text-align: center;\n  color: white;\n  background: #8b5e3c;\n}\n\n/* 열마다 있는 주문 추가 입력 */\n.OrderColumn .order-editor {\n  display: flex;\n  gap: 6px;\n}\n\n.OrderColumn .order-editor input {\n  flex: 1;\n  min-width: 0;\n  padding: 8px 10px;\n  border: 1px solid #e5e7eb;\n  border-radius: 8px;\n}\n\n.OrderColumn .order-editor button {\n  padding: 8px 12px;\n  border: none;\n  border-radius: 8px;\n  background: #8b5e3c;\n  color: white;\n  cursor: pointer;\n}\n\n.OrderColumn .cards {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n",
+      "src/components/OrderColumn.jsx": "import { useState } from \"react\";\nimport OrderCard from \"./OrderCard\";\nimport \"./OrderColumn.css\";\n\n// props: title(열 이름), status(이 열의 상태), orders(이 열에 속한 주문 배열), onCreate, onDelete, onMove\nconst OrderColumn = ({ title }) => {\n  // TODO 8: 메뉴 이름을 저장할 State(menu)를 만들고 이 열의 입력 창과 연결하세요. (value + onChange)\n\n  // TODO 9: <추가> 버튼을 클릭하면\n  //   - menu가 빈 문자열이면 아무것도 하지 않습니다.\n  //   - 아니면 onCreate(menu, status)를 호출해 이 열에 주문을 추가하고, 입력 창을 비웁니다.\n\n  return (\n    <div className=\"OrderColumn\">\n      <div className=\"column-header\">\n        <h3>{title}</h3>\n        {/* TODO 10: 0 대신 이 열의 주문 개수를 표시하세요. */}\n        <span className=\"count\">0</span>\n      </div>\n      <div className=\"order-editor\">\n        <input placeholder=\"메뉴 이름\" />\n        <button>추가</button>\n      </div>\n      <div className=\"cards\">\n        {/* TODO 11: orders를 map으로 순회하며 OrderCard를 렌더링하세요.\n            - key는 주문의 id\n            - order와 onDelete, onMove를 props로 전달 */}\n      </div>\n    </div>\n  );\n};\n\nexport default OrderColumn;\n"
     },
     "solution": {
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport CardEditor from \"./components/CardEditor\";\nimport KanbanColumn from \"./components/KanbanColumn\";\n\n// 컬럼 순서 (왼쪽 → 오른쪽). 수정하지 마세요.\nconst STATUSES = [\"todo\", \"progress\", \"done\"];\n\nfunction App() {\n  const [cards, setCards] = useState([]);\n  const idRef = useRef(0);\n\n  const onCreate = (title) => {\n    const newCard = { id: idRef.current, title, status: \"todo\" };\n    setCards([...cards, newCard]);\n    idRef.current += 1;\n  };\n\n  const onMove = (targetId, direction) => {\n    setCards(\n      cards.map((card) => {\n        if (card.id !== targetId) return card;\n        const nextIndex = STATUSES.indexOf(card.status) + direction;\n        if (nextIndex < 0 || nextIndex >= STATUSES.length) return card;\n        return { ...card, status: STATUSES[nextIndex] };\n      })\n    );\n  };\n\n  return (\n    <div className=\"App\">\n      <div className=\"header\">\n        <h2>미니 칸반 보드</h2>\n      </div>\n      <CardEditor onCreate={onCreate} />\n      <div className=\"kanban-columns\">\n        <KanbanColumn\n          title=\"Todo\"\n          cards={cards.filter((card) => card.status === \"todo\")}\n          onMove={onMove}\n        />\n        <KanbanColumn\n          title=\"In Progress\"\n          cards={cards.filter((card) => card.status === \"progress\")}\n          onMove={onMove}\n        />\n        <KanbanColumn\n          title=\"Done\"\n          cards={cards.filter((card) => card.status === \"done\")}\n          onMove={onMove}\n        />\n      </div>\n    </div>\n  );\n}\n\nexport default App;\n",
-      "src/components/CardEditor.jsx": "import { useState } from \"react\";\nimport \"./CardEditor.css\";\n\nconst CardEditor = ({ onCreate }) => {\n  const [title, setTitle] = useState(\"\");\n\n  const onChangeTitle = (e) => {\n    setTitle(e.target.value);\n  };\n\n  const onSubmit = () => {\n    if (title === \"\") {\n      return;\n    }\n    onCreate(title);\n    setTitle(\"\");\n  };\n\n  return (\n    <div className=\"CardEditor\">\n      <input\n        value={title}\n        onChange={onChangeTitle}\n        placeholder=\"새 카드 제목 (Todo에 추가됩니다)\"\n      />\n      <button onClick={onSubmit}>추가</button>\n    </div>\n  );\n};\n\nexport default CardEditor;\n",
-      "src/components/KanbanCard.jsx": "import \"./KanbanCard.css\";\n\nconst KanbanCard = ({ card, onMove }) => {\n  return (\n    <div className=\"KanbanCard\">\n      <div className=\"title\">{card.title}</div>\n      <div className=\"controls\">\n        {card.status !== \"todo\" && (\n          <button className=\"move left\" onClick={() => onMove(card.id, -1)}>\n            ←\n          </button>\n        )}\n        {card.status !== \"done\" && (\n          <button className=\"move right\" onClick={() => onMove(card.id, 1)}>\n            →\n          </button>\n        )}\n      </div>\n    </div>\n  );\n};\n\nexport default KanbanCard;\n",
-      "src/components/KanbanColumn.jsx": "import KanbanCard from \"./KanbanCard\";\nimport \"./KanbanColumn.css\";\n\nconst KanbanColumn = ({ title, cards, onMove }) => {\n  return (\n    <div className=\"KanbanColumn\">\n      <div className=\"column-header\">\n        <h3>{title}</h3>\n        <div className=\"count\">{cards.length}</div>\n      </div>\n      <div className=\"cards\">\n        {cards.map((card) => (\n          <KanbanCard key={card.id} card={card} onMove={onMove} />\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default KanbanColumn;\n"
+      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport OrderColumn from \"./components/OrderColumn\";\n\n// 주문 상태 순서 (왼쪽 → 오른쪽). 수정하지 마세요.\n//   \"received\": 주문 접수 / \"making\": 제조 중 / \"done\": 픽업 완료\nconst STATUSES = [\"received\", \"making\", \"done\"];\n\n// 목(Mock) 데이터 (수정하지 마세요)\nconst mockOrders = [\n  { id: 0, menu: \"아이스 아메리카노\", status: \"received\" },\n  { id: 1, menu: \"카페라떼\", status: \"received\" },\n  { id: 2, menu: \"바닐라라떼\", status: \"making\" },\n  { id: 3, menu: \"녹차라떼\", status: \"done\" },\n];\n\nfunction App() {\n  const [orders, setOrders] = useState(mockOrders);\n  const idRef = useRef(4);\n\n  const onCreate = (menu, status) => {\n    setOrders([...orders, { id: idRef.current, menu, status }]);\n    idRef.current += 1;\n  };\n\n  const onDelete = (targetId) => {\n    setOrders(orders.filter((order) => order.id !== targetId));\n  };\n\n  const onMove = (targetId, direction) => {\n    setOrders(\n      orders.map((order) => {\n        if (order.id !== targetId) return order;\n        const next = STATUSES.indexOf(order.status) + direction;\n        if (next < 0 || next >= STATUSES.length) return order;\n        return { ...order, status: STATUSES[next] };\n      })\n    );\n  };\n\n  return (\n    <div className=\"App\">\n      <div className=\"header\">\n        <h2>☕ 카페 주문 현황판</h2>\n      </div>\n      <div className=\"board\">\n        <OrderColumn\n          title=\"주문 접수\"\n          status=\"received\"\n          orders={orders.filter((order) => order.status === \"received\")}\n          onCreate={onCreate}\n          onDelete={onDelete}\n          onMove={onMove}\n        />\n        <OrderColumn\n          title=\"제조 중\"\n          status=\"making\"\n          orders={orders.filter((order) => order.status === \"making\")}\n          onCreate={onCreate}\n          onDelete={onDelete}\n          onMove={onMove}\n        />\n        <OrderColumn\n          title=\"픽업 완료\"\n          status=\"done\"\n          orders={orders.filter((order) => order.status === \"done\")}\n          onCreate={onCreate}\n          onDelete={onDelete}\n          onMove={onMove}\n        />\n      </div>\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/components/OrderCard.jsx": "import \"./OrderCard.css\";\n\nconst OrderCard = ({ order, onDelete, onMove }) => {\n  return (\n    <div className=\"OrderCard\">\n      <div className=\"card-top\">\n        <span className=\"menu\">{order.menu}</span>\n        <button className=\"delete\" onClick={() => onDelete(order.id)}>\n          x\n        </button>\n      </div>\n      <div className=\"controls\">\n        {order.status !== \"received\" && (\n          <button className=\"move left\" onClick={() => onMove(order.id, -1)}>\n            ←\n          </button>\n        )}\n        {order.status !== \"done\" && (\n          <button className=\"move right\" onClick={() => onMove(order.id, 1)}>\n            →\n          </button>\n        )}\n      </div>\n    </div>\n  );\n};\n\nexport default OrderCard;\n",
+      "src/components/OrderColumn.jsx": "import { useState } from \"react\";\nimport OrderCard from \"./OrderCard\";\nimport \"./OrderColumn.css\";\n\nconst OrderColumn = ({ title, status, orders, onCreate, onDelete, onMove }) => {\n  const [menu, setMenu] = useState(\"\");\n\n  const onSubmit = () => {\n    if (menu === \"\") {\n      return;\n    }\n    onCreate(menu, status);\n    setMenu(\"\");\n  };\n\n  return (\n    <div className=\"OrderColumn\">\n      <div className=\"column-header\">\n        <h3>{title}</h3>\n        <span className=\"count\">{orders.length}</span>\n      </div>\n      <div className=\"order-editor\">\n        <input value={menu} onChange={(e) => setMenu(e.target.value)} placeholder=\"메뉴 이름\" />\n        <button onClick={onSubmit}>추가</button>\n      </div>\n      <div className=\"cards\">\n        {orders.map((order) => (\n          <OrderCard key={order.id} order={order} onDelete={onDelete} onMove={onMove} />\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default OrderColumn;\n"
     },
     "tests": [
       {
-        "name": "카드를 추가하면 Todo 컬럼에 표시되고 입력창이 비워진다",
-        "points": 20,
-        "body": "const NAMES = ['Todo', 'In Progress', 'Done'];\nconst cols = () => t.$$('.KanbanColumn');\nconst titles = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard .title')).map((e) => e.textContent.trim()) : []);\nconst card = (i, title) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard')).find((c) => t.text(c.querySelector('.title')) === title) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (title) => NAMES.filter((n, i) => titles(i).includes(title)).join(', ') || '없음';\nconst add = async (s) => {\n  await t.type('.CardEditor input', s);\n  await t.wait(30);\n  await t.click('.CardEditor button');\n  await t.wait(30);\n};\nconst move = async (i, title, dir) => {\n  const c = card(i, title);\n  t.expect(!!c, NAMES[i] + ' 컬럼에서 \"' + title + '\" 카드를 찾을 수 없어요 (현재 위치: ' + where(title) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 컬럼의 \"' + title + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nt.expect(cols().length === 3, '컬럼이 3개 있어야 해요');\nawait add('기획서 작성');\nt.expect(titles(0).includes('기획서 작성'), 'Todo 컬럼에 \"기획서 작성\" 카드가 보여야 해요 (현재 위치: ' + where('기획서 작성') + ')');\nt.expect(titles(1).length === 0 && titles(2).length === 0, '새 카드는 Todo 컬럼에만 추가되어야 해요');\nt.expect(t.$('.CardEditor input').value === '', '추가한 뒤 입력창이 비워져야 해요');\nawait t.click('.CardEditor button');\nawait t.wait(30);\nt.expect(titles(0).length === 1, '빈 제목으로 추가를 누르면 카드가 추가되면 안 돼요 (Todo 카드 수: ' + titles(0).length + ')');"
+        "name": "컴포넌트 구조: OrderColumn 영역이 App에 렌더링된다",
+        "points": 10,
+        "bullet": "structure",
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = [\"OrderColumn\"];\nconst miss = NAMES.filter((n) => !t.$('.' + n));\nt.expect(miss.length === 0, '화면에서 ' + miss.join(', ') + ' 영역을 찾을 수 없어요 (App에서 렌더링했는지, 컴포넌트 최상위 요소의 className을 바꾸지 않았는지 확인하세요)');\nconst notUsed = NAMES.filter((n) => !uses('src/App.jsx', n));\nt.expect(notUsed.length === 0, 'App.jsx에서 ' + notUsed.join(', ') + ' 컴포넌트를 import해서 렌더링해야 해요');\nconst heads = t.$$('.OrderColumn h3').map((h) => h.textContent.trim());\nt.expect(heads.length === 3, 'OrderColumn을 3개 렌더링해야 해요 (현재: ' + heads.length + '개)');\nt.expect(heads[0].includes('주문 접수') && heads[1].includes('제조 중') && heads[2].includes('픽업 완료'), '열 제목은 왼쪽부터 \"주문 접수\", \"제조 중\", \"픽업 완료\"여야 해요 (현재: ' + heads.join(', ') + ')');\n"
       },
       {
-        "name": "각 컬럼의 카드 개수가 표시된다",
-        "points": 15,
-        "body": "const NAMES = ['Todo', 'In Progress', 'Done'];\nconst cols = () => t.$$('.KanbanColumn');\nconst titles = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard .title')).map((e) => e.textContent.trim()) : []);\nconst card = (i, title) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard')).find((c) => t.text(c.querySelector('.title')) === title) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (title) => NAMES.filter((n, i) => titles(i).includes(title)).join(', ') || '없음';\nconst add = async (s) => {\n  await t.type('.CardEditor input', s);\n  await t.wait(30);\n  await t.click('.CardEditor button');\n  await t.wait(30);\n};\nconst move = async (i, title, dir) => {\n  const c = card(i, title);\n  t.expect(!!c, NAMES[i] + ' 컬럼에서 \"' + title + '\" 카드를 찾을 수 없어요 (현재 위치: ' + where(title) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 컬럼의 \"' + title + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nawait add('A');\nawait add('B');\nawait add('C');\nt.expect(titles(0).length === 3, 'Todo 컬럼에 카드 3개가 보여야 해요 (현재: ' + titles(0).length + '개)');\nt.expect(count(0) === '3', 'Todo 컬럼의 개수 뱃지에 3이 표시되어야 해요 (현재: \"' + count(0) + '\")');\nt.expect(count(1) === '0' && count(2) === '0', 'In Progress, Done 컬럼의 개수는 0이어야 해요');"
+        "name": "각 열의 입력 창으로 그 열에 주문을 추가한다 (빈 입력은 추가 안 됨)",
+        "points": 5,
+        "bullet": 0,
+        "body": "const NAMES = ['주문 접수', '제조 중', '픽업 완료'];\nconst cols = () => t.$$('.OrderColumn');\nconst menus = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard .menu')).map((e) => e.textContent.trim()) : []);\nconst card = (i, m) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard')).find((c) => t.text(c.querySelector('.menu')) === m) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (m) => NAMES.filter((n, i) => menus(i).includes(m)).join(', ') || '없음';\nconst counts = () => [0, 1, 2].map(count).join(' / ');\nconst need3 = () => t.expect(cols().length === 3, 'OrderColumn이 3개 있어야 해요 (현재: ' + cols().length + '개)');\nconst add = async (i, m) => {\n  need3();\n  const inp = cols()[i].querySelector('.order-editor input');\n  const btn = cols()[i].querySelector('.order-editor button');\n  t.expect(!!inp && !!btn, NAMES[i] + ' 열의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type(inp, m);\n  await t.wait(30);\n  await t.click(cols()[i].querySelector('.order-editor button'));\n  await t.wait(30);\n};\nconst move = async (i, m, dir) => {\n  const c = card(i, m);\n  t.expect(!!c, NAMES[i] + ' 열에서 \"' + m + '\" 주문을 찾을 수 없어요 (현재 위치: ' + where(m) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 열의 \"' + m + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nawait add(0, '카푸치노');\nt.expect(menus(0).includes('카푸치노'), '주문 접수 열에 \"카푸치노\"가 추가되어야 해요 (현재 위치: ' + where('카푸치노') + ')');\nt.expect(cols()[0].querySelector('.order-editor input').value === '', '추가한 뒤 입력 창이 비워져야 해요');\nawait add(2, '아이스티');\nt.expect(menus(2).includes('아이스티') && !menus(0).includes('아이스티'), '픽업 완료 열의 입력 창으로 추가하면 픽업 완료 열에 추가되어야 해요 (현재 위치: ' + where('아이스티') + ')');\nconst before = menus(1).length;\nawait t.type(cols()[1].querySelector('.order-editor input'), '');\nawait t.click(cols()[1].querySelector('.order-editor button'));\nawait t.wait(30);\nt.expect(menus(1).length === before, '빈 입력으로 추가를 누르면 주문이 추가되면 안 돼요');"
       },
       {
-        "name": "→ 버튼을 누르면 카드가 오른쪽 컬럼으로 이동한다",
-        "points": 25,
-        "body": "const NAMES = ['Todo', 'In Progress', 'Done'];\nconst cols = () => t.$$('.KanbanColumn');\nconst titles = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard .title')).map((e) => e.textContent.trim()) : []);\nconst card = (i, title) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard')).find((c) => t.text(c.querySelector('.title')) === title) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (title) => NAMES.filter((n, i) => titles(i).includes(title)).join(', ') || '없음';\nconst add = async (s) => {\n  await t.type('.CardEditor input', s);\n  await t.wait(30);\n  await t.click('.CardEditor button');\n  await t.wait(30);\n};\nconst move = async (i, title, dir) => {\n  const c = card(i, title);\n  t.expect(!!c, NAMES[i] + ' 컬럼에서 \"' + title + '\" 카드를 찾을 수 없어요 (현재 위치: ' + where(title) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 컬럼의 \"' + title + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nawait add('보고서');\nawait move(0, '보고서', 1);\nt.expect(titles(1).includes('보고서') && !titles(0).includes('보고서'), '→를 누르면 \"보고서\"가 Todo에서 In Progress로 이동해야 해요 (현재 위치: ' + where('보고서') + ')');\nawait move(1, '보고서', 1);\nt.expect(titles(2).includes('보고서') && !titles(1).includes('보고서'), '한 번 더 →를 누르면 Done으로 이동해야 해요 (현재 위치: ' + where('보고서') + ')');"
+        "name": "각 열의 제목 옆에 주문 개수가 표시된다",
+        "points": 5,
+        "bullet": 1,
+        "body": "const NAMES = ['주문 접수', '제조 중', '픽업 완료'];\nconst cols = () => t.$$('.OrderColumn');\nconst menus = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard .menu')).map((e) => e.textContent.trim()) : []);\nconst card = (i, m) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard')).find((c) => t.text(c.querySelector('.menu')) === m) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (m) => NAMES.filter((n, i) => menus(i).includes(m)).join(', ') || '없음';\nconst counts = () => [0, 1, 2].map(count).join(' / ');\nconst need3 = () => t.expect(cols().length === 3, 'OrderColumn이 3개 있어야 해요 (현재: ' + cols().length + '개)');\nconst add = async (i, m) => {\n  need3();\n  const inp = cols()[i].querySelector('.order-editor input');\n  const btn = cols()[i].querySelector('.order-editor button');\n  t.expect(!!inp && !!btn, NAMES[i] + ' 열의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type(inp, m);\n  await t.wait(30);\n  await t.click(cols()[i].querySelector('.order-editor button'));\n  await t.wait(30);\n};\nconst move = async (i, m, dir) => {\n  const c = card(i, m);\n  t.expect(!!c, NAMES[i] + ' 열에서 \"' + m + '\" 주문을 찾을 수 없어요 (현재 위치: ' + where(m) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 열의 \"' + m + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nneed3();\nt.expect(counts() === '2 / 1 / 1', '처음 주문 개수는 2 / 1 / 1이어야 해요 (현재: ' + counts() + ')');\nawait add(1, '카페모카');\nt.expect(counts() === '2 / 2 / 1', '제조 중 열에 주문을 추가하면 2 / 2 / 1이 되어야 해요 (현재: ' + counts() + ')');"
       },
       {
-        "name": "← 버튼을 누르면 카드가 왼쪽 컬럼으로 이동한다",
-        "points": 20,
-        "body": "const NAMES = ['Todo', 'In Progress', 'Done'];\nconst cols = () => t.$$('.KanbanColumn');\nconst titles = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard .title')).map((e) => e.textContent.trim()) : []);\nconst card = (i, title) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard')).find((c) => t.text(c.querySelector('.title')) === title) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (title) => NAMES.filter((n, i) => titles(i).includes(title)).join(', ') || '없음';\nconst add = async (s) => {\n  await t.type('.CardEditor input', s);\n  await t.wait(30);\n  await t.click('.CardEditor button');\n  await t.wait(30);\n};\nconst move = async (i, title, dir) => {\n  const c = card(i, title);\n  t.expect(!!c, NAMES[i] + ' 컬럼에서 \"' + title + '\" 카드를 찾을 수 없어요 (현재 위치: ' + where(title) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 컬럼의 \"' + title + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nawait add('발표 준비');\nawait move(0, '발표 준비', 1);\nawait move(1, '발표 준비', 1);\nt.expect(titles(2).includes('발표 준비'), '→ 두 번으로 Done 컬럼까지 이동해야 해요 (현재 위치: ' + where('발표 준비') + ')');\nawait move(2, '발표 준비', -1);\nt.expect(titles(1).includes('발표 준비') && !titles(2).includes('발표 준비'), '←를 누르면 Done에서 In Progress로 이동해야 해요 (현재 위치: ' + where('발표 준비') + ')');\nawait move(1, '발표 준비', -1);\nt.expect(titles(0).includes('발표 준비'), '한 번 더 ←를 누르면 Todo로 이동해야 해요 (현재 위치: ' + where('발표 준비') + ')');"
+        "name": "x 버튼을 누르면 해당 주문이 삭제된다",
+        "points": 5,
+        "bullet": 2,
+        "body": "const NAMES = ['주문 접수', '제조 중', '픽업 완료'];\nconst cols = () => t.$$('.OrderColumn');\nconst menus = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard .menu')).map((e) => e.textContent.trim()) : []);\nconst card = (i, m) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard')).find((c) => t.text(c.querySelector('.menu')) === m) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (m) => NAMES.filter((n, i) => menus(i).includes(m)).join(', ') || '없음';\nconst counts = () => [0, 1, 2].map(count).join(' / ');\nconst need3 = () => t.expect(cols().length === 3, 'OrderColumn이 3개 있어야 해요 (현재: ' + cols().length + '개)');\nconst add = async (i, m) => {\n  need3();\n  const inp = cols()[i].querySelector('.order-editor input');\n  const btn = cols()[i].querySelector('.order-editor button');\n  t.expect(!!inp && !!btn, NAMES[i] + ' 열의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type(inp, m);\n  await t.wait(30);\n  await t.click(cols()[i].querySelector('.order-editor button'));\n  await t.wait(30);\n};\nconst move = async (i, m, dir) => {\n  const c = card(i, m);\n  t.expect(!!c, NAMES[i] + ' 열에서 \"' + m + '\" 주문을 찾을 수 없어요 (현재 위치: ' + where(m) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 열의 \"' + m + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nneed3();\nconst c = card(0, '카페라떼');\nt.expect(!!c, '주문 접수 열에서 \"카페라떼\"를 찾을 수 없어요 (현재 위치: ' + where('카페라떼') + ')');\nt.expect(!!c.querySelector('.delete'), '\"카페라떼\" 카드에 x(.delete) 버튼이 없어요');\nawait t.click(c.querySelector('.delete'));\nawait t.wait(30);\nt.expect(where('카페라떼') === '없음', '\"카페라떼\"가 삭제되어야 해요 (현재 위치: ' + where('카페라떼') + ')');\nt.expect(menus(0).includes('아이스 아메리카노') && menus(1).includes('바닐라라떼') && menus(2).includes('녹차라떼'), '다른 주문은 그대로 남아 있어야 해요');"
       },
       {
-        "name": "Todo 카드에는 ← 버튼이, Done 카드에는 → 버튼이 없다",
-        "points": 20,
-        "body": "const NAMES = ['Todo', 'In Progress', 'Done'];\nconst cols = () => t.$$('.KanbanColumn');\nconst titles = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard .title')).map((e) => e.textContent.trim()) : []);\nconst card = (i, title) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.KanbanCard')).find((c) => t.text(c.querySelector('.title')) === title) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (title) => NAMES.filter((n, i) => titles(i).includes(title)).join(', ') || '없음';\nconst add = async (s) => {\n  await t.type('.CardEditor input', s);\n  await t.wait(30);\n  await t.click('.CardEditor button');\n  await t.wait(30);\n};\nconst move = async (i, title, dir) => {\n  const c = card(i, title);\n  t.expect(!!c, NAMES[i] + ' 컬럼에서 \"' + title + '\" 카드를 찾을 수 없어요 (현재 위치: ' + where(title) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 컬럼의 \"' + title + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nawait add('테스트');\nlet c = card(0, '테스트');\nt.expect(!!c, 'Todo 컬럼에 \"테스트\" 카드가 보여야 해요');\nt.expect(!c.querySelector('.left'), 'Todo 컬럼 카드에는 ← 버튼이 없어야 해요');\nt.expect(!!c.querySelector('.right'), 'Todo 컬럼 카드에는 → 버튼이 있어야 해요');\nawait move(0, '테스트', 1);\nc = card(1, '테스트');\nt.expect(!!c && !!c.querySelector('.left') && !!c.querySelector('.right'), 'In Progress 컬럼 카드에는 ←, → 버튼이 모두 있어야 해요');\nawait move(1, '테스트', 1);\nc = card(2, '테스트');\nt.expect(!!c, 'Done 컬럼에 \"테스트\" 카드가 보여야 해요');\nt.expect(!c.querySelector('.right'), 'Done 컬럼 카드에는 → 버튼이 없어야 해요');\nt.expect(!!c.querySelector('.left'), 'Done 컬럼 카드에는 ← 버튼이 있어야 해요');"
+        "name": "→ / ← 버튼으로 주문이 옆 열로 이동한다",
+        "points": 5,
+        "bullet": 3,
+        "body": "const NAMES = ['주문 접수', '제조 중', '픽업 완료'];\nconst cols = () => t.$$('.OrderColumn');\nconst menus = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard .menu')).map((e) => e.textContent.trim()) : []);\nconst card = (i, m) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard')).find((c) => t.text(c.querySelector('.menu')) === m) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (m) => NAMES.filter((n, i) => menus(i).includes(m)).join(', ') || '없음';\nconst counts = () => [0, 1, 2].map(count).join(' / ');\nconst need3 = () => t.expect(cols().length === 3, 'OrderColumn이 3개 있어야 해요 (현재: ' + cols().length + '개)');\nconst add = async (i, m) => {\n  need3();\n  const inp = cols()[i].querySelector('.order-editor input');\n  const btn = cols()[i].querySelector('.order-editor button');\n  t.expect(!!inp && !!btn, NAMES[i] + ' 열의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type(inp, m);\n  await t.wait(30);\n  await t.click(cols()[i].querySelector('.order-editor button'));\n  await t.wait(30);\n};\nconst move = async (i, m, dir) => {\n  const c = card(i, m);\n  t.expect(!!c, NAMES[i] + ' 열에서 \"' + m + '\" 주문을 찾을 수 없어요 (현재 위치: ' + where(m) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 열의 \"' + m + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nneed3();\nawait move(0, '아이스 아메리카노', 1);\nt.expect(menus(1).includes('아이스 아메리카노') && !menus(0).includes('아이스 아메리카노'), '→를 누르면 \"아이스 아메리카노\"가 제조 중으로 이동해야 해요 (현재 위치: ' + where('아이스 아메리카노') + ')');\nawait move(1, '아이스 아메리카노', 1);\nt.expect(menus(2).includes('아이스 아메리카노'), '한 번 더 →를 누르면 픽업 완료로 이동해야 해요 (현재 위치: ' + where('아이스 아메리카노') + ')');\nawait move(2, '아이스 아메리카노', -1);\nt.expect(menus(1).includes('아이스 아메리카노') && !menus(2).includes('아이스 아메리카노'), '←를 누르면 픽업 완료에서 제조 중으로 이동해야 해요 (현재 위치: ' + where('아이스 아메리카노') + ')');\nconst first = card(0, '카페라떼');\nif (first && first.querySelector('.left')) { await t.click(first.querySelector('.left')); await t.wait(30); }\nt.expect(menus(0).includes('카페라떼'), '주문 접수 열의 주문은 ←로 이동하면 안 돼요 (현재 위치: ' + where('카페라떼') + ')');\nconst last = card(2, '녹차라떼');\nif (last && last.querySelector('.right')) { await t.click(last.querySelector('.right')); await t.wait(30); }\nt.expect(menus(2).includes('녹차라떼'), '픽업 완료 열의 주문은 →로 이동하면 안 돼요 (현재 위치: ' + where('녹차라떼') + ')');"
+      },
+      {
+        "name": "주문 State를 App에 선언하고 상태별로 걸러서 전달한다",
+        "points": 5,
+        "bullet": 4,
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = ['주문 접수', '제조 중', '픽업 완료'];\nconst cols = () => t.$$('.OrderColumn');\nconst menus = (i) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard .menu')).map((e) => e.textContent.trim()) : []);\nconst card = (i, m) => (cols()[i] ? Array.from(cols()[i].querySelectorAll('.OrderCard')).find((c) => t.text(c.querySelector('.menu')) === m) : null);\nconst count = (i) => (cols()[i] ? t.text(cols()[i].querySelector('.count')) : '');\nconst where = (m) => NAMES.filter((n, i) => menus(i).includes(m)).join(', ') || '없음';\nconst counts = () => [0, 1, 2].map(count).join(' / ');\nconst need3 = () => t.expect(cols().length === 3, 'OrderColumn이 3개 있어야 해요 (현재: ' + cols().length + '개)');\nconst add = async (i, m) => {\n  need3();\n  const inp = cols()[i].querySelector('.order-editor input');\n  const btn = cols()[i].querySelector('.order-editor button');\n  t.expect(!!inp && !!btn, NAMES[i] + ' 열의 입력 창/추가 버튼을 찾을 수 없어요');\n  await t.type(inp, m);\n  await t.wait(30);\n  await t.click(cols()[i].querySelector('.order-editor button'));\n  await t.wait(30);\n};\nconst move = async (i, m, dir) => {\n  const c = card(i, m);\n  t.expect(!!c, NAMES[i] + ' 열에서 \"' + m + '\" 주문을 찾을 수 없어요 (현재 위치: ' + where(m) + ')');\n  const b = c.querySelector(dir > 0 ? '.right' : '.left');\n  t.expect(!!b, NAMES[i] + ' 열의 \"' + m + '\" 카드에 ' + (dir > 0 ? '→' : '←') + ' 버튼이 없어요');\n  await t.click(b);\n  await t.wait(30);\n};\nt.expect(/useState\\s*\\(/.test(code('src/App.jsx')), 'App.jsx에서 useState로 상태를 선언해야 해요');\nneed3();\nt.expect(menus(0).join(',') === '아이스 아메리카노,카페라떼', '주문 접수 열에는 \"아이스 아메리카노\", \"카페라떼\"가 보여야 해요 (현재: ' + menus(0).join(', ') + ')');\nt.expect(menus(1).join(',') === '바닐라라떼', '제조 중 열에는 \"바닐라라떼\"만 보여야 해요 (현재: ' + menus(1).join(', ') + ')');\nt.expect(menus(2).join(',') === '녹차라떼', '픽업 완료 열에는 \"녹차라떼\"만 보여야 해요 (현재: ' + menus(2).join(', ') + ')');"
       }
     ]
   },
@@ -259,10 +688,84 @@
     "id": "p6",
     "title": "한 줄 메모장 (useRef · useEffect)",
     "level": "보통",
-    "desc": "## 한 줄 메모장 완성하기\n\n짧은 메모를 등록하고 검색할 수 있는 앱입니다. **useRef**로 입력창을 직접 조작하고, **useEffect**로 마운트 시점을 제어해 봅니다.\n화면(UI)과 CSS는 모두 주어져 있습니다. 아래 요구사항을 만족하도록 코드를 완성하시오. (CSS는 채점하지 않습니다.)\n\n### 화면 구성\n- **MemoEditor** : 메모 입력창(`.memo_input`), `등록` 버튼, 글자 수 표시(`.char_count`)\n- **MemoList** : 검색창(`.searchbar`), 메모 목록(`<li className=\"MemoItem\">`)\n\n### 요구사항\n1. **App**에 메모 목록 State `memos`(초기값 `[]`)를 만든다. 메모 하나는 `{ id, content }` 형태이며, `id`는 `useRef`로 0부터 1씩 증가한다.\n2. 앱이 처음 화면에 나타나면(**마운트**) 메모 입력창에 **자동으로 포커스**된다. (`useRef` + `useEffect`)\n3. 입력하는 동안 `.char_count`에 현재 글자 수를 `글자수 / 30` 형식으로 표시한다. (예: `5 / 30`)\n4. `등록` 버튼을 눌렀을 때\n   - 내용이 **5글자 미만**이면 등록하지 않고 입력창에 **포커스**한다.\n   - **5글자 이상**이면 메모가 목록에 추가되고, 입력창이 비워진다.\n5. **MemoList**의 검색창에 검색어를 입력하면 내용에 검색어가 포함된 메모만 보인다. (빈 검색어 → 전체)\n\n### 수정할 파일\n- `src/App.jsx`, `src/components/MemoEditor.jsx`, `src/components/MemoList.jsx`",
+    "desc": "## 6. 한 줄 메모장\n\n### 요구사항(초기화면)\n\n- 짧은 메모를 등록하고 검색할 수 있으며, useRef·useEffect로 입력 창의 포커스를 제어하는 메모장 프로그램\n- 초기 화면은 아래 [추가 스크린샷]의 '초기 화면'을 참고\n\n### 요구사항(컴포넌트 구조 – 10점)\n\n- 이 앱은 하나의 페이지이며, 두 개의 영역으로 나누어져 있음\n  - 첫 번째 영역은 메모 입력 창, 등록 버튼, 글자 수를 표시\n    - ▸ 이 영역의 이름을 **MemoEditor**이라고 할 것\n  - 두 번째 영역은 검색 창과 메모 목록을 표시\n    - ▸ 이 영역의 이름을 **MemoList**이라고 할 것\n- 각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). 메모 목록의 각 항목은 <li className=\"MemoItem\">으로 표시할 것\n\n### 요구사항(기능 구현 – 25점)\n\n- 앱이 처음 화면에 나타나면 메모 입력 창에 자동으로 포커스되어야 함 **(5점)**\n  - ▸ 반드시 useRef와 useEffect를 사용할 것\n- 입력하는 동안 현재 글자 수가 '글자수 / 30' 형식으로 나타나야 함 **(5점)**\n  - ▸ 예: 5 / 30\n- 등록 버튼을 클릭하면 메모가 목록에 추가되고 입력 창이 비워져야 함 **(5점)**\n  - ▸ 메모가 5글자 미만이면 등록하지 않고 입력 창에 포커스할 것\n- 검색 창에 검색어를 입력하면 내용에 검색어가 포함된 메모만 나타나야 함 **(5점)**\n  - ▸ 검색어가 비어 있으면 전체 목록이 나타나야 함\n- 기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것 **(5점)**\n  - ▸ 메모 목록 State는 App에 선언하고 props로 전달할 것 (새 메모의 id는 useRef로 관리)\n\n### 요구사항(추가 스크린샷)\n\n1. 초기 화면 (입력 창에 자동 포커스)\n2. 메모 3개 등록\n3. 메모 3개 등록 후 '리액트'로 검색\n\n### 수정할 파일\n\n`src/App.jsx`, `src/components/MemoEditor.jsx`, `src/components/MemoList.jsx`\n\n> 각 파일의 `TODO` 주석을 참고하세요. CSS는 채점하지 않습니다.",
+    "sheet": {
+      "title": "6. 한 줄 메모장",
+      "summary": "짧은 메모를 등록하고 검색할 수 있으며, useRef·useEffect로 입력 창의 포커스를 제어하는 메모장 프로그램",
+      "structure": {
+        "points": 10,
+        "lead": "이 앱은 하나의 페이지이며, 두 개의 영역으로 나누어져 있음",
+        "areas": [
+          {
+            "desc": "첫 번째 영역은 메모 입력 창, 등록 버튼, 글자 수를 표시",
+            "name": "MemoEditor"
+          },
+          {
+            "desc": "두 번째 영역은 검색 창과 메모 목록을 표시",
+            "name": "MemoList"
+          }
+        ],
+        "note": "각 영역의 화면 코드(마크업)와 CSS는 src/components 폴더에 주어져 있음 (최상위 요소의 className은 바꾸지 말 것). 메모 목록의 각 항목은 <li className=\"MemoItem\">으로 표시할 것"
+      },
+      "features": {
+        "points": 25,
+        "items": [
+          {
+            "text": "앱이 처음 화면에 나타나면 메모 입력 창에 자동으로 포커스되어야 함",
+            "points": 5,
+            "sub": [
+              "반드시 useRef와 useEffect를 사용할 것"
+            ]
+          },
+          {
+            "text": "입력하는 동안 현재 글자 수가 '글자수 / 30' 형식으로 나타나야 함",
+            "points": 5,
+            "sub": [
+              "예: 5 / 30"
+            ]
+          },
+          {
+            "text": "등록 버튼을 클릭하면 메모가 목록에 추가되고 입력 창이 비워져야 함",
+            "points": 5,
+            "sub": [
+              "메모가 5글자 미만이면 등록하지 않고 입력 창에 포커스할 것"
+            ]
+          },
+          {
+            "text": "검색 창에 검색어를 입력하면 내용에 검색어가 포함된 메모만 나타나야 함",
+            "points": 5,
+            "sub": [
+              "검색어가 비어 있으면 전체 목록이 나타나야 함"
+            ]
+          },
+          {
+            "text": "기능 구현을 위해 적절히 상태를 선언하고 관련 함수를 작성할 것",
+            "points": 5,
+            "sub": [
+              "메모 목록 State는 App에 선언하고 props로 전달할 것 (새 메모의 id는 useRef로 관리)"
+            ]
+          }
+        ]
+      },
+      "screens": [
+        {
+          "caption": "초기 화면 (입력 창에 자동 포커스)",
+          "steps": ""
+        },
+        {
+          "caption": "메모 3개 등록",
+          "steps": "for (const s of ['리액트 공부하기', '자바스크립트 복습', '리액트 시험 대비']) { await t.type('.MemoEditor .memo_input', s); await t.click('.MemoEditor button'); await t.wait(30); }"
+        },
+        {
+          "caption": "메모 3개 등록 후 '리액트'로 검색",
+          "steps": "for (const s of ['리액트 공부하기', '자바스크립트 복습', '리액트 시험 대비']) { await t.type('.MemoEditor .memo_input', s); await t.click('.MemoEditor button'); await t.wait(30); } await t.type('.MemoList .searchbar', '리액트'); await t.wait(30);"
+        }
+      ],
+      "files": "src/App.jsx, src/components/MemoEditor.jsx, src/components/MemoList.jsx"
+    },
     "files": {
       "src/main.jsx": "import { createRoot } from \"react-dom/client\";\nimport \"./index.css\";\nimport App from \"./App.jsx\";\n\ncreateRoot(document.getElementById(\"root\")).render(<App />);\n",
-      "src/App.jsx": "import { useState, useRef } from \"react\";\nimport \"./App.css\";\nimport MemoEditor from \"./components/MemoEditor\";\nimport MemoList from \"./components/MemoList\";\n\nfunction App() {\n  // TODO 1: 메모 목록 State(memos)를 만들고 초기값을 빈 배열로 설정하세요.\n  //   메모 하나의 모양: { id, content }\n\n  // TODO 2: 새 메모의 id로 사용할 Ref 객체(idRef)를 초기값 0으로 만드세요.\n\n  // TODO 3: onCreate(content) - 새 메모를 memos에 추가하고 idRef.current를 1 증가시키세요.\n\n  return (\n    <div className=\"App\">\n      <h2>한 줄 메모장 📝</h2>\n      {/* TODO 4: MemoEditor에 onCreate를, MemoList에 memos를 props로 전달하세요. */}\n      <MemoEditor />\n      <MemoList />\n    </div>\n  );\n}\n\nexport default App;\n",
+      "src/App.jsx": "import \"./App.css\";\n\n// [컴포넌트 구조] TODO 1: components 폴더의 MemoEditor, MemoList 컴포넌트를 import 하세요.\n//   (필요한 Hook도 react에서 import 하세요.)\n\nfunction App() {\n  // [기능 구현] TODO 2: 메모 목록 State(memos)를 만들고 초기값을 빈 배열로 설정하세요.\n  //   메모 하나의 모양: { id, content }\n\n  // TODO 3: 새 메모의 id로 사용할 Ref 객체(idRef)를 초기값 0으로 만드세요.\n\n  // TODO 4: onCreate(content) - 새 메모를 memos에 추가하고 idRef.current를 1 증가시키세요.\n\n  return (\n    <div className=\"App\">\n      <h2>한 줄 메모장 📝</h2>\n      {/* TODO 1-1: 첫 번째 영역 - MemoEditor 컴포넌트를 렌더링하고 onCreate를 props로 전달하세요. */}\n\n      {/* TODO 1-2: 두 번째 영역 - MemoList 컴포넌트를 렌더링하고 memos를 props로 전달하세요. */}\n    </div>\n  );\n}\n\nexport default App;\n",
       "src/App.css": "/* 페이지 레이아웃 (채점하지 않음) */\n.App {\n  max-width: 500px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 24px;\n}\n\n.App > h2 {\n  margin: 0;\n  color: #1f93ff;\n}\n",
       "src/index.css": "/* 전역 스타일 (채점하지 않음) */\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Malgun Gothic\",\n    \"Apple SD Gothic Neo\", sans-serif;\n  background-color: #f5f7fb;\n  color: #111827;\n}\n\n* {\n  box-sizing: border-box;\n}\n",
       "src/components/MemoEditor.css": ".MemoEditor {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n\n.MemoEditor .editor_wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.MemoEditor input {\n  flex: 1;\n  padding: 14px;\n  border: 1px solid rgb(220, 220, 220);\n  border-radius: 5px;\n}\n\n.MemoEditor input:focus {\n  outline: none;\n  border: 1px solid #1f93ff;\n}\n\n.MemoEditor button {\n  width: 80px;\n  cursor: pointer;\n  border: none;\n  border-radius: 5px;\n  background-color: #1f93ff;\n  color: white;\n  font-weight: bold;\n}\n\n.MemoEditor .char_count {\n  text-align: right;\n  font-size: 13px;\n  color: gray;\n}\n",
@@ -277,29 +780,40 @@
     },
     "tests": [
       {
-        "name": "앱이 처음 나타나면 메모 입력창에 자동으로 포커스된다",
-        "points": 15,
-        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && el.ownerDocument.activeElement === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ');\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait t.wait(50);\nt.expect(!!input(), '메모 입력창(.memo_input)을 찾을 수 없어요');\nt.expect(focused(), '앱이 마운트되면 메모 입력창에 포커스가 있어야 해요 (useRef + useEffect)');"
+        "name": "컴포넌트 구조: MemoEditor, MemoList 영역이 App에 렌더링된다",
+        "points": 10,
+        "bullet": "structure",
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst NAMES = [\"MemoEditor\",\"MemoList\"];\nconst miss = NAMES.filter((n) => !t.$('.' + n));\nt.expect(miss.length === 0, '화면에서 ' + miss.join(', ') + ' 영역을 찾을 수 없어요 (App에서 렌더링했는지, 컴포넌트 최상위 요소의 className을 바꾸지 않았는지 확인하세요)');\nconst notUsed = NAMES.filter((n) => !uses('src/App.jsx', n));\nt.expect(notUsed.length === 0, 'App.jsx에서 ' + notUsed.join(', ') + ' 컴포넌트를 import해서 렌더링해야 해요');\n"
+      },
+      {
+        "name": "앱이 처음 나타나면 메모 입력 창에 자동으로 포커스된다",
+        "points": 5,
+        "bullet": 0,
+        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && t.active() === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ') || '없음';\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { t.expect(!!input(), '메모 입력 창(.memo_input)을 찾을 수 없어요'); await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait t.wait(50);\nt.expect(!!input(), '메모 입력 창(.memo_input)을 찾을 수 없어요');\nt.expect(focused(), '앱이 마운트되면 메모 입력 창에 포커스가 있어야 해요 (useRef + useEffect)');"
       },
       {
         "name": "입력한 글자 수가 '글자수 / 30' 형식으로 표시된다",
-        "points": 20,
-        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && el.ownerDocument.activeElement === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ');\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait typeMemo('안녕하세요');\nt.expect(counter() === '5/30', '\"안녕하세요\"를 입력하면 5 / 30이 표시되어야 해요 (현재: \"' + t.text('.MemoEditor .char_count') + '\")');\nawait typeMemo('React');\nt.expect(counter() === '5/30', '\"React\"를 입력하면 5 / 30이 표시되어야 해요');\nawait typeMemo('hi');\nt.expect(counter() === '2/30', '\"hi\"를 입력하면 2 / 30이 표시되어야 해요 (현재: \"' + t.text('.MemoEditor .char_count') + '\")');"
+        "points": 5,
+        "bullet": 1,
+        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && t.active() === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ') || '없음';\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { t.expect(!!input(), '메모 입력 창(.memo_input)을 찾을 수 없어요'); await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait typeMemo('안녕하세요');\nt.expect(counter() === '5/30', '\"안녕하세요\"를 입력하면 5 / 30이 표시되어야 해요 (현재: \"' + t.text('.MemoEditor .char_count') + '\")');\nawait typeMemo('hi');\nt.expect(counter() === '2/30', '\"hi\"를 입력하면 2 / 30이 표시되어야 해요 (현재: \"' + t.text('.MemoEditor .char_count') + '\")');"
       },
       {
-        "name": "5글자 미만이면 등록되지 않고 입력창에 다시 포커스된다",
-        "points": 20,
-        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && el.ownerDocument.activeElement === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ');\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait typeMemo('메모');\ninput().blur();\nawait t.wait(30);\nt.expect(!focused(), '(테스트 준비) 입력창의 포커스를 해제하지 못했어요');\nawait submit();\nt.expect(items().length === 0, '5글자 미만인 메모는 등록되면 안 돼요 (현재 목록: ' + texts() + ')');\nt.expect(focused(), '5글자 미만일 때 등록 버튼을 누르면 입력창에 포커스되어야 해요');"
-      },
-      {
-        "name": "5글자 이상이면 목록에 추가되고 입력창이 비워진다",
-        "points": 25,
-        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && el.ownerDocument.activeElement === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ');\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait add('리액트 공부 중');\nt.expect(items().length === 1 && texts() === '리액트 공부 중', '\"리액트 공부 중\"이 목록에 추가되어야 해요 (현재 목록: ' + texts() + ')');\nt.expect(input().value === '', '등록한 뒤 입력창이 비워져야 해요');\nt.expect(counter() === '0/30', '입력창이 비워지면 글자 수도 0 / 30이 되어야 해요 (현재: \"' + t.text('.MemoEditor .char_count') + '\")');\nawait add('중간고사 대비');\nt.expect(items().length === 2, '두 번째 메모까지 2개가 보여야 해요 (현재 목록: ' + texts() + ')');"
+        "name": "5글자 이상이면 등록되고 입력 창이 비워진다 (5글자 미만이면 등록 안 되고 포커스)",
+        "points": 5,
+        "bullet": 2,
+        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && t.active() === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ') || '없음';\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { t.expect(!!input(), '메모 입력 창(.memo_input)을 찾을 수 없어요'); await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait add('리액트 공부 중');\nt.expect(items().length === 1 && texts() === '리액트 공부 중', '\"리액트 공부 중\"이 목록에 추가되어야 해요 (현재 목록: ' + texts() + ')');\nt.expect(input().value === '', '등록한 뒤 입력 창이 비워져야 해요');\nawait typeMemo('메모');\ninput().blur();\nawait t.wait(30);\nawait submit();\nt.expect(items().length === 1, '5글자 미만인 메모는 등록되면 안 돼요 (현재 목록: ' + texts() + ')');\nt.expect(focused(), '5글자 미만일 때 등록 버튼을 누르면 입력 창에 포커스되어야 해요');"
       },
       {
         "name": "검색어를 입력하면 해당 내용이 포함된 메모만 보인다",
-        "points": 20,
-        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && el.ownerDocument.activeElement === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ');\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait add('리액트 공부하기');\nawait add('자바스크립트 복습');\nawait add('리액트 시험 대비');\nt.expect(items().length === 3, '메모 3개가 등록되어야 해요 (현재 목록: ' + texts() + ')');\nawait t.type('.MemoList .searchbar', '리액트');\nawait t.wait(30);\nt.expect(items().length === 2 && items().every((el) => t.text(el).includes('리액트')), '\"리액트\"로 검색하면 2개만 보여야 해요 (현재 목록: ' + texts() + ')');\nawait t.type('.MemoList .searchbar', '복습');\nawait t.wait(30);\nt.expect(items().length === 1 && texts() === '자바스크립트 복습', '\"복습\"으로 검색하면 \"자바스크립트 복습\"만 보여야 해요 (현재 목록: ' + texts() + ')');\nawait t.type('.MemoList .searchbar', '');\nawait t.wait(30);\nt.expect(items().length === 3, '검색어를 지우면 다시 3개가 모두 보여야 해요');"
+        "points": 5,
+        "bullet": 3,
+        "body": "const input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && t.active() === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ') || '없음';\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { t.expect(!!input(), '메모 입력 창(.memo_input)을 찾을 수 없어요'); await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nawait add('리액트 공부하기');\nawait add('자바스크립트 복습');\nawait add('리액트 시험 대비');\nt.expect(items().length === 3, '메모 3개가 등록되어야 해요 (현재 목록: ' + texts() + ')');\nt.expect(!!t.$('.MemoList .searchbar'), '검색 창(.searchbar)을 찾을 수 없어요');\nawait t.type('.MemoList .searchbar', '리액트');\nawait t.wait(30);\nt.expect(items().length === 2 && items().every((el) => t.text(el).includes('리액트')), '\"리액트\"로 검색하면 2개만 보여야 해요 (현재 목록: ' + texts() + ')');\nawait t.type('.MemoList .searchbar', '');\nawait t.wait(30);\nt.expect(items().length === 3, '검색어를 지우면 다시 3개가 모두 보여야 해요 (현재 목록: ' + texts() + ')');"
+      },
+      {
+        "name": "메모 State를 App에 선언하고 props로 전달한다",
+        "points": 5,
+        "bullet": 4,
+        "body": "const code = (p) => String(t.src(p) || '').replace(/\\/\\*[\\s\\S]*?\\*\\//g, '').replace(/(^|[^:])\\/\\/[^\\n]*/g, '$1');\nconst uses = (p, name) => new RegExp('<' + name + '[\\\\s/>]').test(code(p));\nconst input = () => t.$('.MemoEditor .memo_input');\nconst focused = () => { const el = input(); return !!el && t.active() === el; };\nconst items = () => t.$$('.MemoList .MemoItem');\nconst texts = () => items().map((el) => t.text(el)).join(', ') || '없음';\nconst counter = () => t.text('.MemoEditor .char_count').replace(/\\s+/g, '');\nconst typeMemo = async (s) => { t.expect(!!input(), '메모 입력 창(.memo_input)을 찾을 수 없어요'); await t.type('.MemoEditor .memo_input', s); await t.wait(30); };\nconst submit = async () => { await t.click('.MemoEditor button'); await t.wait(30); };\nconst add = async (s) => { await typeMemo(s); await submit(); };\nt.expect(/useState\\s*\\(/.test(code('src/App.jsx')), 'App.jsx에서 useState로 상태를 선언해야 해요');\nt.expect(/useRef\\s*\\(/.test(code('src/components/MemoEditor.jsx')), 'MemoEditor.jsx에서 useRef로 입력 창을 참조해야 해요');\nawait add('상태 끌어올리기');\nt.expect(texts() === '상태 끌어올리기', 'App의 memos가 MemoList에 전달되어 등록한 메모가 보여야 해요 (현재 목록: ' + texts() + ')');"
       }
     ]
   }

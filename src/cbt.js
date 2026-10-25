@@ -35,6 +35,24 @@
     return out.join('\n');
   };
 
+  /* ---------- 시험지 (작년 시험 문제지 형식) ---------- */
+  L.sheet = function (pr, no) {
+    const sh = pr.sheet; const shots = sh.shots || [];
+    const t = sh.title || (no + '. ' + pr.title);
+    let k = 0;
+    const slide = (body) => { k++; return `<section class="slide"><h2 class="sl-t">${esc(t)} (${k})</h2><div class="sl-b">${body}</div><div class="sl-f">Page | ${k}</div></section>`; };
+    const img = (i, cap) => shots[i] ? `<figure class="shot"><img src="${shots[i]}" alt="${esc(cap || '')}"></figure>` : '';
+    const out = [];
+    out.push(slide(`<p class="o1">요구사항(초기화면)</p><p class="o2">${esc(sh.summary || '')}</p>${img(0, '초기 화면')}`));
+    const st = sh.structure || { areas: [] };
+    out.push(slide(`<p class="o1">요구사항(컴포넌트 구조 – ${st.points || 10}점${st.note ? ', ' + esc(st.note) : ''})</p>${st.lead ? `<p class="o2">${esc(st.lead)}</p>` : ''}${(st.areas || []).map(a => `<p class="o2">${esc(a.desc)}</p><p class="o3">이 영역의 이름을 <b>${esc(a.name)}</b>이라고 할 것</p>`).join('')}`));
+    const ft = sh.features || { items: [] };
+    out.push(slide(`<p class="o1">요구사항(기능 구현 – ${ft.points || 25}점)</p>${(ft.items || []).map(x => `<p class="o2">${esc(x.text)} <b>(${x.points}점)</b></p>${(x.sub || []).map(y => `<p class="o3">${esc(y)}</p>`).join('')}`).join('')}`));
+    const scr = (sh.screens || []).slice(1);
+    if (scr.length) out.push(slide(`<p class="o1">요구사항(추가 스크린샷)</p>${scr.map(x => `<p class="o2">${esc(x.caption)}</p>`).join('')}<div class="shots">${scr.map((x, i) => `<div>${img(i + 1, x.caption)}<div class="cap">${esc(x.caption)}</div></div>`).join('')}</div>`));
+    return `<div class="sheet"><div class="sh-note">문제지 · ${esc(pr.title)} · 배점 ${L.maxPoints(pr)}점${sh.files ? ` · 수정할 파일: <code>${esc(sh.files)}</code>` : ''}</div>${out.join('')}<div class="sh-note">CSS는 채점하지 않아요. 시험 도구(비커 아이콘)의 <b>채점하기</b>는 위 배점대로 요구사항을 하나씩 확인해요.</div></div>`;
+  };
+
   /* ---------- 코드 색칠 (VS Code 색) ---------- */
   const KW = /^(const|let|var|function|new|typeof|class|extends|this|true|false|null|undefined|async|of|in)$/;
   const CT = /^(import|export|from|return|if|else|for|while|switch|case|break|default|await|try|catch)$/;
@@ -90,7 +108,7 @@
         <div class="card"><h2>실전 모의고사</h2><p>실제 시험처럼 120분 타이머. 필기 20문항을 먼저 풀고, 이어서 실기 2문제를 풀어요. 끝나면 영역별 점수가 나와요.</p><div class="meta">필기 20문항 + 실기 2문제 · 120분</div><button class="btn pri go" data-go="mock">모의고사 시작</button></div>
       </div>
       <h3>실기 문제 바로 열기</h3>
-      <div class="plinks">${prs.map((p, i) => { const b = st.get('best.' + p.id, null); return `<button class="plink" data-prob="${p.id}"><span><b>problem${i + 1}</b> · ${esc(p.title)}<br><small>${esc(p.level || '')}</small></span><span class="s${b === 100 ? ' full' : ''}">${b == null ? '' : b + '점'}</span></button>`; }).join('')}</div>
+      <div class="plinks">${prs.map((p, i) => { const b = st.get('best2.' + p.id, null); const mx = L.maxPoints(p); return `<button class="plink" data-prob="${p.id}"><span><b>problem${i + 1}</b> · ${esc(p.title)}<br><small>${esc(p.level || '')} · ${mx}점</small></span><span class="s${b != null && b >= mx ? ' full' : ''}">${b == null ? '' : b + ' / ' + mx}</span></button>`; }).join('')}</div>
       <p class="foot-note">진행 기록과 작성한 코드는 이 브라우저에만 저장돼요. 실제 시험 PC에는 VS Code와 Node.js가 깔려 있고, 이 연습실은 그 화면을 흉내 낸 거예요. 범위: 10/26 수업까지 · CSS와 React와 상관없는 JS는 출제 안 됨.</p>
       <p class="foot-note"><button class="btn" data-go="reset">기록 모두 지우기</button></p>
     </div>`;
@@ -216,7 +234,7 @@
     const prs = D.practical || [];
     const easy = shuffle(prs.filter(p => /쉬움/.test(p.level || ''))), mid = shuffle(prs.filter(p => !/쉬움/.test(p.level || '')));
     const probs = [(easy[0] || prs[0]).id, (mid[0] || prs[1] || prs[0]).id].filter((v, i, a) => a.indexOf(v) === i);
-    probs.forEach(id => st.del('files.' + id));
+    probs.forEach(id => st.del('files2.' + id));
     const endAt = Date.now() + 120 * 60000;
     const M = { list, probs, endAt };
     S = { mode: 'mock', list, i: 0, ans: {}, checked: {}, filter: {}, endAt, onDone: () => { clearTimeout(tickW.t); M.wAns = S.ans; S = null; L.ide.open({ mode: 'mock', problems: probs, pid: probs[0], endAt, onEnd: sc => report(M, sc) }); } };
@@ -227,10 +245,10 @@
     const und = M.list.filter(q => q.type === 'single' || q.type === 'multi'), rev = M.list.filter(q => q.type === 'review' || q.type === 'blank');
     const ok = arr => arr.filter(q => isRight(q, M.wAns[q.id])).length;
     const u = ok(und) / und.length * 30, r = ok(rev) / rev.length * 30;
-    const pr = Object.values(sc); const p = pr.reduce((s, x) => s + x.score, 0) / (pr.length * 100) * 40;
+    const pr = Object.keys(sc); const p = pr.reduce((s, id) => s + sc[id].score, 0) / pr.reduce((s, id) => s + L.maxPoints((D.practical || []).find(q => q.id === id)), 0) * 40;
     const total = Math.round((u + r + p) * 10) / 10;
     const wr = st.get('wres', {}); M.list.forEach(q => { wr[q.id] = isRight(q, M.wAns[q.id]); }); st.set('wres', wr);
-    const prRows = Object.keys(sc).map(id => { const x = (D.practical || []).find(q => q.id === id); return `<div class="rrow"><span>실기 · ${esc(x.title)}</span><b>${sc[id].score}점 / 100</b><div class="bar"><i style="width:${sc[id].score}%"></i></div></div>`; }).join('');
+    const prRows = Object.keys(sc).map(id => { const x = (D.practical || []).find(q => q.id === id); return `<div class="rrow"><span>실기 · ${esc(x.title)}</span><b>${sc[id].score}점 / ${L.maxPoints(x)}</b><div class="bar"><i style="width:${sc[id].score / L.maxPoints(x) * 100}%"></i></div></div>`; }).join('');
     el.innerHTML = `<div class="page" style="position:absolute"><div class="report"><h1>모의고사 결과</h1><p style="color:var(--c-mut);margin:0">실제 시험 배점(이해 30 · 코드리뷰 30 · 코드 작성 40)으로 환산했어요.</p>
       <div class="big">${total}<span style="font-size:22px;color:var(--c-mut)"> / 100</span></div>
       <div class="rows">
