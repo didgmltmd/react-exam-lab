@@ -1,4 +1,4 @@
-/* cbt.js — 홈 화면, 필기(CBT), 실전 모의고사 흐름 */
+/* cbt.js — 홈 화면, 필기 연습, 실전 모의고사 (러닝메이트 React 중간고사) */
 (function () {
   'use strict';
   const L = window.RL; const esc = L.esc;
@@ -14,54 +14,6 @@
   const squash = s => String(s || '').replace(/\s+/g, '').toLowerCase();
   const autoTicks = (q, text) => { const t = squash(text); return q.rubric.map(r => r.keys.some(k => t.includes(squash(k)))); };
   const eScore = (q, tk) => q.rubric.reduce((s, r, k) => s + (tk && tk[k] ? r.pts : 0), 0);
-
-  /* ---------- 간단 마크다운 ---------- */
-  function inline(s) {
-    return esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>').replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  }
-  L.md = function (src) {
-    const ls = String(src || '').replace(/\r/g, '').split('\n'); const out = []; let i = 0;
-    while (i < ls.length) {
-      const l = ls[i];
-      if (/^```/.test(l)) { const buf = []; i++; while (i < ls.length && !/^```/.test(ls[i])) buf.push(ls[i++]); i++; out.push(`<pre><code>${esc(buf.join('\n'))}</code></pre>`); continue; }
-      const h = /^(#{1,4})\s+(.*)$/.exec(l); if (h) { out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); i++; continue; }
-      if (/^---+\s*$/.test(l)) { out.push('<hr>'); i++; continue; }
-      if (/^\s*>/.test(l)) { const buf = []; while (i < ls.length && /^\s*>/.test(ls[i])) buf.push(ls[i++].replace(/^\s*>\s?/, '')); out.push(`<blockquote>${L.md(buf.join('\n'))}</blockquote>`); continue; }
-      if (/^\s*\|/.test(l)) { const rows = []; while (i < ls.length && /^\s*\|/.test(ls[i])) rows.push(ls[i++]); const cells = r => r.trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim()); const body = rows.filter(r => !/^\s*\|[\s:|-]+\|\s*$/.test(r)); out.push('<table>' + body.map((r, k) => '<tr>' + cells(r).map(c => k === 0 ? `<th>${inline(c)}</th>` : `<td>${inline(c)}</td>`).join('') + '</tr>').join('') + '</table>'); continue; }
-      if (/^\s*([-*]|\d+\.)\s+/.test(l)) {
-        const ordered = /^\s*\d+\./.test(l); const items = [];
-        while (i < ls.length && (/^\s*([-*]|\d+\.)\s+/.test(ls[i]) || (/^\s{2,}\S/.test(ls[i]) && items.length))) {
-          if (/^\s*([-*]|\d+\.)\s+/.test(ls[i]) && !/^\s{2,}/.test(ls[i])) items.push(ls[i].replace(/^\s*([-*]|\d+\.)\s+/, ''));
-          else items[items.length - 1] += '\n' + ls[i].trim();
-          i++;
-        }
-        out.push(`<${ordered ? 'ol' : 'ul'}>` + items.map(x => `<li>${x.split('\n').map((y, k) => k && /^([-*]|\d+\.)\s/.test(y) ? '<br>• ' + inline(y.replace(/^([-*]|\d+\.)\s+/, '')) : inline(y)).join(k => ' ')}</li>`).join('') + `</${ordered ? 'ol' : 'ul'}>`);
-        continue;
-      }
-      if (!l.trim()) { i++; continue; }
-      const buf = []; while (i < ls.length && ls[i].trim() && !/^(#{1,4}\s|```|\s*([-*]|\d+\.)\s|\s*>|\s*\|)/.test(ls[i])) buf.push(ls[i++]);
-      out.push(`<p>${buf.map(inline).join('<br>')}</p>`);
-    }
-    return out.join('\n');
-  };
-
-  /* ---------- 시험지 (작년 시험 문제지 형식) ---------- */
-  L.sheet = function (pr, no) {
-    const sh = pr.sheet; const shots = sh.shots || [];
-    const t = sh.title || (no + '. ' + pr.title);
-    let k = 0;
-    const slide = (body) => { k++; return `<section class="slide"><h2 class="sl-t">${esc(t)} (${k})</h2><div class="sl-b">${body}</div><div class="sl-f">Page | ${k}</div></section>`; };
-    const img = (i, cap) => shots[i] ? `<figure class="shot"><img src="${shots[i]}" alt="${esc(cap || '')}"></figure>` : '';
-    const out = [];
-    out.push(slide(`<p class="o1">요구사항(초기화면)</p><p class="o2">${esc(sh.summary || '')}</p>${img(0, '초기 화면')}`));
-    const st = sh.structure || { areas: [] };
-    out.push(slide(`<p class="o1">요구사항(컴포넌트 구조 – ${st.points || 10}점${st.note ? ', ' + esc(st.note) : ''})</p>${st.lead ? `<p class="o2">${esc(st.lead)}</p>` : ''}${(st.areas || []).map(a => `<p class="o2">${esc(a.desc)}</p><p class="o3">이 영역의 이름을 <b>${esc(a.name)}</b>이라고 할 것</p>`).join('')}`));
-    const ft = sh.features || { items: [] };
-    out.push(slide(`<p class="o1">요구사항(기능 구현 – ${ft.points || 25}점)</p>${(ft.items || []).map(x => `<p class="o2">${esc(x.text)} <b>(${x.points}점)</b></p>${(x.sub || []).map(y => `<p class="o3">${esc(y)}</p>`).join('')}`).join('')}`));
-    const scr = (sh.screens || []).slice(1);
-    if (scr.length) out.push(slide(`<p class="o1">요구사항(추가 스크린샷)</p>${scr.map(x => `<p class="o2">${esc(x.caption)}</p>`).join('')}<div class="shots">${scr.map((x, i) => `<div>${img(i + 1, x.caption)}<div class="cap">${esc(x.caption)}</div></div>`).join('')}</div>`));
-    return `<div class="sheet"><div class="sh-note">문제지 · ${esc(pr.title)} · 배점 ${L.maxPoints(pr)}점${sh.files ? ` · 수정할 파일: <code>${esc(sh.files)}</code>` : ''}</div>${out.join('')}<div class="sh-note">CSS는 채점하지 않아요. 시험 도구(비커 아이콘)의 <b>채점하기</b>는 위 배점대로 요구사항을 하나씩 확인해요.</div></div>`;
-  };
 
   /* ---------- 코드 색칠 (VS Code 색) ---------- */
   const KW = /^(const|let|var|function|new|typeof|class|extends|this|true|false|null|undefined|async|of|in)$/;
@@ -103,36 +55,72 @@
   const st = L.store;
   function stats() { const r = st.get('wres', {}); let ok = 0, n = 0; Object.values(r).forEach(v => { n++; if (v) ok++; }); return { ok, n }; }
 
+  /* ---------- 러닝메이트 상단 막대 ---------- */
+  const IMG = D.img || {};
+  const EXAM = Date.UTC(2026, 10, 2, 5, 0); // 2026-11-02 14:00 KST
+  L.topbar = (title, right) => `<header class="topbar"><div class="tb-in"><button class="brand" data-go="home" aria-label="홈으로">${IMG.logo ? `<img src="${IMG.logo}" alt="">` : ''}<b>러닝메이트</b><span class="sep">·</span><span class="tb-t">${esc(title)}</span></button><div class="tb-r">${right || ''}</div></div></header>`;
+  function dday() {
+    const left = EXAM - Date.now();
+    if (left <= -2 * 3600e3) return { big: '시험 끝', small: '수고했어요!' };
+    if (left <= 0) return { big: 'D-DAY', small: '지금 시험 중이에요' };
+    const d = Math.floor(left / 86400e3), h = Math.floor(left / 3600e3) % 24;
+    return { big: d ? `D-${d}` : 'D-DAY', small: d ? `${d}일 ${h}시간 남았어요` : `${h}시간 ${Math.floor(left / 60000) % 60}분 남았어요` };
+  }
+
   /* ---------- 홈 ---------- */
+  const AINFO = {
+    '이해': { w: 30, c: 'a1', d: '개념을 정확히 알고 있는지 묻는 객관식 · 복수 정답' },
+    '코드리뷰': { w: 30, c: 'a2', d: '코드에서 틀린 줄 찾기 · 비워진 부분 채우기' },
+    '코드 작성': { w: 10, c: 'a3', d: '카운터, 입력 state, 할 일 삭제처럼 짧은 코드 직접 쓰기' },
+    '서술형': { w: 30, c: 'a4', d: '개념 설명 · 이유와 해결 방법을 문장으로 쓰기' },
+  };
   L.home = function () {
-    const h = document.getElementById('home'); document.getElementById('cbt').hidden = true; h.hidden = false; document.title = 'React 시험 연습실';
-    const s = stats();
-    const prs = D.practical || [];
-    const wr = st.get('wres', {});
-    const areaBtn = a => { const qs = W.filter(q => AREA[q.type] === a); const done = qs.filter(q => wr[q.id] != null).length; return `<button class="btn area" data-area="${a}"><span>${a}</span><small>${done} / ${qs.length}</small></button>`; };
-    h.innerHTML = `<div class="home">
-      <h1>React 중간고사 연습실</h1>
-      <p class="sub">시험이 필기 중심으로 바뀌었어요. 객관식·코드리뷰는 바로 채점되고, 서술형·코드 작성은 모범답안과 채점 포인트를 보며 직접 채점해요.</p>
-      <div class="info"><div><b>11/2 (월) 14:00~16:00</b><span>PC 대면 · 120분</span></div><div><b>이해 30%</b><span>객관식</span></div><div><b>코드리뷰 30%</b><span>틀린 곳 찾기 · 빈칸 채우기</span></div><div><b>코드 작성 10%</b><span>짧은 코드 쓰기</span></div><div><b>서술형 30%</b><span>개념 설명 · 이유 쓰기</span></div></div>
-      <div class="cards">
-        <div class="card"><h2>영역별 연습</h2><p>시험 영역을 골라 한 문제씩 풀고 바로 해설을 봐요. 숫자는 푼 문제 / 전체 문제예요.</p><div class="area-btns">${AREAS.map(areaBtn).join('')}</div><div class="meta">전체 ${W.length}문항 · 푼 문제 ${s.n} · 맞힌 문제 ${s.ok}</div><button class="btn pri go" data-go="written">전체 섞어서 풀기</button></div>
-        <div class="card"><h2>실전 모의고사</h2><p>실제 시험처럼 120분 타이머. 끝까지 풀고 제출하면 객관식은 자동 채점, 서술형·코드는 모범답안을 보며 채점해서 100점 만점으로 환산해요.</p><div class="meta">이해 10 · 코드리뷰 10 · 코드 작성 1 · 서술형 3 · 120분</div><button class="btn pri go" data-go="mock">모의고사 시작</button></div>
-        <div class="card"><h2>VS Code 실기 (심화)</h2><p>코드 작성 감각을 기르는 연습이에요. VS Code 화면에서 컴포넌트를 완성하고 <b>npm run dev</b>로 확인한 뒤 자동 채점해요.</p><div class="meta">${prs.length}문제 · 시험 비중은 작아졌지만 손에 익히기 좋아요</div><button class="btn go" data-go="practical">실기 연습 열기</button></div>
-      </div>
-      <h3>VS Code 실기 문제 바로 열기</h3>
-      <div class="plinks">${prs.map((p, i) => { const b = st.get('best2.' + p.id, null); const mx = L.maxPoints(p); return `<button class="plink" data-prob="${p.id}"><span><b>problem${i + 1}</b> · ${esc(p.title)}<br><small>${esc(p.level || '')} · ${mx}점</small></span><span class="s${b != null && b >= mx ? ' full' : ''}">${b == null ? '' : b + ' / ' + mx}</span></button>`; }).join('')}</div>
-      <p class="foot-note">진행 기록과 작성한 답안은 이 브라우저에만 저장돼요. 범위: 10/26 수업까지 · CSS와 React와 상관없는 JS는 출제 안 됨.</p>
-      <p class="foot-note"><button class="btn" data-go="reset">기록 모두 지우기</button></p>
-    </div>`;
+    const h = document.getElementById('home'); document.getElementById('cbt').hidden = true; h.hidden = false; document.title = 'React 중간고사 연습실 · 러닝메이트';
+    const s = stats(); const wr = st.get('wres', {});
+    const wrongN = W.filter(q => wr[q.id] === false).length;
+    const dd = dday();
+    const card = a => {
+      const qs = W.filter(q => AREA[q.type] === a); const n = qs.length;
+      const done = qs.filter(q => wr[q.id] != null).length, ok = qs.filter(q => wr[q.id] === true).length;
+      const I = AINFO[a];
+      return `<button class="acard ${I.c}" data-area="${a}"><span class="a-top"><b>${a}</b><span class="a-w">${I.w}%</span></span><span class="a-d">${I.d}</span><span class="a-cnt"><span>${n}문항</span><span>푼 문제 <b>${done}</b> · 맞힘 <b>${ok}</b></span></span><span class="prog" aria-hidden="true"><i class="dn" style="width:${n ? done / n * 100 : 0}%"></i><i class="ok" style="width:${n ? ok / n * 100 : 0}%"></i></span><span class="a-go">풀기 →</span></button>`;
+    };
+    h.innerHTML = L.topbar('React 중간고사') + `<main class="home">
+      <section class="hero">
+        <div class="hero-t">
+          <p class="eyebrow">러닝메이트 시험 대비</p>
+          <h1>React 중간고사,<br>필기로 끝까지 준비해요</h1>
+          <p class="lead">이해 · 코드리뷰 · 코드 작성 · 서술형 <b>${W.length}문항</b>. 객관식과 빈칸은 바로 채점되고, 서술형과 코드 작성은 모범답안과 채점 포인트를 보며 직접 채점해요.</p>
+          <div class="dday"><b id="dd-big">${dd.big}</b><span><span class="dd-date">11월 2일 (월) 14:00~16:00 · PC 대면 · 120분</span><span class="dd-small" id="dd-small">${dd.small}</span></span></div>
+          <div class="hero-cta"><button class="btn pri lg" data-go="mock">실전 모의고사 시작</button><button class="btn lg" data-go="written">전체 섞어서 풀기</button></div>
+        </div>
+        ${IMG.mascot ? `<img class="mascot" src="${IMG.mascot}" alt="러닝메이트 마스코트 커너비">` : ''}
+      </section>
+      <section class="comp" aria-label="시험 구성">
+        <h2>시험 구성</h2>
+        <div class="wbar" role="img" aria-label="이해 30%, 코드리뷰 30%, 코드 작성 10%, 서술형 30%">${AREAS.map(a => `<i class="${AINFO[a].c}" style="flex:${AINFO[a].w}"></i>`).join('')}</div>
+        <div class="wlab">${AREAS.map(a => `<span style="flex:${AINFO[a].w}"><b>${a}</b> ${AINFO[a].w}%</span>`).join('')}</div>
+        <p class="note">범위: 10/26 수업까지 · CSS와 React와 상관없는 JS는 출제되지 않아요.</p>
+      </section>
+      <section>
+        <div class="sec-h"><h2>영역별 연습</h2><span class="sum">푼 문제 <b>${s.n}</b> / ${W.length} · 맞힌 문제 <b>${s.ok}</b></span></div>
+        <div class="areas">${AREAS.map(card).join('')}</div>
+        <div class="tools"><button class="btn" data-go="wrong"${wrongN ? '' : ' disabled'}>오답노트 <span class="cnt">${wrongN}</span></button><button class="btn" data-go="new">안 푼 문제만</button><button class="btn quiet" data-go="reset">기록 모두 지우기</button></div>
+      </section>
+      <p class="foot-note">진행 기록과 작성한 답안은 이 브라우저에만 저장돼요. · 러닝메이트 학습 지원</p>
+    </main>`;
+    clearInterval(L.home.t); L.home.t = setInterval(() => { const b = document.getElementById('dd-big'); if (!b || h.hidden) return clearInterval(L.home.t); const x = dday(); b.textContent = x.big; document.getElementById('dd-small').textContent = x.small; }, 30000);
+    const startF = f => { st.set('wfilter', Object.assign({ ch: '', type: '', only: '', area: '' }, f)); startWritten({ mode: 'practice' }); };
     h.onclick = e => {
-      const b = e.target.closest('[data-go],[data-prob],[data-area]'); if (!b) return;
-      if (b.dataset.prob) return L.ide.open({ mode: 'practice', problems: prs.map(p => p.id), pid: b.dataset.prob });
-      if (b.dataset.area) { st.set('wfilter', { ch: '', type: '', only: '', area: b.dataset.area }); return startWritten({ mode: 'practice' }); }
+      const b = e.target.closest('[data-go],[data-area]'); if (!b || b.disabled) return;
+      if (b.dataset.area) return startF({ area: b.dataset.area });
       const g = b.dataset.go;
-      if (g === 'written') { st.set('wfilter', { ch: '', type: '', only: '', area: '' }); startWritten({ mode: 'practice' }); }
-      else if (g === 'practical') L.ide.open({ mode: 'practice', problems: prs.map(p => p.id), pid: prs[0].id });
+      if (g === 'home') L.home();
+      else if (g === 'written') startF({});
+      else if (g === 'wrong') startF({ only: 'wrong' });
+      else if (g === 'new') startF({ only: 'new' });
       else if (g === 'mock') startMock();
-      else if (g === 'reset') { L.ask('기록을 모두 지울까요?', '필기 기록, 실기 코드, 점수가 모두 사라져요.', '모두 지우기').then(y => { if (!y) return; try { Object.keys(localStorage).filter(k => k.startsWith('reactlab.')).forEach(k => localStorage.removeItem(k)); } catch (x) { } L.home(); }); }
+      else if (g === 'reset') { L.ask('기록을 모두 지울까요?', '푼 문제 기록과 맞힘/틀림 기록이 모두 사라져요.', '모두 지우기').then(y => { if (!y) return; try { Object.keys(localStorage).filter(k => k.startsWith('reactlab.')).forEach(k => localStorage.removeItem(k)); } catch (x) { } L.home(); }); }
     };
   };
 
@@ -176,7 +164,7 @@
     const el = document.getElementById('cbt'); document.getElementById('home').hidden = true; el.hidden = false;
     const mock = S.mode === 'mock';
     if (!S.list.length) {
-      el.innerHTML = `<div class="cbt"><div class="cbt-top"><span class="ttl">React 필기 연습</span><span class="r"><button class="btn" data-a="home">홈</button></span></div><div class="cbt-body"><div class="qwrap"><div class="qcard"><p class="qtext">조건에 맞는 문제가 없어요. 오른쪽 필터를 바꿔 보세요.</p></div></div>${sideHTML()}</div></div>`;
+      el.innerHTML = `<div class="cbt">${L.topbar('React 필기 연습', '<button class="btn sm" data-a="home">홈</button>')}<div class="cbt-body"><div class="qwrap"><div class="qcard"><p class="qtext">조건에 맞는 문제가 없어요. 오른쪽 필터를 바꿔 보세요.</p></div></div>${sideHTML()}</div></div>`;
       bind(el); return;
     }
     const q = S.list[S.i]; const a = S.ans[q.id]; const done = !mock && S.checked[q.id];
@@ -212,7 +200,7 @@
     const checkLbl = isEssay(q) ? '모범답안 보고 채점하기' : '정답 확인';
     body += `<div class="qact">${S.i > 0 ? '<button class="btn" data-a="prev">← 이전</button>' : ''}${!mock && !done ? `<button class="btn pri" data-a="check"${answered(q) ? '' : ' disabled'}>${checkLbl}</button>` : ''}${!last ? `<button class="btn${mock || done ? ' pri' : ''}" data-a="next">다음 →</button>` : mock ? '<button class="btn pri" data-a="submit">답안 제출하고 채점 →</button>' : ''}</div>`;
     const timer = mock ? `<span class="tm" id="tm"></span>` : '';
-    el.innerHTML = `<div class="cbt"><div class="cbt-top"><span class="ttl">${mock ? '실전 모의고사' : 'React 필기 연습'}</span>${timer}<span class="r">${mock ? '<button class="btn pri" data-a="submit">답안 제출</button>' : '<button class="btn" data-a="home">홈</button>'}</span></div>
+    el.innerHTML = `<div class="cbt">${L.topbar(mock ? '실전 모의고사' : 'React 필기 연습', timer + (mock ? '<button class="btn sm pri" data-a="submit">답안 제출</button>' : '<button class="btn sm" data-a="home">홈</button>'))}
       <div class="cbt-body"><div class="qwrap"><div class="qcard">${body}</div></div>${sideHTML()}</div></div>`;
     bind(el);
     const qw = el.querySelector('.qwrap'); if (qw) qw.scrollTop = 0;
@@ -246,6 +234,7 @@
     el.onclick = e => {
       const t = e.target; const q = S.list[S.i];
       if (t.closest('.rub')) return; // 체크박스는 onchange 에서 처리
+      if (t.closest('.brand')) { if (S.mode !== 'mock') { S = null; L.home(); } return; } // 모의고사 중에는 로고로 나가지 않음
       const o = t.closest('[data-opt]'); if (o && q && !(S.mode !== 'mock' && S.checked[q.id])) { const k = +o.dataset.opt; let a = (S.ans[q.id] || []).slice(); if (q.type === 'multi') { a = a.includes(k) ? a.filter(x => x !== k) : a.concat(k); } else a = [k]; S.ans[q.id] = a; renderCBT(); return; }
       const ln = t.closest('[data-line]'); if (ln && q && q.type === 'review' && !(S.mode !== 'mock' && S.checked[q.id])) { S.ans[q.id] = +ln.dataset.line; renderCBT(); return; }
       const g = t.closest('[data-go]'); if (g) { saveBlanks(); S.i = +g.dataset.go; renderCBT(); return; }
@@ -306,11 +295,11 @@
     M.ticks = {}; subj.forEach(q => { M.ticks[q.id] = autoTicks(q, M.wAns[q.id]); });
     if (!subj.length) return report(M);
     const mine = q => { const v = M.wAns[q.id]; return v && String(v).trim() ? `<pre class="mine${q.type === 'code' ? ' mono' : ''}">${esc(v)}</pre>` : '<p class="mine-none">답을 쓰지 않았어요 (0점)</p>'; };
-    el.innerHTML = `<div class="page" style="position:absolute"><div class="report sg"><h1>코드 작성 · 서술형 채점</h1><p class="sg-lead">객관식과 빈칸은 자동으로 채점했어요. 아래 ${subj.length}문제는 내 답과 모범답안을 비교해서, 내 답에 들어간 채점 포인트를 체크하세요. 키워드가 보이는 항목은 미리 체크돼 있어요.</p>
+    el.innerHTML = `<div class="page" style="position:absolute">${L.topbar('모의고사 채점')}<div class="report sg"><h1>코드 작성 · 서술형 채점</h1><p class="sg-lead">객관식과 빈칸은 자동으로 채점했어요. 아래 ${subj.length}문제는 내 답과 모범답안을 비교해서, 내 답에 들어간 채점 포인트를 체크하세요. 키워드가 보이는 항목은 미리 체크돼 있어요.</p>
       ${subj.map((q, n) => `<section class="sg-item"><div class="qhead"><span class="qn">${M.list.indexOf(q) + 1}.</span><span class="tag k">${AREA[q.type]}</span><span class="tag">${q.points}점</span><span class="tag">${esc(q.ch || '')}</span></div><p class="qtext">${inlineQ(q.q)}</p>${q.code ? codeBlock(q.code) : ''}<h4>내 답</h4>${mine(q)}${essayResult(q, M.wAns[q.id], M.ticks[q.id], q.id)}</section>`).join('')}
       <div class="qact"><button class="btn pri" data-r="done">채점 끝내고 결과 보기</button></div></div></div>`;
     el.onchange = e => { const box = e.target.closest('[data-tick]'); if (!box) return; const id = box.closest('.essay-res').dataset.eq; const q = subj.find(x => x.id === id); onTick(box, q, M.ticks[id]); };
-    el.onclick = e => { const b = e.target.closest('[data-r="done"]'); if (b) report(M); };
+    el.onclick = e => { if (e.target.closest('.brand')) { L.ask('채점을 그만두고 홈으로 갈까요?', '이번 모의고사 결과는 저장되지 않아요.', '홈으로').then(y => { if (y) L.home(); }); return; } const b = e.target.closest('[data-r="done"]'); if (b) report(M); };
     el.oninput = null; el.onkeydown = null;
     const pg = el.querySelector('.page'); if (pg) pg.scrollTop = 0;
   }
@@ -327,8 +316,8 @@
     const total = r1(u + r + c + e);
     const wr = st.get('wres', {}); M.list.forEach(q => { wr[q.id] = isEssay(q) ? isRight(q, M.wAns[q.id] || '', T[q.id]) : isRight(q, M.wAns[q.id]); }); st.set('wres', wr);
     const row = (lbl, got, w) => `<div class="rrow"><span>${lbl}</span><b>${r1(got)} / ${w}</b><div class="bar"><i style="width:${got / w * 100}%"></i></div></div>`;
-    el.innerHTML = `<div class="page" style="position:absolute"><div class="report"><h1>모의고사 결과</h1><p style="color:var(--c-mut);margin:0">실제 시험 배점(이해 30 · 코드리뷰 30 · 코드 작성 10 · 서술형 30)으로 환산했어요.</p>
-      <div class="big">${total}<span style="font-size:22px;color:var(--c-mut)"> / 100</span></div>
+    el.innerHTML = `<div class="page" style="position:absolute">${L.topbar('모의고사 결과')}<div class="report"><div class="rep-hero"><div class="rep-t"><h1>모의고사 결과</h1><p class="rep-sub">실제 시험 배점(이해 30 · 코드리뷰 30 · 코드 작성 10 · 서술형 30)으로 환산했어요.</p>
+      <div class="big">${total}<span> / 100</span></div><p class="rep-msg">${total >= 80 ? '아주 좋아요! 틀린 문제만 한 번 더 보면 돼요.' : total >= 60 ? '좋아요. 오답노트로 약한 영역을 채워 봐요.' : '괜찮아요. 영역별 연습부터 차근차근 다시 해 봐요.'}</p></div>${IMG.mascot ? `<img class="rep-mascot" src="${IMG.mascot}" alt="">` : ''}</div>
       <div class="rows">
         ${row(`이해 (객관식) — ${ok(und)} / ${und.length}문항`, u, 30)}
         ${row(`코드리뷰 (틀린 줄 · 빈칸) — ${ok(rev)} / ${rev.length}문항`, r, 30)}
@@ -337,7 +326,7 @@
       </div>
       <div class="qact"><button class="btn pri" data-r="review">답 맞춰 보기</button><button class="btn" data-r="home">홈으로</button></div></div></div>`;
     el.onchange = null; el.oninput = null; el.onkeydown = null;
-    el.onclick = ev => { const b = ev.target.closest('[data-r]'); if (!b) return; if (b.dataset.r === 'home') L.home(); else { S = { mode: 'practice', list: M.list, i: 0, ans: M.wAns, checked: Object.fromEntries(M.list.map(q => [q.id, true])), ticks: Object.assign({}, T), filter: Object.assign({ ch: '', type: '', only: '', area: '' }, st.get('wfilter', {})) }; renderCBT(); } };
+    el.onclick = ev => { if (ev.target.closest('.brand')) return L.home(); const b = ev.target.closest('[data-r]'); if (!b) return; if (b.dataset.r === 'home') L.home(); else { S = { mode: 'practice', list: M.list, i: 0, ans: M.wAns, checked: Object.fromEntries(M.list.map(q => [q.id, true])), ticks: Object.assign({}, T), filter: Object.assign({ ch: '', type: '', only: '', area: '' }, st.get('wfilter', {})) }; renderCBT(); } };
   }
 
   L.boot = function () { L.home(); };
