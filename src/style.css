@@ -233,7 +233,7 @@ button { font: inherit; color: inherit; }
 .home { max-width: 1040px; margin: 0 auto; padding: 40px 20px 60px; }
 .home h1 { margin: 0; font-size: 30px; letter-spacing: -.3px; }
 .home .sub { margin: 6px 0 0; color: var(--c-mut); }
-.info { margin-top: 22px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.info { margin-top: 22px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
 .info div { background: var(--c-card); border: 1px solid var(--c-line); border-radius: 10px; padding: 12px 14px; }
 .info b { display: block; font-size: 18px; }
 .info span { color: var(--c-mut); font-size: 13px; }
@@ -325,6 +325,7 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 900px) {
   .info, .cards, .plinks { grid-template-columns: 1fr; }
+  .sg-item { padding: 14px; }
   .cbt-body { grid-template-columns: 1fr; }
   .side { border-left: 0; border-top: 1px solid var(--c-line); }
   .qwrap { padding: 18px 16px 60px; }
@@ -368,3 +369,36 @@ button { font: inherit; color: inherit; }
 .slide .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
 .slide .shots .shot { margin: 0; max-width: none; }
 .slide .cap { text-align: center; font-size: 12.5px; color: #555; margin-top: 4px; font-weight: 700; }
+
+/* 영역별 연습 버튼 */
+.area-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.btn.area { display: flex; justify-content: space-between; align-items: center; gap: 6px; text-align: left; }
+.btn.area small { color: var(--c-mut); font-weight: 600; font-variant-numeric: tabular-nums; }
+.btn.area:hover { border-color: var(--c-acc); }
+/* 서술형 · 코드 작성 답안 */
+textarea.essay { display: block; width: 100%; min-height: 190px; resize: vertical; font: 15.5px/1.75 var(--ui); padding: 12px 14px; border: 1.5px solid var(--c-line); border-radius: 10px; background: #fff; color: var(--c-fg); outline: none; }
+textarea.essay:focus { border-color: var(--c-acc); }
+textarea.essay.mono { font: 14px/1.6 var(--mono); background: var(--c-code); color: #d4d4d4; border-color: #333; min-height: 260px; tab-size: 2; white-space: pre; }
+textarea.essay.mono:focus { border-color: #4daafc; }
+textarea.essay[readonly] { opacity: .85; }
+.ecount { text-align: right; font-size: 12.5px; color: var(--c-mut); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.essay-res .eh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.essay-res .esc { font-weight: 800; font-size: 18px; color: var(--c-acc); font-variant-numeric: tabular-nums; }
+.essay-res .ans-t { margin: 0 0 4px; }
+.essay-res .code { margin: 4px 0 4px; }
+.rub { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.rub .rh { font-size: 13px; color: var(--c-mut); }
+.rub .ri { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border: 1.5px solid var(--c-line); border-radius: 8px; background: #fff; cursor: pointer; font-size: 14.5px; }
+.rub .ri input { width: 17px; height: 17px; accent-color: var(--c-ok); margin: 0; }
+.rub .ri.on { border-color: #9bd3ae; background: var(--c-ok-soft); }
+.rub .ri b { font-variant-numeric: tabular-nums; color: var(--c-mut); }
+.rub .ri.on b { color: var(--c-ok); }
+.ex2 { margin-top: 10px; font-size: 14px; color: var(--c-mut); }
+/* 모의고사 직접 채점 */
+.sg .sg-lead { color: var(--c-mut); margin: 0 0 6px; }
+.sg-item { background: var(--c-card); border: 1px solid var(--c-line); border-radius: 12px; padding: 18px 20px; margin-top: 16px; }
+.sg-item h4 { margin: 4px 0 6px; font-size: 13.5px; color: var(--c-mut); }
+.sg-item .qtext { font-size: 16px; margin-bottom: 10px; }
+pre.mine { white-space: pre-wrap; word-break: break-word; background: #f4f6f9; border: 1px solid var(--c-line); border-radius: 8px; padding: 10px 12px; font: 14.5px/1.65 var(--ui); margin: 0; }
+pre.mine.mono { font-family: var(--mono); font-size: 13.5px; }
+.mine-none { margin: 0; color: var(--c-bad); font-size: 14px; }

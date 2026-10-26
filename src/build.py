@@ -18,7 +18,16 @@ if any(p.get('sheet') for p in practical):
     for p in practical:
         if p.get('sheet') and p['id'] in shots: p['sheet']['shots'] = shots[p['id']]
 written = json.loads((S / 'react' / 'written.json').read_text(encoding='utf-8'))
-data = 'window.RL = window.RL || {}; window.RL.DATA = ' + json.dumps({'practical': practical, 'written': written}, ensure_ascii=False).replace('</', '<' + chr(92) + '/') + ';'
+# 서술형·코드 작성 문제: react/essay.json (없으면 견본 tmp_essay.json)
+ep = S / 'react' / 'essay.json'
+if not ep.exists(): ep = H / 'tmp_essay.json'
+essay = json.loads(ep.read_text(encoding='utf-8'))
+for q in essay:
+    assert q['kind'] in ('essay', 'code'), q['id']
+    assert sum(r['pts'] for r in q['rubric']) == q['points'], ('rubric pts', q['id'])
+    assert all(r['keys'] and all(k.strip() for k in r['keys']) for r in q['rubric']), ('keys', q['id'])
+print('essay', ep.name, len(essay))
+data = 'window.RL = window.RL || {}; window.RL.DATA = ' + json.dumps({'practical': practical, 'written': written, 'essay': essay}, ensure_ascii=False).replace('</', '<' + chr(92) + '/') + ';'
 js = '\n'.join((H / f).read_text(encoding='utf-8') for f in ['icons.js', 'core.js', 'cbt.js', 'ide.js']).replace('</script', '<' + chr(92) + '/script')
 out = page.replace('/*STYLE*/', css).replace('/*DATA*/', data).replace('/*SCRIPTS*/', js + '\nwindow.RL.boot();')
 (H / 'react_lab.html').write_text(out, encoding='utf-8')
